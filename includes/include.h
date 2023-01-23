@@ -3,9 +3,11 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../minilibx_opengl_20191021/mlx.h"
+# include <stdint.h>
+# include "../mlx/mlx.h"
 # include "stdbool.h"
 
 #endif

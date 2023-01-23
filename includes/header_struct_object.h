@@ -44,15 +44,16 @@ typedef struct s_sprite
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_sprite	wall_sprite[4];
-	void		*color[2];
+	void			*mlx;
+	void			*mlx_win;
+	t_sprite		wall_sprite[4];
+	unsigned char	ceiling_color[3];
+	unsigned char	floor_color[3];
 }	t_mlx;
 
 typedef struct	s_cube
 {
-	t_string	*map;
+	char		**map;
 	t_mlx		mlx_data;
 	t_character	character;
 }	t_cube;

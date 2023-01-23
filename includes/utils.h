@@ -10,4 +10,7 @@ void		free_map(t_cube map);
 int			ft_strncomp(const char *str1, const char *str2, const int n);
 size_t		ft_strlen(const char *str);
 
+void		free_double_pointer(void **pointer);
+int			add_line(t_cube map, t_string line);
+
 #endif

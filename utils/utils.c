@@ -1,5 +1,5 @@
 #include "../includes/utils.h"
-#include <cstdlib>
+#include <stdlib.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -62,8 +62,6 @@ int	ft_read_file(t_string *line, const int fd)
 
 void	init_map(t_cube map)
 {
-	map.mlx_data.color[0] = NULL;
-	map.mlx_data.color[1] = NULL;
 	map.mlx_data.wall_sprite[0].sprite = NULL;
 	map.mlx_data.wall_sprite[1].sprite = NULL;
 	map.mlx_data.wall_sprite[2].sprite = NULL;
@@ -71,8 +69,36 @@ void	init_map(t_cube map)
 	map.map = NULL;
 }
 
-void	add_line(t_cube map, t_string line)
+void	free_double_pointer(void **pointer)
 {
-	if (!map.map)
-		map.map = malloc(sizeof(t_string) * 2);
+	int	i;
+
+	i = -1;
+	if (pointer)
+	{
+		while (pointer[++i])
+			free(pointer[i]);
+		free(pointer);
+	}
+}
+
+int	add_line(t_cube map, t_string line)
+{
+	int		i;
+	char	**new_map;
+
+	i = 0;
+	while (map.map && map.map[i])
+		i++;
+	new_map = malloc(sizeof(char*) * (i + 1));
+	if (new_map == NULL)
+		return (FAILURE);
+	i = -1;
+	while (map.map && map.map[++i])
+		new_map[i]  = map.map[i];
+	new_map[i] = line.str;
+	new_map[i + 1] = NULL;
+	free_double_pointer((void**)map.map);
+	map.map = new_map;
+	return (SUCCESS);
 }

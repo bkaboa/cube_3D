@@ -17,11 +17,6 @@ void	exit_error_and_destruct(t_string *str, t_cube map, const int fd, const char
 		str->string_destructor(str);
 	if (fd != 0)
 		close(fd);
-	if (map.map)
-	{
-		while (map.map[i].str)
-			map.map[i].string_destructor(&map.map[i]);
-		free(map.map);
-	}
+	free_double_pointer((void**)map.map);
 	exit(EXIT_FAILURE);
 }

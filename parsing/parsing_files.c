@@ -3,8 +3,9 @@
 static void	check_file(t_string line, t_cube map, unsigned int *y, const int fd)
 {
 	int		i;
-	int		img_size[2];
 
+	if (*y >= 4)
+		check_color(fd, map, line, y);
 	i = 2;
 	if (line.str[i] != ' ')
 		exit_error_and_destruct(&line, map, fd, WALL_ERROR);
@@ -26,7 +27,7 @@ static void	init_sprite_direction(int *sprite_direction)
 
 	i = 0;
 	while (i < 4)
-		sprite_direction[i] = 0;
+		sprite_direction[i++] = 0;
 }
 
 static int	read_in_file(t_string *line, const int fd)
@@ -43,24 +44,25 @@ static int	read_in_file(t_string *line, const int fd)
 
 void	check_sprite_files(const int fd, t_cube map)
 {
-	const char		*glance[] = {NORTH, SOUTH, EAST, WEST, NULL};
-	int				sprite_direction[4];
+	const char		*glance[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
+	int				sprite_and_color[6];
 	int				i;
 	unsigned int	y;
 	t_string		line;
 
 	i = -1;
 	line.string_init(&line);
-	init_sprite_direction(sprite_direction);
-	while (++i < 4)
+	init_sprite_direction(sprite_and_color);
+	while (++i < 6)
 	{
+		y = 0;
 		if (read_in_file(&line, fd) == FAILURE)
 			exit_error_and_destruct(&line, map, fd, READ_ERROR);
 		while (glance[y])
 		{
 			if (ft_strcomp(glance[y++], line.str) == true)
 			{
-				if (++(sprite_direction[y]) > 1)
+				if (++(sprite_and_color[y]) > 1)
 					exit_error_and_destruct(&line, map, fd, WALL_INVALID);
 				check_file(line, map, &y, fd);
 			}
