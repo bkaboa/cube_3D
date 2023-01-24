@@ -21,7 +21,7 @@ OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES)) 	\
 				object/string/string.h
 CFLAGS 		:= 	-Wall -Wextra -Werror
-MLXPATH 	:= 	mlx/
+MLXPATH 	:= 	mlx_linux/
 MLXFLAGS 	:= 	-L $(MLXPATH) -lbsd -lmlx_Linux -lXext -lX11
 MEMFLAGS 	:= 	-fsanitize=address -g3
 
@@ -38,10 +38,10 @@ leaks 			: CFLAGS += $(MEMFLAGS)
 leaks 			: re
 
 make_mlx 		:
-	@make -C mlx
+	@make -C $(MLXPATH)
 
 clean_mlx 		:
-	@make clean -C mlx || true
+	@make clean -C $(MLXPATH) || true
 
 clean 			: clean_mlx
 	@rm -rf $(OPATH) || true

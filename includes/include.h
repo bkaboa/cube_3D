@@ -7,7 +7,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdint.h>
-# include "../mlx/mlx.h"
+# include "../mlx_linux/mlx.h"
 # include "stdbool.h"
 
 #endif
