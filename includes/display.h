@@ -1,13 +1,13 @@
 #ifndef DISPLAY
 #define DISPLAY
 
+# include "include.h"
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include "../mlx/mlx.h"
 
 # define WIDTH 1024
 # define HEIGHT 768

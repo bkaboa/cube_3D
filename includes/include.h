@@ -1,13 +1,22 @@
 #ifndef INCLUDE_H
 # define INCLUDE_H
 
+# if defined (__APPLE__)
+	# include "../mlx/mlx.h"
+# elif defined(__linux__)
+	# include "../mlx_linux/mlx.h"
+#endif
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdint.h>
-# include "../mlx_linux/mlx.h"
+# include <stdio.h>
+# include <math.h>
+# include <stddef.h>
 # include "stdbool.h"
+
 
 #endif
