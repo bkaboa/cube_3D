@@ -1,4 +1,4 @@
-NAME 		:= 	cube3D
+NAME 		:= 	cub3D
 
 INCLUDES 	:= 	header_struct_object.h 	\
 				include.h 				\
@@ -13,6 +13,8 @@ SRC 		:=	parsing/error.c 			\
 				parsing/parsing_map.c 		\
 				object/string/string.c 		\
 				main.c
+
+
 
 OPATH 		:= 	.obj_dir
 OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
