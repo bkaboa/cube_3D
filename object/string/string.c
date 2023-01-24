@@ -1,14 +1,7 @@
 #include "string.h"
 #include "../../includes/utils.h"
 
-void	string_init(t_string *str)
-{
-	str->lenght = 0;
-	str->size = 0;
-	str->str = NULL;
-}
-
-void	string_destructor(t_string *str)
+static void	string_destructor(t_string *str)
 {
 	str->lenght = 0;
 	str->size = 0;
@@ -18,7 +11,7 @@ void	string_destructor(t_string *str)
 }
 
 
-int	alloc_string(t_string *str1, size_t lenght)
+static int	alloc_string(t_string *str1, size_t lenght)
 {
 	char	*str;
 	int		i;
@@ -34,7 +27,7 @@ int	alloc_string(t_string *str1, size_t lenght)
 		str[i] = str1->str[i];
 		i++;
 	}
-	while (i < str1->size)
+	while ((u_int64_t)i < str1->size)
 	{
 		str[i++] = 0;
 	}
@@ -44,14 +37,14 @@ int	alloc_string(t_string *str1, size_t lenght)
 	return (SUCCESS);
 }
 
-int	append(t_string *str1, const char *str2)
+static int32_t	append(t_string *str1, const char *str2)
 {
 	int		i;
 
 	i = 0;
 	if (!str2)
 		return (SUCCESS);
-	if (ft_strlen(str2) + str1->lenght > str1->size)
+	if ((ft_strlen(str2) + str1->lenght) > str1->size)
 		if (alloc_string(str1, ft_strlen(str2)) == FAILURE)
 			return (FAILURE);
 	while (str2[i])
@@ -62,7 +55,7 @@ int	append(t_string *str1, const char *str2)
 	return (SUCCESS);
 }
 
-void	reference_copy_operator(const t_string to_copy, t_string *copy)
+static void	reference_copy_operator(const t_string to_copy, t_string *copy)
 {
 	copy->string_destructor(copy);
 	copy->lenght = to_copy.lenght;
@@ -70,7 +63,7 @@ void	reference_copy_operator(const t_string to_copy, t_string *copy)
 	copy->str = to_copy.str;
 }
 
-int	profond_copy_operator(const t_string to_copy, t_string *copy)
+static int	profond_copy_operator(const t_string to_copy, t_string *copy)
 {
 	copy->string_destructor(copy);
 	if (copy->append(copy, to_copy.str) == FAILURE)
@@ -78,10 +71,10 @@ int	profond_copy_operator(const t_string to_copy, t_string *copy)
 	return (SUCCESS);
 }
 
-int find(t_string *str, const char *str2)
+static int find(t_string *str, const char *str2)
 {
 	int	i;
-	const int str2_len = ft_strlen(str2);
+	const size_t str2_len = ft_strlen(str2);
 
 	if (!str->str || str2)
 		return (-1);
@@ -98,4 +91,17 @@ int find(t_string *str, const char *str2)
 		i++;
 	}
 	return (-1);
+}
+
+void	string_init(t_string *str)
+{
+	str->str = NULL;
+	str->size = 0;
+	str->lenght = 0;
+	str->append = append;
+	str->alloc_string = alloc_string;
+	str->string_destructor = string_destructor;
+	str->reference_copy_operator = reference_copy_operator;
+	str->profond_copy_operator = profond_copy_operator;
+	str->find = find;
 }

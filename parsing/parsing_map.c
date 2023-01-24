@@ -44,7 +44,7 @@ static void	take_map(const int fd, t_cube map)
 	int			n;
 
 	n = -1;
-	line.string_init(&line);
+	string_init(&line);
 	while (line.str == NULL)
 	{
 		read_file_ret = ft_read_file(&line, fd);

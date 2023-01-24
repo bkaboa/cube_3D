@@ -10,13 +10,11 @@ void	exit_error(const char *str)
 
 void	exit_error_and_destruct(t_string *str, t_cube map, const int fd, const char *msg)
 {
-	int		i;
-
-	i = -1;
 	if (str)
 		str->string_destructor(str);
 	if (fd != 0)
 		close(fd);
 	free_double_pointer((void**)map.map);
+	write(2, msg, ft_strlen(msg));
 	exit(EXIT_FAILURE);
 }

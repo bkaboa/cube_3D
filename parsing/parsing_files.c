@@ -26,7 +26,7 @@ static void	init_sprite_direction(int *sprite_direction)
 	int		i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 6)
 		sprite_direction[i++] = 0;
 }
 
@@ -51,7 +51,7 @@ void	check_sprite_files(const int fd, t_cube map)
 	t_string		line;
 
 	i = -1;
-	line.string_init(&line);
+	string_init(&line);
 	init_sprite_direction(sprite_and_color);
 	while (++i < 6)
 	{

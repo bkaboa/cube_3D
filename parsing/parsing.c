@@ -22,7 +22,6 @@ void	file_map_parsing(const char *file, t_cube map)
 
 	check_file(file, &fd);
 	check_sprite_files(fd, map);
-	check_color(fd, map);
 	check_map(fd, map);
 	close(fd);
 }
