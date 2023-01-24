@@ -11,9 +11,9 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
-# define MINIMAPX 0
-# define MINIMAPY 0
-# define MINIMAPTILESIZE 10
+# define MINIMAPX 20
+# define MINIMAPY 20
+# define MINIMAPTILESIZE 50
 # define C_WHITE 0xFFFFFF
 # define C_BLUE  0x0000FF
 # define C_RED	 0xFF0000

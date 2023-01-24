@@ -26,23 +26,21 @@ void	drawMinimap(t_mlx_data *data, t_my_map *map, t_player player)
 	int miniY = MINIMAPY;
 	while (y < map->y_len)
 	{
-		printf("char = %c\n", map->map[0][1]);
+		printf("char = %c\n", map->map[4][3]);
 		x = 0;
 		miniX = MINIMAPX;
 		while (x < map->x_len)
 		{
-			printf("Gonna draw on %d %d with mini %d %d\n", x, y, miniX, miniY);
 			printf("char y[%d] x[%d] = %c\n", y, x, map->map[y][x]);
+			printf("Gonna draw on %d %d with mini %d %d\n", x, y, miniX, miniY);
 			if (map->map[y][x] == '1')
-				my_mlx_pixel_put(data, miniX, miniY, C_WHITE);
-				//drawSquare(data, miniX, miniY, C_WHITE);
+				drawSquare(data, miniX, miniY, C_WHITE);
 			else if (map->map[y][x] == '0')
-				my_mlx_pixel_put(data, miniX, miniY, C_BLUE);
-				//drawSquare(data, miniX, miniY, C_BLUE);
-			else if (map->map[y][x] == 'N')
-				my_mlx_pixel_put(data, miniX, miniY, C_RED);
-				//drawSquare(data, miniX, miniY, C_RED);
+				drawSquare(data, miniX, miniY, C_BLUE);
+			else if (map->map[y][x] == ' ')
+				drawSquare(data, miniX, miniY, 0x000000);
 			miniX += MINIMAPTILESIZE;
+			printf("Gonna draw on %d %d with mini %d %d\n", x, y, miniX, miniY);
 			x++;
 		}
 		miniY += MINIMAPTILESIZE;
