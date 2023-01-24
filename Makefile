@@ -14,15 +14,23 @@ SRC 		:=	parsing/error.c 			\
 				object/string/string.c 		\
 				main.c
 
-
+UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        MLXPATH    	= mlx_linux
+        MLX        	= $(DIR_MLX)/libmlx_Linux.a 
+        MLXFLAGS 	= -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        MLXPATH    	= mlx
+        MLX        	= $(DIR_MLX)/libmlx.a
+        MLXFLAGS 	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+    endif
 
 OPATH 		:= 	.obj_dir
 OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES)) 	\
 				object/string/string.h
 CFLAGS 		:= 	-Wall -Wextra -Werror
-MLXPATH 	:= 	mlx_linux/
-MLXFLAGS 	:= 	-L $(MLXPATH) -lbsd -lmlx_Linux -lXext -lX11
 MEMFLAGS 	:= 	-fsanitize=address -g3
 
 all 			: $(NAME)
@@ -30,7 +38,7 @@ all 			: $(NAME)
 $(NAME) 		: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
-$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
+$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile $(MLX)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
