@@ -1,5 +1,4 @@
 #include "../includes/parsing.h"
-#include <stdlib.h>
 
 void	exit_error(const char *str)
 {

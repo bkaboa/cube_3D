@@ -60,13 +60,13 @@ int	ft_read_file(t_string *line, const int fd)
 	return (SUCCESS);
 }
 
-void	init_map(t_cube map)
+void	init_map(t_cube *map)
 {
-	map.mlx_data.wall_sprite[0].sprite = NULL;
-	map.mlx_data.wall_sprite[1].sprite = NULL;
-	map.mlx_data.wall_sprite[2].sprite = NULL;
-	map.mlx_data.wall_sprite[3].sprite = NULL;
-	map.map = NULL;
+	map->mlx_data.wall_sprite[0].sprite = NULL;
+	map->mlx_data.wall_sprite[1].sprite = NULL;
+	map->mlx_data.wall_sprite[2].sprite = NULL;
+	map->mlx_data.wall_sprite[3].sprite = NULL;
+	map->map = NULL;
 }
 
 void	free_double_pointer(void **pointer)

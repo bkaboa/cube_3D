@@ -7,6 +7,7 @@ INCLUDES 	:= 	header_struct_object.h 	\
 
 SRC 		:=	parsing/error.c 			\
 				parsing/parsing.c 			\
+				utils/utils.c 				\
 				parsing/parsing_color.c 	\
 				parsing/parsing_files.c 	\
 				parsing/parsing_map.c 		\
@@ -18,32 +19,33 @@ OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES)) 	\
 				object/string/string.h
 CFLAGS 		:= 	-Wall -Wextra -Werror
-MLXFLAGS 	:= 	-lbsd -lmlx -lXext -lX11
+MLXPATH 	:= 	mlx/
+MLXFLAGS 	:= 	-L $(MLXPATH) -lbsd -lmlx_Linux -lXext -lX11
 MEMFLAGS 	:= 	-fsanitize=address -g3
 
 all 			: $(NAME)
 
 $(NAME) 		: $(OBJ)
-	$(CC) $(CFLAGS) $< -o $@ $(MLXFLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
-$(OPATH)/%.o 	: %.c $(HEADER) $(SRC) make_mlx Makefile
+$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(MLXFLAGS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-leaks 			: $(MLXFLAGS) + MEMFLAGS all
+leaks 			: CFLAGS += $(MEMFLAGS)
+leaks 			: re
 
 make_mlx 		:
 	@make -C mlx
 
 clean_mlx 		:
-	@make clean -C mlx
+	@make clean -C mlx || true
 
-clean 			:
-	@rm -rf $(OPATH)
-	@clean_mlx
+clean 			: clean_mlx
+	@rm -rf $(OPATH) || true
 
 fclean 			: clean
-	rm $(NAME)
+	rm $(NAME) || true
 
 re 				: fclean all
 
