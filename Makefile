@@ -4,6 +4,7 @@ INCLUDES 	:= 	header_struct_object.h 	\
 				include.h 				\
 				parsing.h 				\
 				utils.h 				\
+				display.h
 
 SRC 		:=	parsing/error.c 			\
 				parsing/parsing.c 			\
@@ -12,6 +13,9 @@ SRC 		:=	parsing/error.c 			\
 				parsing/parsing_files.c 	\
 				parsing/parsing_map.c 		\
 				object/string/string.c 		\
+				display/init_mlx.c			\
+				display/minimap.c			\
+				display/mlx_pixel_put.c		\
 				main.c
 
 UNAME_S := $(shell uname -s)
@@ -38,7 +42,7 @@ all 			: $(NAME)
 $(NAME) 		: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
-$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile $(MLX)
+$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -1,4 +1,4 @@
-#include "display.h"
+#include "../includes/display.h"
 
 t_mlx_data	init_mlx(void)
 {
