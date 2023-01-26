@@ -27,14 +27,10 @@ t_player	initPlayer(void)
 
 int main(void)
 {
-	t_mlx_data mlx;
+	t_mlx		mlx;
 	t_player	player;
-	t_my_map	map;
 
     char* array[] = {"1111111", "1001001", "1001001", "1000001", "100N001", "1000001", "1111111"};
-	map.map = array;
-	map.x_len = 7;
-	map.y_len = 7;
 	player = initPlayer();
 	mlx = init_mlx();
 	drawMinimap(&mlx, &map, player);

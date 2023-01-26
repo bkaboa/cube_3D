@@ -19,7 +19,7 @@
 # include "stdbool.h"
 # include "typedef_define/define.h"
 # include "typedef_define/struct.h"
-# include "display.h"
 # include "utils.h"
+# include "hooks.h"
 
 #endif

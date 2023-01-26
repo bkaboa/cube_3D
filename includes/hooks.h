@@ -1,7 +1,7 @@
 #ifndef HOOKS
 #define HOOKS
 
-#include "player.h"
+#include "include.h"
 
 void rotatePlayer(int keycode, t_player *player);
 void movePlayer(int keycode, t_player *player);

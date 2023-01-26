@@ -1,7 +1,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "../includes/include.h"
+# include "include.h"
 
 void	exit_error(const char *str);
 

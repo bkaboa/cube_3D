@@ -29,6 +29,45 @@
 
 /*
  *
+ *********************************		DEFINE_SCREEN
+ *
+ */
+
+# define WIDTH 1024
+# define HEIGHT 768
+
+/*
+ *
+ *********************************		DEFINE_MINIMAP
+ *
+ */
+
+# define MINIMAPX 10
+# define MINIMAPY 10
+# define MINIMAPTILESIZE 20
+
+/*
+ *
+ *********************************		DEFINE_COLOR
+ *
+ */
+
+# define C_WHITE 0xFFFFFF
+# define C_BLUE  0x0000FF
+# define C_RED	 0xFF0000
+
+/*
+ *
+ *********************************		DEFINE_PLAYER
+ *
+ */
+
+#define MOVESPEED 1;
+#define FOV		45;
+#define ROTATIONSPEED 1;
+
+/*
+ *
  *********************************		DEFINE_MAP
  *
  */
