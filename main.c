@@ -17,8 +17,11 @@ int main(int ac, char **av)
 t_player	initPlayer(void)
 {
 	t_player	player;
-	player.position.xTile = 3;
-	player.position.yTile = 4;
+	player.xPos = 3;
+	player.yPos = 5;
+	player.angle = M_PI;
+	player.delta_x = cos(player.angle) * 5;
+	player.delta_y = sin(player.angle) * 5;
 	return (player);
 }
 
@@ -28,14 +31,16 @@ int main(void)
 	t_player	player;
 	t_my_map	map;
 
-    char* array[] = {"  11111", "10001 1", "1110N011111", "1000111", "11111  "};
+    char* array[] = {"1111111", "1001001", "1001001", "1000001", "100N001", "1000001", "1111111"};
 	map.map = array;
-	map.x_len = 5;
-	map.y_len = 5;
+	map.x_len = 7;
+	map.y_len = 7;
 	player = initPlayer();
 	mlx = init_mlx();
 	drawMinimap(&mlx, &map, player);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	mlx_hook(fdf.mlx.win, 17, 1L << 0, &win_close, &fdf);
+	mlx_hook_loop(mlx.win, &control_hooks_loop, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
