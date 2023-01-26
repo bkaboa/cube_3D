@@ -1,10 +1,6 @@
 #ifndef DISPLAY
 #define DISPLAY
 
-# include "include.h"
-# include "player.h"
-# include "hooks.h"
-
 # define WIDTH 1024
 # define HEIGHT 768
 # define MINIMAPX 10
