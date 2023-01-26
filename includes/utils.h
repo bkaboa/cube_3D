@@ -1,8 +1,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "header_struct_object.h"
-
 bool		ft_strcomp(const char *first, const char *second);
 int			ft_read_file(t_string *line, int fd);
 void		init_map(t_cube *map);

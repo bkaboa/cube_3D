@@ -1,14 +1,6 @@
 #ifndef DISPLAY
 #define DISPLAY
 
-# include "include.h"
-# include <stddef.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <math.h>
-
 # define WIDTH 1024
 # define HEIGHT 768
 # define MINIMAPX 20

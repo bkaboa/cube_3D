@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	return (0);
 }
 */
-#include "includes/display.h"
+#include "includes/include.h"
 
 t_player	initPlayer(void)
 {
