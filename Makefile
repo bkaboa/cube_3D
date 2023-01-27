@@ -12,7 +12,7 @@ SRC 		:=	parsing/error.c 			\
 				parsing/parsing_color.c 	\
 				parsing/parsing_files.c 	\
 				parsing/parsing_map.c 		\
-				object/string/string.c 		\
+				object/string.c
 				display/init_mlx.c			\
 				display/minimap.c			\
 				display/mlx_pixel_put.c		\
