@@ -1,4 +1,4 @@
-#include "../includes/parsing.h"
+#include "../includes/cube3D.h"
 
 static void	check_line(const t_string *line, t_cube map, const int fd, int y)
 {
@@ -14,8 +14,8 @@ static void	check_line(const t_string *line, t_cube map, const int fd, int y)
 			p_count++;
 			if (p_count > 1)
 				exit_error_and_destruct(NULL, map, fd, MAP_ERROR);
-			map.character.pos_x = x;
-			map.character.pos_y = y;
+			map.player.pos_x = x;
+			map.player.pos_y = y;
 			line->str[x] = '0';
 		}
 		if (line->str[x] != '0' || line->str[x] != '1' || line->str[x] != ' ')

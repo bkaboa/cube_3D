@@ -1,5 +1,6 @@
 #include "string.h"
-#include "../../includes/utils.h"
+
+# include "../includes/include.h"
 
 static void	string_destructor(t_string *str)
 {

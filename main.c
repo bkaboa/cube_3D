@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	return (0);
 }
 */
-#include "includes/include.h"
+# include "includes/cube3D.h"
 
 t_player	initPlayer(void)
 {

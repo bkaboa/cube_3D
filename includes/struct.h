@@ -8,12 +8,12 @@ typedef struct s_string
 	size_t	lenght;
 	size_t	size;
 	char	*str;
-	int			(*append)(struct s_string*, const char*);
-	int			(*alloc_string)(struct s_string*, size_t);
-	void		(*string_destructor)(struct s_string*);
-	void		(*reference_copy_operator)(const struct s_string, struct s_string*);
-	int			(*profond_copy_operator)(const struct s_string, struct s_string*);
-	int32_t			(*find)(struct s_string*, const char*);
+	int32_t	(*append)(struct s_string*, const char*);
+	int32_t	(*alloc_string)(struct s_string*, size_t);
+	void	(*string_destructor)(struct s_string*);
+	void	(*reference_copy_operator)(const struct s_string, struct s_string*);
+	int32_t	(*profond_copy_operator)(const struct s_string, struct s_string*);
+	int32_t	(*find)(struct s_string*, const char*);
 }	t_string;
 
 typedef struct s_player
@@ -23,37 +23,36 @@ typedef struct s_player
 	float	angle;
 	float	delta_x;
 	float	delta_y;
-	int		lastKey;
+	int32_t	lastKey;
 }	t_player;
-
 
 typedef struct s_sprite
 {
 	void	*sprite;
-	int		sprite_lenght;
-	int		sprite_width;
+	int32_t	sprite_lenght;
+	int32_t	sprite_width;
 }	t_sprite;
 
 typedef struct s_mlx
 {
-	void			*mlx;
-	void			*mlx_win;
-	void			*minimap;
-	void			*walls;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	t_sprite		wall_sprite[4];
-	unsigned char	ceiling_color[3];
-	unsigned char	floor_color[3];
+	void		*mlx;
+	void		*mlx_win;
+	void		*minimap;
+	void		*walls;
+	char		*addr;
+	int32_t		bits_per_pixel;
+	int32_t		line_length;
+	int32_t		endian;
+	t_sprite	wall_sprite[4];
+	u_int8_t	ceiling_color[3];
+	u_int8_t	floor_color[3];
 }	t_mlx;
 
 typedef struct	s_cube
 {
 	char		**map;
-	int			map_xlen;
-	int			map_ylen;
+	int32_t		map_xlen;
+	int32_t		map_ylen;
 	t_mlx		mlx_data;
 	t_player	player;
 }	t_cube;

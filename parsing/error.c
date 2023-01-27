@@ -1,4 +1,4 @@
-#include "../includes/include.h"
+#include "../includes/cube3D.h"
 
 void	exit_error(const char *str)
 {

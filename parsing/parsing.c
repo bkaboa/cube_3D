@@ -1,4 +1,4 @@
-#include "../includes/parsing.h"
+#include "../includes/cube3D.h"
 
 static void	check_file(const char *file, int *fd)
 {

@@ -1,4 +1,4 @@
-#include "../includes/parsing.h"
+#include "../includes/cube3D.h"
 
 static void	check_file(t_string line, t_cube map, unsigned int *y, const int fd)
 {
@@ -44,10 +44,10 @@ static int	read_in_file(t_string *line, const int fd)
 
 void	check_sprite_files(const int fd, t_cube map)
 {
-	const char		*glance[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
-	int				sprite_and_color[6];
-	int				i;
-	unsigned int	y;
+	const char		*sprite[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
+	int32_t				sprite_and_color[6];
+	u_int32_t		i;
+	u_int32_t		y;
 	t_string		line;
 
 	i = -1;
