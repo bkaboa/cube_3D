@@ -1,10 +1,9 @@
 NAME 		:= 	cub3D
 
-INCLUDES 	:= 	header_struct_object.h 	\
-				include.h 				\
-				parsing.h 				\
-				utils.h 				\
-				display.h
+INCLUDES 	:= 	cube3D.h 					\
+    			define.h 					\
+    			include.h 					\
+    			struct.h
 
 SRC 		:=	parsing/error.c 			\
 				parsing/parsing.c 			\
@@ -12,7 +11,7 @@ SRC 		:=	parsing/error.c 			\
 				parsing/parsing_color.c 	\
 				parsing/parsing_files.c 	\
 				parsing/parsing_map.c 		\
-				object/string.c
+				object/string.c 			\
 				display/init_mlx.c			\
 				display/minimap.c			\
 				display/mlx_pixel_put.c		\
@@ -32,8 +31,7 @@ UNAME_S := $(shell uname -s)
 
 OPATH 		:= 	.obj_dir
 OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
-HEADER 		:= 	$(addprefix includes/,$(INCLUDES)) 	\
-				object/string/string.h
+HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	-Wall -Wextra -Werror
 MEMFLAGS 	:= 	-fsanitize=address -g3
 
