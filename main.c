@@ -27,6 +27,7 @@ t_player	initPlayer(void)
 }
 
 
+
 int main(void)
 {
 	t_mlx		mlx;
@@ -38,9 +39,20 @@ int main(void)
 	cube.map_ylen = 7;
 	cube.player = initPlayer();
 	cube.map = array;
+	mlx.ceiling_color[0] = 0xff;
+	mlx.ceiling_color[1] = 0xff;
+	mlx.ceiling_color[2] = 0xff;
+
+	mlx.floor_color[0] = 0x0;
+	mlx.floor_color[1] = 0x0;
+	mlx.floor_color[2] = 0xff;
+
 	drawMinimap(&mlx, &cube);
+	drawBackground(&mlx);
 	my_mlx_pixel_put(&mlx.walls, 500, 500, C_WHITE);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.minimap.img, 0, 0);
+	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0);
+	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.minimap.img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.background.img, 0, 0);
 	mlx_hook(mlx.mlx_win, 17, 1L << 0, &click_close, &mlx);
 	// mlx_loop_hook(mlx.mlx_win, &control_hooks_loop, &mlx);
 	mlx_loop(mlx.mlx);

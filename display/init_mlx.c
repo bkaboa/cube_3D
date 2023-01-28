@@ -10,5 +10,7 @@ void init_mlx(t_mlx *mlx)
 	mlx->walls.img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
 	mlx->walls.addr = mlx_get_data_addr(mlx->walls.img, &mlx->walls.bits_per_pixel, \
 	&mlx->walls.line_length, &mlx->walls.endian);
-
+	mlx->background.img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
+	mlx->background.addr = mlx_get_data_addr(mlx->background.img, &mlx->background.bits_per_pixel, \
+	&mlx->background.line_length, &mlx->background.endian);
 }

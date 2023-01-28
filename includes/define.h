@@ -46,6 +46,8 @@
 
 # define MINIMAPX 10
 # define MINIMAPY 10
+# define MINIMAP_WITDH 500
+# define MINIMAP_HEIGHT 500
 # define MINIMAPTILESIZE 50
 
 /*

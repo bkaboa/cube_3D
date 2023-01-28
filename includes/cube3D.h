@@ -22,6 +22,7 @@ int	click_close(t_mlx *mlx);
  */
 void    my_mlx_pixel_put(t_img *img, float x, float y, int color);
 void	drawMinimap(t_mlx *data, t_cube *cube);
+void	drawBackground(t_mlx *mlx);
 
 /*
  *
