@@ -1,6 +1,6 @@
-#include "../includes/display.h"
+#include "../includes/cube3D.h"
 
-void    my_mlx_pixel_put(t_mlx_data *data, float x, float y, int color)
+void    my_mlx_pixel_put(t_img *img, float x, float y, int color)
 {
 	char    *dst;
 
@@ -8,8 +8,8 @@ void    my_mlx_pixel_put(t_mlx_data *data, float x, float y, int color)
 	{
 			x = roundf(x);
 			y = roundf(y);
-			dst = data->addr + (int)(y * data->line_length + \
-			x * (data->bits_per_pixel / 8));
+			dst = img->addr + (int)(y * img->line_length + \
+			x * (img->bits_per_pixel / 8));
 			*(unsigned int *) dst = color;
 	}
 }

@@ -33,16 +33,21 @@ typedef struct s_sprite
 	int32_t	sprite_width;
 }	t_sprite;
 
-typedef struct s_mlx
+typedef	struct s_img
 {
-	void		*mlx;
-	void		*mlx_win;
-	void		*minimap;
-	void		*walls;
+	void		*img;
 	char		*addr;
 	int32_t		bits_per_pixel;
 	int32_t		line_length;
 	int32_t		endian;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*mlx_win;
+	t_img		minimap;
+	t_img		walls;
 	t_sprite	wall_sprite[4];
 	u_int8_t	ceiling_color[3];
 	u_int8_t	floor_color[3];

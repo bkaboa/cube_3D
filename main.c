@@ -26,18 +26,23 @@ t_player	initPlayer(void)
 	return (player);
 }
 
+
 int main(void)
 {
 	t_mlx		mlx;
-	t_player	player;
+	t_cube		cube;
 
-    char* array[] = {"1111111", "1001001", "1001001", "1000001", "100N001", "1000001", "1111111"};
-	player = initPlayer();
-	mlx = init_mlx();
-	drawMinimap(&mlx, &map, player);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-	mlx_hook(fdf.mlx.win, 17, 1L << 0, &win_close, &fdf);
-	mlx_hook_loop(mlx.win, &control_hooks_loop, &mlx);
+	init_mlx(&mlx);
+    char* array[] = {"1111111", "1001001", "1001001", "1000001", "1000001", "1000001", "1111111"};
+	cube.map_xlen = 7;
+	cube.map_ylen = 7;
+	cube.player = initPlayer();
+	cube.map = array;
+	drawMinimap(&mlx, &cube);
+	my_mlx_pixel_put(&mlx.walls, 500, 500, C_WHITE);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.minimap.img, 0, 0);
+	mlx_hook(mlx.mlx_win, 17, 1L << 0, &click_close, &mlx);
+	// mlx_loop_hook(mlx.mlx_win, &control_hooks_loop, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

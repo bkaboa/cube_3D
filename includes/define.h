@@ -18,6 +18,8 @@
 
 //MAP_ERROR
 # define MAP_ERROR			"map error in (line, column)\n"
+# define WALL_ERROR			"Wall error\n"
+# define WALL_INVALID		"Wall invalid\n"
 
 //SYS_ERROR
 # define MALLOC_ERROR		"malloc error\n"
@@ -44,7 +46,7 @@
 
 # define MINIMAPX 10
 # define MINIMAPY 10
-# define MINIMAPTILESIZE 20
+# define MINIMAPTILESIZE 50
 
 /*
  *
@@ -85,7 +87,7 @@
  */
 # define FAILURE		-1
 # define SUCCESS		0
-# define EOF			2
+# define EOM			2
 
 
 
