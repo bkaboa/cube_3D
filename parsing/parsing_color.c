@@ -33,10 +33,10 @@ static void	assign_color(t_cube map, const int fd, t_string line, unsigned int *
 	i = -1;
 	if (*y == 4)
 		while (++i < 3)
-			map.mlx_data.floor_color[i] = color[i];
+			map.mlx.floor_color[i] = color[i];
 	else
 		while (++i < 3)
-			map.mlx_data.ceiling_color[i] = color[i];
+			map.mlx.ceiling_color[i] = color[i];
 }
 
 void	check_color(const int fd, t_cube map, t_string line, unsigned int *y)

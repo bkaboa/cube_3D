@@ -1,6 +1,4 @@
-#include "string.h"
-
-# include "../includes/include.h"
+#include "../includes/cube3D.h"
 
 static void	string_destructor(t_string *str)
 {

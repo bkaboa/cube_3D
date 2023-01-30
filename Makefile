@@ -5,16 +5,19 @@ INCLUDES 	:= 	cube3D.h 					\
     			include.h 					\
     			struct.h
 
-SRC 		:=	parsing/error.c 			\
+SRC 		:=	parsing/error.c 				\
 				parsing/parsing.c 			\
 				utils/utils.c 				\
-				parsing/parsing_color.c 	\
-				parsing/parsing_files.c 	\
-				parsing/parsing_map.c 		\
+				parsing/parsing_color.c 		\
+				parsing/parsing_files.c 		\
+				parsing/parsing_map.c 			\
 				object/string.c				\
 				display/init_mlx.c			\
 				display/minimap.c			\
-				display/mlx_pixel_put.c		\
+				display/mlx_pixel_put.c			\
+				controls/closing.c 			\
+				controls/controls.c 			\
+				display/background.c 			\
 				main.c
 
 UNAME_S := $(shell uname -s)

@@ -51,6 +51,6 @@ cub3D
 .tmp_versions/
 modules.order
 Module.symvers
-Mkfile.old
+Makefile.old
 dkms.conf
 *.gen

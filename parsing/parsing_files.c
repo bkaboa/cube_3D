@@ -11,11 +11,11 @@ static void	check_file(t_string line, t_cube map, unsigned int *y, const int fd)
 		exit_error_and_destruct(&line, map, fd, WALL_ERROR);
 	while (line.str[i] == ' ')
 		i++;
-	map.mlx_data.wall_sprite[*y].sprite = mlx_xpm_file_to_image(\
-			map.mlx_data.mlx, &line.str[i], \
-			&map.mlx_data.wall_sprite[*y].sprite_lenght, \
-			&map.mlx_data.wall_sprite[*y].sprite_width);
-	if (map.mlx_data.wall_sprite[*y].sprite == NULL)
+	map.mlx.wall_sprite[*y].sprite = mlx_xpm_file_to_image(\
+			map.mlx.mlx, &line.str[i], \
+			&map.mlx.wall_sprite[*y].sprite_lenght, \
+			&map.mlx.wall_sprite[*y].sprite_width);
+	if (map.mlx.wall_sprite[*y].sprite == NULL)
 		exit_error_and_destruct(&line, map, fd, XPM_WALL_INVALID);
 	line.string_destructor(&line);
 	*y = 0;
@@ -45,7 +45,7 @@ static int	read_in_file(t_string *line, const int fd)
 void	check_sprite_files(const int fd, t_cube map)
 {
 	const char		*sprite[] = {"NO", "SO", "EA", "WE", "F", "C", NULL};
-	int32_t				sprite_and_color[6];
+	int32_t			sprite_and_color[6];
 	u_int32_t		i;
 	u_int32_t		y;
 	t_string		line;
@@ -58,16 +58,16 @@ void	check_sprite_files(const int fd, t_cube map)
 		y = 0;
 		if (read_in_file(&line, fd) == FAILURE)
 			exit_error_and_destruct(&line, map, fd, READ_ERROR);
-		while (glance[y])
+		while (sprite[y])
 		{
-			if (ft_strcomp(glance[y++], line.str) == true)
+			if (ft_strcomp(sprite[y++], line.str) == true)
 			{
 				if (++(sprite_and_color[y]) > 1)
 					exit_error_and_destruct(&line, map, fd, WALL_INVALID);
 				check_file(line, map, &y, fd);
 			}
 		}
-		if (!glance[y])
+		if (!sprite[y])
 			exit_error_and_destruct(&line, map, fd, WALL_INVALID);
 	}
 }
