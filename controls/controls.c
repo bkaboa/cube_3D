@@ -7,22 +7,28 @@
 
 void rotatePlayer(int keycode, t_player *player)
 {
+	double oldDirX;
+	double oldPlaneX;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 	{
 		if (keycode == KEY_LEFT)
 		{
-			player->angle -= 0.1;
-			if (player->angle < 0)
-				player->angle += 2 * M_PI;
+			oldDirX = player->delta_x;
+			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
+			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
+			oldPlaneX  = player->planex;
+			player->planex = player->planex * cos(ROTATIONSPEED) - player->planey * sin(ROTATIONSPEED);
+			player->planey = oldPlaneX * sin(ROTATIONSPEED) + player->planey * cos(ROTATIONSPEED);
 		}
 		else
 		{
-			player->angle += 0.1;
-			if (player->angle > 2 * M_PI)
-				player->angle -= 2 * M_PI;
+			oldDirX = player->delta_x;
+			player->delta_x = player->delta_x * cos(-ROTATIONSPEED) - player->delta_y * sin(-ROTATIONSPEED);
+			player->delta_y = oldDirX * sin(-ROTATIONSPEED) + player->delta_y * cos(-ROTATIONSPEED);
+			oldPlaneX  = player->planex;
+			player->planex = player->planex * cos(-ROTATIONSPEED) - player->planey * sin(-ROTATIONSPEED);
+			player->planey = oldPlaneX * sin(-ROTATIONSPEED) + player->planey * cos(-ROTATIONSPEED);
 		}
-		player->delta_x = cos(player->angle) * 5;
-		player->delta_y = sin(player->angle) * 5;
 	}
 }
 
@@ -32,13 +38,13 @@ void movePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_FORWARD)
 		{
-			player->xPos += player->delta_x;
-			player->yPos += player->delta_y;
+			player->xPos += player->delta_x * MOVESPEED;
+			player->yPos += player->delta_y * MOVESPEED;
 		}
 		else
 		{
-			player->xPos -= player->delta_x;
-			player->yPos -= player->delta_y;	
+			player->xPos -= player->delta_x * MOVESPEED;
+			player->yPos -= player->delta_y * MOVESPEED;	
 		}
 	}
 }
@@ -53,13 +59,14 @@ void movePlayer(int keycode, t_player *player)
 
 // }
 
-void control_hooks_loop(int keycode, t_player *player)
+int control_hooks_loop(int keycode, t_player *player)
 {
 	if (player->lastKey != 60)
 	{
 		rotatePlayer(keycode, player);
 		movePlayer(keycode, player);
 	}
+	return (0);
 }
 
 int	control_hooks_expose(int keycode, t_player *player)

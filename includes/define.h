@@ -44,12 +44,9 @@
  *
  */
 
-# define MINIMAPX 10
-# define MINIMAPY 10
-# define MINIMAP_WITDH 500
-# define MINIMAP_HEIGHT 500
-# define MINIMAPTILESIZE 50
-
+# define MINIMAP_RATIO 40
+# define CELL_SIZE 30
+# define PLAYER_MINI_SIZE 5
 /*
  *
  *********************************		DEFINE_COLOR
@@ -66,9 +63,9 @@
  *
  */
 
-#define MOVESPEED 1;
-#define FOV		45;
-#define ROTATIONSPEED 1;
+#define MOVESPEED 1
+#define FOV		45
+#define ROTATIONSPEED 1
 
 /*
  *

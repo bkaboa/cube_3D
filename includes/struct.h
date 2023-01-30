@@ -21,6 +21,8 @@ typedef struct s_player
 	float 	xPos;
 	float 	yPos;
 	float	angle;
+	float	planex;
+	float	planey;
 	float	delta_x;
 	float	delta_y;
 	int32_t	lastKey;
@@ -59,7 +61,8 @@ typedef struct	s_cube
 	char		**map;
 	int32_t		map_xlen;
 	int32_t		map_ylen;
-	t_mlx		mlx_data;
+	int			minimap_tile_size;
+	t_mlx		mlx;
 	t_player	player;
 }	t_cube;
 

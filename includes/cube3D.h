@@ -10,7 +10,7 @@
  */
 void rotatePlayer(int keycode, t_player *player);
 void movePlayer(int keycode, t_player *player);
-void control_hooks_loop(int keycode, t_player *player);
+int control_hooks_loop(int keycode, t_player *player);
 int	control_hooks_expose(int keycode, t_player *player);
 int	click_close(t_mlx *mlx);
 
@@ -21,7 +21,7 @@ int	click_close(t_mlx *mlx);
  *
  */
 void    my_mlx_pixel_put(t_img *img, float x, float y, int color);
-void	drawMinimap(t_mlx *data, t_cube *cube);
+void	drawMinimap(t_cube *cube);
 void	drawBackground(t_mlx *mlx);
 
 /*
@@ -51,7 +51,7 @@ int			ft_strncomp(const char *str1, const char *str2, const int n);
 size_t		ft_strlen(const char *str);
 void		free_double_pointer(void **pointer);
 int			add_line(t_cube map, t_string line);
-void 		init_mlx(t_mlx *mlx);
+void 		init_mlx(t_cube *cube);
 
 /*
  *
