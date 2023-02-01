@@ -15,9 +15,9 @@ SRC 		:=	parsing/error.c 				\
 				display/init_mlx.c			\
 				display/minimap.c			\
 				display/mlx_pixel_put.c			\
+				display/background.c 			\
 				controls/closing.c 			\
 				controls/controls.c 			\
-				display/background.c 			\
 				main.c
 
 UNAME_S := $(shell uname -s)
@@ -36,19 +36,19 @@ OPATH 		:= 	.obj_dir
 OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	-Wall -Wextra -Werror
-MEMFLAGS 	:= 	-fsanitize=address -g3
+MEMFLAGS 	:= 	-fsanitize=address
 
 all 			: $(NAME)
 
 $(NAME) 		: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ -lm $(MLXFLAGS)
 
 $(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 leaks 			: CFLAGS += $(MEMFLAGS)
-leaks 			: re
+leaks 			: all
 
 make_mlx 		:
 	@make -C $(MLXPATH)

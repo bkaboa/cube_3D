@@ -35,5 +35,16 @@ void	drawMinimap(t_cube *cube)
 		}
 		y++;
 	}
-	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, 0x00FF00);
+	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, C_GREEN);
+}
+
+void	updateMinimap(t_cube *cube)
+{
+	cube->mlx.minimap.img = mlx_new_image(cube->mlx.mlx, (int)(cube->map_xlen * MINIMAP_RATIO), (int)(cube->map_ylen * MINIMAP_RATIO));
+	cube->mlx.minimap.addr = mlx_get_data_addr(cube->mlx.minimap.img, \
+	&cube->mlx.minimap.bits_per_pixel, &cube->mlx.minimap.line_length, &cube->mlx.minimap.endian);
+	drawMinimap(cube);
+	drawPlayer(&cube->mlx, cube->player.xPos, cube->player.yPos, C_GREEN);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.minimap.img, 0, 0);
+	mlx_destroy_image(cube->mlx.mlx, cube->mlx.minimap.img);
 }

@@ -10,9 +10,11 @@
  */
 void rotatePlayer(int keycode, t_player *player);
 void movePlayer(int keycode, t_player *player);
-int control_hooks_loop(int keycode, t_player *player);
-int	control_hooks_expose(int keycode, t_player *player);
-int	click_close(t_mlx *mlx);
+int control_hooks_loop(int keycode, t_cube *cube);
+int	control_hooks_expose(int keycode, t_cube *cube);
+int	control_hooks(int keycode, t_cube *cube);
+int	click_close(t_cube *cube);
+int	win_keyclose(int keycode, t_cube *cube);
 
 
 /*
@@ -23,6 +25,7 @@ int	click_close(t_mlx *mlx);
 void    my_mlx_pixel_put(t_img *img, float x, float y, int color);
 void	drawMinimap(t_cube *cube);
 void	drawBackground(t_mlx *mlx);
+void	updateMinimap(t_cube *cube);
 
 /*
  *

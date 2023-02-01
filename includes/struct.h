@@ -35,6 +35,12 @@ typedef struct s_sprite
 	int32_t	sprite_width;
 }	t_sprite;
 
+typedef struct s_position
+{
+	int x_pos;
+	int y_pos;
+} t_position;
+
 typedef	struct s_img
 {
 	void		*img;

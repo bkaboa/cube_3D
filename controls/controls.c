@@ -1,8 +1,8 @@
 #include "../includes/cube3D.h"
-#define KEY_LEFT 0
-#define KEY_RIGHT 2
-#define KEY_FORWARD 13
-#define KEY_BACKWARD 1
+#define KEY_LEFT 113
+#define KEY_RIGHT 100
+#define KEY_FORWARD 122
+#define KEY_BACKWARD 115
 
 
 void rotatePlayer(int keycode, t_player *player)
@@ -13,6 +13,7 @@ void rotatePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_LEFT)
 		{
+			printf("Rotate left\n");
 			oldDirX = player->delta_x;
 			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
 			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
@@ -22,6 +23,7 @@ void rotatePlayer(int keycode, t_player *player)
 		}
 		else
 		{
+			printf("Rotate right\n");
 			oldDirX = player->delta_x;
 			player->delta_x = player->delta_x * cos(-ROTATIONSPEED) - player->delta_y * sin(-ROTATIONSPEED);
 			player->delta_y = oldDirX * sin(-ROTATIONSPEED) + player->delta_y * cos(-ROTATIONSPEED);
@@ -38,40 +40,45 @@ void movePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_FORWARD)
 		{
+			printf("J'avance, xpos %f ypos %f deltax %f deltay %f\n", player->xPos, player->yPos, player->delta_x, player->delta_y);
 			player->xPos += player->delta_x * MOVESPEED;
 			player->yPos += player->delta_y * MOVESPEED;
 		}
 		else
 		{
+			printf("Je recule, xpos %f ypos %f\n", player->xPos, player->yPos);
 			player->xPos -= player->delta_x * MOVESPEED;
 			player->yPos -= player->delta_y * MOVESPEED;	
 		}
 	}
 }
 
-// int displayMinimap(int keycode)
-// {
-
-// }
-
-// int control_hooks(int keycode, cub)
-// {
-
-// }
-
-int control_hooks_loop(int keycode, t_player *player)
+int	control_hooks(int keycode, t_cube *cube)
 {
-	if (player->lastKey != 60)
+	if (keycode != 47)
+		cube->player.lastKey = keycode;
+	printf("keycode %d\n", keycode);
+	movePlayer(keycode, &cube->player);
+	rotatePlayer(keycode, &cube->player);
+	win_keyclose(keycode, cube);
+	updateMinimap(cube);
+	return (0);
+}
+
+int control_hooks_loop(int keycode, t_cube *cube)
+{
+	if (cube->player.lastKey != 60)
 	{
-		rotatePlayer(keycode, player);
-		movePlayer(keycode, player);
+		rotatePlayer(keycode, &cube->player);
+		movePlayer(keycode, &cube->player);
+		updateMinimap(cube);
 	}
 	return (0);
 }
 
-int	control_hooks_expose(int keycode, t_player *player)
+int	control_hooks_expose(int keycode, t_cube *cube)
 {
 	(void)keycode;
-	player->lastKey = 60;
+	cube->player.lastKey = 60;
 	return (0);
 }

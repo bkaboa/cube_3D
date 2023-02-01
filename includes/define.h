@@ -56,6 +56,7 @@
 # define C_WHITE 0xFFFFFF
 # define C_BLUE  0x0000FF
 # define C_RED	 0xFF0000
+# define C_GREEN 0x00FF00
 
 /*
  *
@@ -63,9 +64,9 @@
  *
  */
 
-#define MOVESPEED 1
+#define MOVESPEED 2
 #define FOV		45
-#define ROTATIONSPEED 1
+#define ROTATIONSPEED 0.5
 
 /*
  *

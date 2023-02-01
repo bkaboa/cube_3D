@@ -21,10 +21,10 @@ t_player	initPlayer(void)
 	player.xPos = 3 * CELL_SIZE + CELL_SIZE / 2;
 	player.yPos = 4 * CELL_SIZE + CELL_SIZE / 2;
 	player.angle = M_PI;
-	player.delta_x = cos(player.angle) * 5;
-	player.delta_y = sin(player.angle) * 5;
+	player.delta_x = -1;
+	player.delta_y = 0;
 	player.planex = 0;
-	player.planey = -1;
+	player.planey = 0.66;
 	return (player);
 }
 
@@ -53,8 +53,10 @@ int main(void)
 	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.background.img, 0, 0);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
-	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube.mlx);
-	mlx_loop_hook(cube.mlx.mlx_win, &control_hooks_loop, &cube.player);
+	mlx_hook(cube.mlx.mlx_win, 2, 1L << 0, &control_hooks, &cube);
+	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube);
+	mlx_hook(cube.mlx.mlx_win, 3, 1L << 1, &control_hooks_expose, &cube);
+	mlx_loop_hook(cube.mlx.mlx_win, &control_hooks_loop, &cube);
 	mlx_loop(cube.mlx.mlx);
 	return (0);
 }
