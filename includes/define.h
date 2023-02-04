@@ -37,6 +37,7 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
+# define PI     3.14159
 
 /*
  *

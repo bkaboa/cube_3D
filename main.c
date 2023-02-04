@@ -20,7 +20,7 @@ t_player	initPlayer(void)
 	t_player	player;
 	player.xPos = 3 * CELL_SIZE + CELL_SIZE / 2;
 	player.yPos = 4 * CELL_SIZE + CELL_SIZE / 2;
-	player.angle = M_PI;
+	player.angle = PI / 2;
 	player.delta_x = -1;
 	player.delta_y = 0;
 	player.planex = 0;

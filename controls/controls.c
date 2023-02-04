@@ -1,7 +1,7 @@
 #include "../includes/cube3D.h"
-#define KEY_LEFT 113
+#define KEY_LEFT 97
 #define KEY_RIGHT 100
-#define KEY_FORWARD 122
+#define KEY_FORWARD 119
 #define KEY_BACKWARD 115
 
 
@@ -15,21 +15,21 @@ void rotatePlayer(int keycode, t_player *player)
 		{
 			printf("Rotate left\n");
 			oldDirX = player->delta_x;
-			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
-			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
-			oldPlaneX  = player->planex;
-			player->planex = player->planex * cos(ROTATIONSPEED) - player->planey * sin(ROTATIONSPEED);
-			player->planey = oldPlaneX * sin(ROTATIONSPEED) + player->planey * cos(ROTATIONSPEED);
-		}
-		else
-		{
-			printf("Rotate right\n");
-			oldDirX = player->delta_x;
 			player->delta_x = player->delta_x * cos(-ROTATIONSPEED) - player->delta_y * sin(-ROTATIONSPEED);
 			player->delta_y = oldDirX * sin(-ROTATIONSPEED) + player->delta_y * cos(-ROTATIONSPEED);
 			oldPlaneX  = player->planex;
 			player->planex = player->planex * cos(-ROTATIONSPEED) - player->planey * sin(-ROTATIONSPEED);
 			player->planey = oldPlaneX * sin(-ROTATIONSPEED) + player->planey * cos(-ROTATIONSPEED);
+		}
+		else
+		{
+			printf("Rotate right\n");
+			oldDirX = player->delta_x;
+			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
+			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
+			oldPlaneX  = player->planex;
+			player->planex = player->planex * cos(ROTATIONSPEED) - player->planey * sin(ROTATIONSPEED);
+			player->planey = oldPlaneX * sin(ROTATIONSPEED) + player->planey * cos(ROTATIONSPEED);
 		}
 	}
 }

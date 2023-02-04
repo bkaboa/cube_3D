@@ -1,19 +1,49 @@
 #include "../includes/cube3D.h"
 
-void	drawPlayer(t_mlx *mlx, int x, int y, int color)
+void circle_fill(t_img *img, int xc, int yc, int radius) 
 {
-	int j = -PLAYER_MINI_SIZE;
-	
-	while (j < PLAYER_MINI_SIZE)
-	{
-		int i = -PLAYER_MINI_SIZE;
-		while (i < PLAYER_MINI_SIZE)
-		{
-			my_mlx_pixel_put(&mlx->minimap, (y - i - MINIMAP_RATIO), (x - j + MINIMAP_RATIO), color);
-			i++;
+	int x;
+	int y;
+	int d;
+
+	x = 0;
+	y = radius;
+	d = 3 - 2 * radius;
+	while (y >= x) {
+		for (int i = xc - x; i <= xc + x; i++) {
+			my_mlx_pixel_put(img, i, (yc + x), C_WHITE);
+			my_mlx_pixel_put(img, i, (yc - x), C_WHITE);
 		}
-		j++;
+		for (int i = xc - y; i <= xc + y; i++) {
+			my_mlx_pixel_put(img, i, (yc + x), C_WHITE);
+			my_mlx_pixel_put(img, i, (yc - x), C_WHITE);
+		}
+		if (d < 0) {
+			d = d + 4 * x + 6;
+		} else {
+			d = d + 4 * (x - y) + 10;
+			y--;
+		}
+		x++;
 	}
+}
+
+void	drawPlayer(t_mlx *mlx, int x, int y, t_player player)
+{
+	circle_fill(&mlx->minimap, x, y, PLAYER_MINI_SIZE);
+	circle_fill(&mlx->minimap, (x + (player.delta_x * 5)), (y + (player.delta_y * 5)), PLAYER_MINI_SIZE);
+	// int j = -PLAYER_MINI_SIZE;
+
+	// while (j < PLAYER_MINI_SIZE)
+	// {
+	// 	int i = -PLAYER_MINI_SIZE;
+	// 	while (i < PLAYER_MINI_SIZE)
+	// 	{
+	// 		my_mlx_pixel_put(&mlx->minimap, (y - i - MINIMAP_RATIO), (x - j + MINIMAP_RATIO), color);
+	// 		i++;
+	// 	}
+	// 	j++;
+	// }
 }
 
 void	drawMinimap(t_cube *cube)
@@ -35,7 +65,7 @@ void	drawMinimap(t_cube *cube)
 		}
 		y++;
 	}
-	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, C_GREEN);
+	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, cube->player);
 }
 
 void	updateMinimap(t_cube *cube)
@@ -44,7 +74,7 @@ void	updateMinimap(t_cube *cube)
 	cube->mlx.minimap.addr = mlx_get_data_addr(cube->mlx.minimap.img, \
 	&cube->mlx.minimap.bits_per_pixel, &cube->mlx.minimap.line_length, &cube->mlx.minimap.endian);
 	drawMinimap(cube);
-	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, C_GREEN);
+	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE, cube->player);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.minimap.img, 0, 0);
 	mlx_destroy_image(cube->mlx.mlx, cube->mlx.minimap.img);
 }
