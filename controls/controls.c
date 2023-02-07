@@ -8,26 +8,26 @@
 void rotatePlayer(int keycode, t_player *player)
 {
 	double oldDirX;
-	double oldPlaneX;
+	double oldplaneX;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 	{
 		if (keycode == KEY_LEFT)
 		{
-			oldDirX = player->delta_x;
-			player->delta_x = player->delta_x * cos(-ROTATIONSPEED) - player->delta_y * sin(-ROTATIONSPEED);
-			player->delta_y = oldDirX * sin(-ROTATIONSPEED) + player->delta_y * cos(-ROTATIONSPEED);
-			oldPlaneX  = player->planex;
-			player->planex = player->planex * cos(-ROTATIONSPEED) - player->planey * sin(-ROTATIONSPEED);
-			player->planey = oldPlaneX * sin(-ROTATIONSPEED) + player->planey * cos(-ROTATIONSPEED);
+			oldDirX = player->dirX;
+			player->dirX = player->dirX * cos(-ROTATIONSPEED) - player->dirY * sin(-ROTATIONSPEED);
+			player->dirY = oldDirX * sin(-ROTATIONSPEED) + player->dirY * cos(-ROTATIONSPEED);
+			oldplaneX  = player->planeX;
+			player->planeX = player->planeX * cos(-ROTATIONSPEED) - player->planeY * sin(-ROTATIONSPEED);
+			player->planeY = oldplaneX * sin(-ROTATIONSPEED) + player->planeY * cos(-ROTATIONSPEED);
 		}
 		else
 		{
-			oldDirX = player->delta_x;
-			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
-			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
-			oldPlaneX  = player->planex;
-			player->planex = player->planex * cos(ROTATIONSPEED) - player->planey * sin(ROTATIONSPEED);
-			player->planey = oldPlaneX * sin(ROTATIONSPEED) + player->planey * cos(ROTATIONSPEED);
+			oldDirX = player->dirX;
+			player->dirX = player->dirX * cos(ROTATIONSPEED) - player->dirY * sin(ROTATIONSPEED);
+			player->dirY = oldDirX * sin(ROTATIONSPEED) + player->dirY * cos(ROTATIONSPEED);
+			oldplaneX  = player->planeX;
+			player->planeX = player->planeX * cos(ROTATIONSPEED) - player->planeY * sin(ROTATIONSPEED);
+			player->planeY = oldplaneX * sin(ROTATIONSPEED) + player->planeY * cos(ROTATIONSPEED);
 		}
 	}
 }
@@ -38,13 +38,13 @@ void movePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_FORWARD)
 		{
-			player->xPos += player->delta_x * MOVESPEED;
-			player->yPos += player->delta_y * MOVESPEED;
+			player->xPos += player->dirX * MOVESPEED;
+			player->yPos += player->dirY * MOVESPEED;
 		}
 		else
 		{
-			player->xPos -= player->delta_x * MOVESPEED;
-			player->yPos -= player->delta_y * MOVESPEED;	
+			player->xPos -= player->dirX * MOVESPEED;
+			player->yPos -= player->dirY * MOVESPEED;	
 		}
 	}
 }

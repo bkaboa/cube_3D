@@ -7,7 +7,9 @@ void drawDirection(t_cube *cube, int x, int y, int length)
 	i = 0;
 	while (i < length)
 	{
-		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.delta_x* i)), (y + (cube->player.delta_y * i)), C_GREEN);
+		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.planeX* i)), (y + (cube->player.planeY * i)), C_RED);
+		my_mlx_pixel_put(&cube->mlx.minimap, (x - (cube->player.planeX* i)), (y - (cube->player.planeY * i)), C_RED);
+		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.dirX* i)), (y + (cube->player.dirY * i)), C_GREEN);
 		i++;
 	}
 }
@@ -47,18 +49,18 @@ void	drawMinimap(t_cube *cube)
 		}
 		y++;
 	}
-	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE);
 	drawDirection(cube, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos * MINIMAP_RATIO) / CELL_SIZE, 50);
+	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE);
 }
 
 void	updateMinimap(t_cube *cube)
 {
-	printf("Player delta x = %f\n", cube->player.delta_x);
-	printf("Player delta y = %f\n", cube->player.delta_y);
+	printf("Player delta x = %f\n", cube->player.dirX);
+	printf("Player delta y = %f\n", cube->player.dirY);
 	printf("Player posX = %f\n", cube->player.xPos);
 	printf("Player posY = %f\n", cube->player.yPos);
-	printf("Player planeX = %f\n", cube->player.planex);
-	printf("Player planeY = %f\n --------------------------------\n", cube->player.planey);
+	printf("Player planeX = %f\n", cube->player.planeX);
+	printf("Player planeY = %f\n --------------------------------\n", cube->player.planeY);
 
 	cube->mlx.minimap.img = mlx_new_image(cube->mlx.mlx, (int)(cube->map_xlen * MINIMAP_RATIO), (int)(cube->map_ylen * MINIMAP_RATIO));
 	cube->mlx.minimap.addr = mlx_get_data_addr(cube->mlx.minimap.img, \

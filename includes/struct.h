@@ -20,10 +20,10 @@ typedef struct s_player
 {
 	float 	xPos;
 	float 	yPos;
-	float	planex;
-	float	planey;
-	float	delta_x;
-	float	delta_y;
+	float	planeX;
+	float	planeY;
+	float	dirX;
+	float	dirY;
 	int32_t	lastKey;
 }	t_player;
 
