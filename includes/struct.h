@@ -20,7 +20,6 @@ typedef struct s_player
 {
 	float 	xPos;
 	float 	yPos;
-	float	angle;
 	float	planex;
 	float	planey;
 	float	delta_x;

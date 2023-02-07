@@ -13,7 +13,6 @@ void rotatePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_LEFT)
 		{
-			printf("Rotate left\n");
 			oldDirX = player->delta_x;
 			player->delta_x = player->delta_x * cos(-ROTATIONSPEED) - player->delta_y * sin(-ROTATIONSPEED);
 			player->delta_y = oldDirX * sin(-ROTATIONSPEED) + player->delta_y * cos(-ROTATIONSPEED);
@@ -23,7 +22,6 @@ void rotatePlayer(int keycode, t_player *player)
 		}
 		else
 		{
-			printf("Rotate right\n");
 			oldDirX = player->delta_x;
 			player->delta_x = player->delta_x * cos(ROTATIONSPEED) - player->delta_y * sin(ROTATIONSPEED);
 			player->delta_y = oldDirX * sin(ROTATIONSPEED) + player->delta_y * cos(ROTATIONSPEED);
@@ -40,13 +38,11 @@ void movePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_FORWARD)
 		{
-			printf("J'avance, xpos %f ypos %f deltax %f deltay %f\n", player->xPos, player->yPos, player->delta_x, player->delta_y);
 			player->xPos += player->delta_x * MOVESPEED;
 			player->yPos += player->delta_y * MOVESPEED;
 		}
 		else
 		{
-			printf("Je recule, xpos %f ypos %f\n", player->xPos, player->yPos);
 			player->xPos -= player->delta_x * MOVESPEED;
 			player->yPos -= player->delta_y * MOVESPEED;	
 		}
@@ -57,7 +53,6 @@ int	control_hooks(int keycode, t_cube *cube)
 {
 	if (keycode != 47)
 		cube->player.lastKey = keycode;
-	printf("keycode %d\n", keycode);
 	movePlayer(keycode, &cube->player);
 	rotatePlayer(keycode, &cube->player);
 	win_keyclose(keycode, cube);

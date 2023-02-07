@@ -66,8 +66,8 @@
  */
 
 #define MOVESPEED 2
-#define FOV		45
-#define ROTATIONSPEED 0.5
+#define FOV		45 //NUMBER OF RAYS CASTED FROM PLAYER
+#define ROTATIONSPEED 0.05
 
 /*
  *
