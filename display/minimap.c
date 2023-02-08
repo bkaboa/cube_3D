@@ -51,6 +51,7 @@ void	drawMinimap(t_cube *cube)
 	}
 	drawDirection(cube, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos * MINIMAP_RATIO) / CELL_SIZE, 50);
 	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE);
+	// mlx_string_put(&cube->mlx.minimap.img, cube->mlx.mlx_win, 50, 50, C_RED, "HELLO boys");
 }
 
 void	updateMinimap(t_cube *cube)

@@ -7,8 +7,8 @@
 
 void rotatePlayer(int keycode, t_player *player)
 {
-	double oldDirX;
-	double oldplaneX;
+	float oldDirX;
+	float oldplaneX;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 	{
 		if (keycode == KEY_LEFT)

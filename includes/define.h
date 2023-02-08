@@ -48,6 +48,7 @@
 # define MINIMAP_RATIO 40
 # define CELL_SIZE 30
 # define PLAYER_MINI_SIZE 5
+# define WALL_SIZE    30
 /*
  *
  *********************************		DEFINE_COLOR
@@ -66,7 +67,7 @@
  */
 
 #define MOVESPEED 2
-#define FOV		45 //NUMBER OF RAYS CASTED FROM PLAYER
+#define FOV		45 //Player's cone of vision (in angle)
 #define ROTATIONSPEED 0.05
 
 /*
