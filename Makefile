@@ -8,17 +8,18 @@ INCLUDES 	:= 	cube3D.h 					\
 SRC 		:=	parsing/error.c 				\
 				parsing/parsing.c 			\
 				utils/utils.c 				\
-				parsing/parsing_color.c 		\
-				parsing/parsing_files.c 		\
+				parsing/take_line.c 			\
 				parsing/parsing_map.c 			\
-				object/string.c				\
+				object/string.c					\
 				display/init_mlx.c			\
-				display/minimap.c			\
-				display/mlx_pixel_put.c			\
-				controls/closing.c 			\
-				controls/controls.c 			\
-				display/background.c 			\
 				main.c
+				
+				#display/minimap.c			\
+				#display/mlx_pixel_put.c			\
+				#controls/closing.c 			\
+				#controls/controls.c 			\
+				#display/background.c 			\
+				#main.c
 
 UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -37,6 +38,7 @@ OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	-Wall -Wextra -Werror
 MEMFLAGS 	:= 	-fsanitize=address -g3
+LLDB		:=	-g3
 
 all 			: $(NAME)
 
@@ -48,7 +50,10 @@ $(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 leaks 			: CFLAGS += $(MEMFLAGS)
-leaks 			: re
+leaks			: all
+
+debug			: CFLAGS += $(LLDB)
+debug 			: all
 
 make_mlx 		:
 	@make -C $(MLXPATH)
@@ -64,4 +69,4 @@ fclean 			: clean
 
 re 				: fclean all
 
-.PHONY 			: all clean fclean clean_mlx re make_mlx
+.PHONY 			: all clean fclean clean_mlx re make_mlx debug

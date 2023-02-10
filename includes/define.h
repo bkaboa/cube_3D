@@ -18,6 +18,8 @@
 
 //MAP_ERROR
 # define MAP_ERROR			"map error in (line, column)\n"
+# define SYNTAX_ERROR		"syntax in file not correct\n"
+# define MAP_REQUEST		"please make sure you give all the needed informations before the map\n"
 # define WALL_ERROR			"Wall error\n"
 # define WALL_INVALID		"Wall invalid\n"
 
@@ -72,12 +74,12 @@
  *********************************		DEFINE_MAP
  *
  */
-# define NORTH			"NO"
-# define SOUTH			"SO"
-# define WEST			"WE"
-# define EAST			"EA"
-# define FLOOR			"F"
-# define CEILING		"C"
+# define NORTH			0
+# define SOUTH			1
+# define WEST			2
+# define EAST			3
+# define FLOOR			0
+# define CEILING		1
 
 /*
  *

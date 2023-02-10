@@ -13,7 +13,8 @@ typedef struct s_string
 	void	(*string_destructor)(struct s_string*);
 	void	(*reference_copy_operator)(const struct s_string, struct s_string*);
 	int32_t	(*profond_copy_operator)(const struct s_string, struct s_string*);
-	int32_t	(*find)(struct s_string*, const char*);
+	int64_t	(*find)(struct s_string*, const char*);
+	int64_t	(*find_file_instructions)(struct s_string, char**, const char**);
 }	t_string;
 
 typedef struct s_player
@@ -52,8 +53,7 @@ typedef struct s_mlx
 	t_img		walls;
 	t_img		background;
 	t_sprite	wall_sprite[4];
-	u_int8_t	ceiling_color[3];
-	u_int8_t	floor_color[3];
+	u_int8_t	color[2][3];
 }	t_mlx;
 
 typedef struct	s_cube
