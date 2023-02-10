@@ -16,15 +16,20 @@ typedef struct s_string
 	int32_t	(*find)(struct s_string*, const char*);
 }	t_string;
 
+typedef struct s_vector
+{
+	float dirX;
+	float dirY;
+} t_vector;
+
 typedef struct s_player
 {
-	float 	xPos;
-	float 	yPos;
-	float	planeX;
-	float	planeY;
-	float	dirX;
-	float	dirY;
-	int32_t	lastKey;
+	float 		xPos;
+	float 		yPos;
+	float		planeX;
+	float		planeY;
+	t_vector 	playerDir;
+	int32_t		lastKey;
 }	t_player;
 
 typedef struct s_sprite

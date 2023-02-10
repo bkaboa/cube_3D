@@ -9,7 +9,7 @@ void drawDirection(t_cube *cube, int x, int y, int length)
 	{
 		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.planeX* i)), (y + (cube->player.planeY * i)), C_RED);
 		my_mlx_pixel_put(&cube->mlx.minimap, (x - (cube->player.planeX* i)), (y - (cube->player.planeY * i)), C_RED);
-		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.dirX* i)), (y + (cube->player.dirY * i)), C_GREEN);
+		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.playerDir.dirX* i)), (y + (cube->player.playerDir.dirY * i)), C_GREEN);
 		i++;
 	}
 }
@@ -49,6 +49,7 @@ void	drawMinimap(t_cube *cube)
 		}
 		y++;
 	}
+	protoRayDocument(cube);
 	drawDirection(cube, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos * MINIMAP_RATIO) / CELL_SIZE, 50);
 	drawPlayer(&cube->mlx, (cube->player.xPos * MINIMAP_RATIO) / CELL_SIZE, (cube->player.yPos* MINIMAP_RATIO) / CELL_SIZE);
 	// mlx_string_put(&cube->mlx.minimap.img, cube->mlx.mlx_win, 50, 50, C_RED, "HELLO boys");
@@ -56,8 +57,8 @@ void	drawMinimap(t_cube *cube)
 
 void	updateMinimap(t_cube *cube)
 {
-	printf("Player delta x = %f\n", cube->player.dirX);
-	printf("Player delta y = %f\n", cube->player.dirY);
+	printf("Player delta x = %f\n", cube->player.playerDir.dirX);
+	printf("Player delta y = %f\n", cube->player.playerDir.dirY);
 	printf("Player posX = %f\n", cube->player.xPos);
 	printf("Player posY = %f\n", cube->player.yPos);
 	printf("Player planeX = %f\n", cube->player.planeX);

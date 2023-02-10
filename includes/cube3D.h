@@ -29,6 +29,13 @@ void	updateMinimap(t_cube *cube);
 
 /*
  *
+ *********************************		RAYCASTING
+ *
+ */
+float    protoRayDocument(t_cube *cube);
+
+/*
+ *
  *********************************		PARSING
  *
  */

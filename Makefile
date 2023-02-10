@@ -18,6 +18,7 @@ SRC 		:=	parsing/error.c 				\
 				display/background.c 			\
 				controls/closing.c 			\
 				controls/controls.c 			\
+				display/raycasting.c		\
 				main.c
 
 UNAME_S := $(shell uname -s)

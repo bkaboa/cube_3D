@@ -21,8 +21,8 @@ t_player	initPlayer(void)
 	player.xPos = 3 * CELL_SIZE + CELL_SIZE / 2;
 	player.yPos = 4 * CELL_SIZE + CELL_SIZE / 2;
 	printf("PLAYER %f\n", player.xPos);
-	player.dirX = -1;
-	player.dirY = 0;
+	player.playerDir.dirX = -1;
+	player.playerDir.dirY = 0;
 	player.planeX = 0;
 	player.planeY = 0.66;
 	return (player);

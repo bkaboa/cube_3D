@@ -13,18 +13,18 @@ void rotatePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_LEFT)
 		{
-			oldDirX = player->dirX;
-			player->dirX = player->dirX * cos(-ROTATIONSPEED) - player->dirY * sin(-ROTATIONSPEED);
-			player->dirY = oldDirX * sin(-ROTATIONSPEED) + player->dirY * cos(-ROTATIONSPEED);
+			oldDirX = player->playerDir.dirX;
+			player->playerDir.dirX = player->playerDir.dirX * cos(-ROTATIONSPEED) - player->playerDir.dirY * sin(-ROTATIONSPEED);
+			player->playerDir.dirY = oldDirX * sin(-ROTATIONSPEED) + player->playerDir.dirY * cos(-ROTATIONSPEED);
 			oldplaneX  = player->planeX;
 			player->planeX = player->planeX * cos(-ROTATIONSPEED) - player->planeY * sin(-ROTATIONSPEED);
 			player->planeY = oldplaneX * sin(-ROTATIONSPEED) + player->planeY * cos(-ROTATIONSPEED);
 		}
 		else
 		{
-			oldDirX = player->dirX;
-			player->dirX = player->dirX * cos(ROTATIONSPEED) - player->dirY * sin(ROTATIONSPEED);
-			player->dirY = oldDirX * sin(ROTATIONSPEED) + player->dirY * cos(ROTATIONSPEED);
+			oldDirX = player->playerDir.dirX;
+			player->playerDir.dirX = player->playerDir.dirX * cos(ROTATIONSPEED) - player->playerDir.dirY * sin(ROTATIONSPEED);
+			player->playerDir.dirY = oldDirX * sin(ROTATIONSPEED) + player->playerDir.dirY * cos(ROTATIONSPEED);
 			oldplaneX  = player->planeX;
 			player->planeX = player->planeX * cos(ROTATIONSPEED) - player->planeY * sin(ROTATIONSPEED);
 			player->planeY = oldplaneX * sin(ROTATIONSPEED) + player->planeY * cos(ROTATIONSPEED);
@@ -38,13 +38,13 @@ void movePlayer(int keycode, t_player *player)
 	{
 		if (keycode == KEY_FORWARD)
 		{
-			player->xPos += player->dirX * MOVESPEED;
-			player->yPos += player->dirY * MOVESPEED;
+			player->xPos += player->playerDir.dirX * MOVESPEED;
+			player->yPos += player->playerDir.dirY * MOVESPEED;
 		}
 		else
 		{
-			player->xPos -= player->dirX * MOVESPEED;
-			player->yPos -= player->dirY * MOVESPEED;	
+			player->xPos -= player->playerDir.dirX * MOVESPEED;
+			player->yPos -= player->playerDir.dirY * MOVESPEED;	
 		}
 	}
 }
