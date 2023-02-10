@@ -48,7 +48,7 @@
 # define MINIMAP_RATIO 40
 # define CELL_SIZE 30
 # define PLAYER_MINI_SIZE 5
-# define WALL_SIZE    30
+# define WALL_SIZE    100
 /*
  *
  *********************************		DEFINE_COLOR

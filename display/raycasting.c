@@ -83,10 +83,8 @@ float    protoRayDocument(t_cube *cube)
 		rayDir.dirY = cube->player.playerDir.dirY + cube->player.planeY * cameraX;
 		x++;
 		//which box of the map we're in
-		// mapX = (int)cube->player.xPos;
-		// mapY = (int)cube->player.yPos;
-		mapX = 3;
-		mapY = 4;
+		mapX = (int)cube->player.xPos;
+		mapY = (int)cube->player.yPos;
 		//length of ray from one x or y-side to next x or y-side
 		deltaDistX = (rayDir.dirX == 0) ? 1e30 : fabs(1 / rayDir.dirX);
 		deltaDistY = (rayDir.dirY == 0) ? 1e30 : fabs(1 / rayDir.dirY);
@@ -114,12 +112,12 @@ float    protoRayDocument(t_cube *cube)
 			sideDistY = (mapY + 1.0 - cube->player.yPos) * deltaDistY;
 		}
 		//perform DDA
-		int i = 0;
-		while (i < 10)
-		{
-			my_mlx_pixel_put(&cube->mlx.minimap, (cube->player.xPos + rayDir.dirX * i), (cube->player.yPos + rayDir.dirY * i), C_RED);
-			i++;
-		}
+		// int i = 0;
+		// while (i < 500)
+		// {
+		// 	my_mlx_pixel_put(&cube->mlx.minimap, (minimapOffset(cube->player.xPos) + (rayDir.dirX * i)), (minimapOffset(cube->player.yPos) + (rayDir.dirY * i)), C_RED);
+		// 	i++;
+		// }
 		while (hit == 0)
 		{
 			//jump to next map square, either in x-direction, or in y-direction
@@ -135,7 +133,6 @@ float    protoRayDocument(t_cube *cube)
 				mapY += stepY;
 				side = 1;
 			}
-			printf("checking %d %d\n", mapX, mapY);
 			if (cube->map[mapX][mapY] > 0)
 				hit = 1; 	//Check if ray has hit a wall
 		}
@@ -143,6 +140,7 @@ float    protoRayDocument(t_cube *cube)
 			perpWallDist = (sideDistX - deltaDistX);
 		else
 			perpWallDist = (sideDistY - deltaDistY);
+		printf("perpWalldist %f\n", perpWallDist);
 		int lineHeight = (int)(WALL_SIZE / perpWallDist);
 		int drawStart = -lineHeight / 2 + WALL_SIZE / 2;
       	if(drawStart < 0)
@@ -150,12 +148,15 @@ float    protoRayDocument(t_cube *cube)
       	int drawEnd = lineHeight / 2 + WALL_SIZE / 2;
       	if(drawEnd >= WALL_SIZE)
 			drawEnd = WALL_SIZE - 1;
-		// printf("start %d\n", drawStart);
-		// printf("end %d\n", drawEnd);
-		while(drawStart != drawEnd)
+		printf("start %d\n", drawStart);
+		printf("end %d\n", drawEnd);
+		if (perpWallDist != 0)
 		{
-			my_mlx_pixel_put(&cube->mlx.walls, x, drawStart, C_RED);
-			drawStart--;
+			while(drawStart != drawEnd)
+			{
+				my_mlx_pixel_put(&cube->mlx.walls, x, (drawStart + HEIGHT / 2), C_RED);
+				drawStart--;
+			}
 		}
 		x++;
 	}
