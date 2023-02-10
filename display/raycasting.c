@@ -115,7 +115,7 @@ float    protoRayDocument(t_cube *cube)
 		}
 		//perform DDA
 		int i = 0;
-		while (i < 100)
+		while (i < 10)
 		{
 			my_mlx_pixel_put(&cube->mlx.minimap, (cube->player.xPos + rayDir.dirX * i), (cube->player.yPos + rayDir.dirY * i), C_RED);
 			i++;

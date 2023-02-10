@@ -18,9 +18,10 @@ int main(int ac, char **av)
 t_player	initPlayer(void)
 {
 	t_player	player;
-	player.xPos = 3 * CELL_SIZE + CELL_SIZE / 2;
-	player.yPos = 4 * CELL_SIZE + CELL_SIZE / 2;
+	player.xPos = 3;
+	player.yPos = 4;
 	printf("PLAYER %f\n", player.xPos);
+	printf("PLAYER %f\n", player.yPos);
 	player.playerDir.dirX = -1;
 	player.playerDir.dirY = 0;
 	player.planeX = 0;

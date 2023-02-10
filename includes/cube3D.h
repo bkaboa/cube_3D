@@ -47,6 +47,13 @@ void	check_color(const int fd, t_cube map, t_string line, unsigned int *y);
 void	check_map(int fd, t_cube map);
 void	exit_error_and_destruct(t_string *str, t_cube map, const int fd, const char *msg);
 
+/*
+ *
+ *********************************		OFFSETS
+ *
+ */
+float		playerOffset(float value);
+float			minimapOffset(float value);
 
 /*
  *

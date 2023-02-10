@@ -66,7 +66,7 @@
  *
  */
 
-#define MOVESPEED 2
+#define MOVESPEED 0.2
 #define FOV		45 //Player's cone of vision (in angle)
 #define ROTATIONSPEED 0.05
 
