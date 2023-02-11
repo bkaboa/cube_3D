@@ -16,12 +16,14 @@ static void	check_file(const char *file, int *fd)
 		exit_error(OPEN_ERROR);
 }
 
-void	file_map_parsing(const int argc, const char *file, t_cube map)
+void	file_map_parsing(const int argc, char **argv, t_cube map)
 {
 	int		fd;
+	char	*file;
 
 	if (argc > 2 || argc < 2)
 		exit_error(INV_NUM_ARG);
+	file = argv[1];
 	check_file(file, &fd);
 	take_all_line(fd, map);
 	close(fd);

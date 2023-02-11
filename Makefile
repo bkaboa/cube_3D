@@ -9,11 +9,11 @@ SRC 		:=	parsing/error.c 				\
 				parsing/parsing.c 			\
 				utils/utils.c 				\
 				parsing/take_line.c 			\
-				parsing/parsing_map.c 			\
 				object/string.c					\
 				display/init_mlx.c			\
 				main.c
 				
+				#parsing/parsing_map.c 			\
 				#display/minimap.c			\
 				#display/mlx_pixel_put.c			\
 				#controls/closing.c 			\
@@ -42,12 +42,12 @@ LLDB		:=	-g3
 
 all 			: $(NAME)
 
-$(NAME) 		: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
-
 $(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME) 		: $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
 leaks 			: CFLAGS += $(MEMFLAGS)
 leaks			: all

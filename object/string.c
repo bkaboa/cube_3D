@@ -2,12 +2,15 @@
 
 static void	string_destructor(t_string *str)
 {
-	str->lenght = 0;
-	str->size = 0;
-	if (str->str)
-		free(str->str);
-	str->str = NULL;
+	if (str)
+	{
+		str->lenght = 0;
+		str->size = 0;
+		if (str->str)
+			free(str->str);
+		str->str = NULL;
 	}
+}
 
 
 static int32_t	alloc_string(t_string *str1, size_t lenght)
@@ -97,9 +100,9 @@ static int64_t	find_file_instructions(t_string str, char **lines, const char **f
 				while (ft_strncomp(str.str, *find, ft_strlen(*find)) && find++)
 					if (!(*find))
 						return (-1);
-				if (lines[((void*)find - addr) / 8])
+				if (lines[((void*)find - addr) >> 3])
 					return (-2);
-				lines[((void*)find - addr) / 8] = str.str;
+				lines[((void*)find - addr) >> 3] = str.str;
 				while (*str.str != '\n')
 					str.str++;
 				i++;
@@ -111,9 +114,7 @@ static int64_t	find_file_instructions(t_string str, char **lines, const char **f
 
 void	string_init(t_string *str)
 {
-	str->str = NULL;
-	str->size = 0;
-	str->lenght = 0;
+	ft_bzero(str, sizeof(t_string));
 	str->append = append;
 	str->alloc_string = alloc_string;
 	str->string_destructor = string_destructor;

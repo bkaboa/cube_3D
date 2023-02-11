@@ -1,6 +1,7 @@
 NO ./maps/wall_sprite.xpm
 SO ./maps/wall_sprite.xpm
 WE ./maps/wall_sprite.xpm
+EA ./maps/wall_sprite.xpm
 
 F 220,100,0
 C 225,30,0
@@ -15,4 +16,3 @@ C 225,30,0
 10000N00000001
 10000000000001
 11111111111111
-EA ./maps/wall_sprite.xpm

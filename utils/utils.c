@@ -110,3 +110,17 @@ void	ft_bzero(void *var, int64_t var_size)
 	while (var - var_str < var_size)
 		*(char*)(var++) = 0;
 }
+
+int	check_char_in_str(char *str, char c)
+{
+	char	*tmp_str;
+
+	tmp_str = str;
+	while (*str)
+	{
+		if (*str == c)
+			return (str - tmp_str);
+		str++;
+	}
+	return(-1);
+}

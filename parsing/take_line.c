@@ -1,41 +1,116 @@
 #include "../includes/cube3D.h"
 
-//static int64_t	count_map_size(char *str_map)
+static void	check_valid_map(t_cube map, int64_t x, int64_t y)
+{
+	if (map.map[y] && map.map[y][x] == '0')
+	{
+		if (x == 0 || y == 0 || !map.map[y][x + 1])
+			exit_error_and_destruct(map, 0, MAP_ERROR);
+		if (x > (int32_t)ft_strlen(map.map[y + 1]) || x > (int32_t)ft_strlen(map.map[y - 1]))
+			exit_error_and_destruct(map, 0, MAP_ERROR);
+		if (map.map[y - 1][x] == ' ' || map.map[y - 1][x] == ' ')
+			exit_error_and_destruct(map, 0, MAP_ERROR);
+		if (map.map[y][x - 1] == ' ' || map.map[y][x + 1] == ' ')
+			exit_error_and_destruct(map, 0, MAP_ERROR);
+	}
+	if (map.map[y] && x == 0)
+		check_valid_map(map, x, y + 1);
+	if (map.map[y] && map.map[y][x])
+		check_valid_map(map, x + 1, y);
+}
+
+//static void	set_player_view(t_cube map, int32_t player_glance)
 //{
-//	int64_t	n_lines;
-//	
-//	n_lines = 0;
-//	while (*str_map)
-//	{
-//		if (*str_map == '\n')
-//			n_lines++;
-//		str_map++;
-//	}
-//	return (n_lines);
+//	map.player.delta_x = player_glance;
 //}
-//
-//static int16_t	parse_map(void* line, t_cube map, t_string *file_text)
-//{
-//	const char	*str = (char*)line;
-//	int64_t	n_lines;
-//
-//	while (*str != '1')
-//	{
-//		if (*str != '1' && *str != ' ' && *str != '\n')
-//			exit_error_and_destruct(file_text, map, 0, MAP_ERROR);
-//		str++;
-//	}
-//	while (str[-1] != '\n')
-//		str--;
-//	n_lines = count_map_size(str);
-//	return (SUCCESS);
-//}
+
+static void	take_player(t_cube map)
+{
+	int	y;
+	int	x;
+	int	player_glance;
+	int	n_player;
+
+	y = -1;
+	n_player = 0;
+	while (map.map[++y])
+	{
+		x = -1;
+		while (map.map[y][++x])
+		{
+			if (check_char_in_str(MAP_CHAR, map.map[y][x]) == -1)
+			 {
+				player_glance = check_char_in_str(PLAYER_POS, map.map[y][x]);
+				if (player_glance == -1 || n_player >= 1)
+					exit_error_and_destruct(map, 0, MAP_ERROR);
+				map.map[y][x] = '0';
+				n_player++;
+				//set_player_view(map, player_glance);
+				map.player.xPos = x;
+				map.player.yPos = y;
+			 }
+		}
+	}
+}
+
+static void	take_map(char *line, t_cube *map)
+{
+	int	i;
+
+	i = 0;
+	map->map_ylen = 1;
+	while (*line && *line == '\n')
+		line++;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+		{
+			line[i] = '\0';
+			map->map_ylen++;
+			if (i > map->map_xlen)
+				map->map_xlen = i;
+			line = &line[i];
+			i = 0;
+		}
+		i++;
+	}
+	if (map->map_ylen < 3)
+		exit_error_and_destruct(*map, 0, MAP_TOO_SMALL);
+}
+
+static void	allocate_map(char *line, t_cube *map)
+{
+	int32_t	i;
+	bool	is_empty;
+
+	i = -1;
+	is_empty = false;
+	map->map = malloc(sizeof(char*) * (map->map_ylen + 1));
+	if (map->map == NULL)
+		exit_error_and_destruct(*map, 0, MALLOC_ERROR);
+	map->map[map->map_ylen] = NULL;
+	while (*line == '\n')
+		line++;
+	while (++i < map->map_ylen)
+	{
+		map->map[i] = line;
+		while (*line)
+		{
+			is_empty = false;
+			line++;
+		}
+		line++;
+		if (is_empty == true)
+			exit_error_and_destruct(*map, 0, EMPTY_LINE_IN_MAP);
+		is_empty = true;
+	}
+}
 
 static void	place_eol(char **line)
 {
 	char	*tmp;
 	int32_t	n_lines;
-	int		i;
+	int32_t	i;
 	
 	n_lines = 0;
 	i = -1;
@@ -65,11 +140,10 @@ static int	ato_rgb(char **str, u_int8_t *value)
 		(*str)++;
 	}
 	*value = ret;
-	dprintf(2, "value = %d\n", *value);
 	return (SUCCESS);
 }
 
-static void	attribute_color(t_cube map, char **line, t_string *file_text)
+static void	attribute_color(t_cube map, char **line)
 {
 	u_int8_t	i;
 	u_int8_t	j;
@@ -82,23 +156,23 @@ static void	attribute_color(t_cube map, char **line, t_string *file_text)
 		tmp_line = line[i];
 		tmp_line += 1;
 		if (*tmp_line != ' ')
-			exit_error_and_destruct(file_text, map, 0, SYNTAX_ERROR);
+			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')
 			tmp_line++;
 		while (*tmp_line && *tmp_line != '\n')
 		{
 			if (ato_rgb(&tmp_line, &map.mlx.color[i - 4][j]) == FAILURE)
-				exit_error_and_destruct(file_text, map, 0, SYNTAX_ERROR);
+				exit_error_and_destruct(map, 0, SYNTAX_ERROR);
 			if (*tmp_line == ',' && ++j)
 				tmp_line++;
 		}
 		if (j > 2 || j < 2)
-			exit_error_and_destruct(file_text, map, 0, SYNTAX_ERROR);
+			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
 		i++;
 	}
 }
 
-static void	attribute_wall_sprite(t_cube map, char **line, t_string *file_text)
+static void	attribute_wall_sprite(t_cube map, char **line)
 {
 	int8_t	i;
 	char		*tmp_line;
@@ -109,42 +183,43 @@ static void	attribute_wall_sprite(t_cube map, char **line, t_string *file_text)
 		tmp_line = line[i];
 		tmp_line += 2;
 		if (*tmp_line != ' ')
-			exit_error_and_destruct(file_text, map, 0, SYNTAX_ERROR);
+			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')
 			tmp_line++;
 		map.mlx.wall_sprite[i].sprite = mlx_xpm_file_to_image(map.mlx.mlx, tmp_line, &map.mlx.wall_sprite[i].sprite_lenght, &map.mlx.wall_sprite[i].sprite_width);
 		if (map.mlx.wall_sprite[i].sprite == NULL)
-			exit_error_and_destruct(file_text, map, 0, WALL_INVALID);
+			exit_error_and_destruct(map, 0, WALL_INVALID);
 	}
 }
 
-static void	take_sprite_and_color(t_cube map, t_string *file_text)
+static void	take_sprite_and_color(t_cube map)
 {
 	int64_t		ret_find;
 	char		*line[7];
-	int			i;
+	int32_t		i;
 	const char	*map_instruct[] = {"NO", "SO", "EA", "WE", "C", "F", NULL};
 
 	i = -1;
 	while (++i < 7)
 		line[i] = NULL;
-	ret_find = file_text->find_file_instructions(*file_text, line, map_instruct);
+	ret_find = map.text_file.find_file_instructions(map.text_file, line, map_instruct);
 	if (ret_find < 0)
-		exit_error_and_destruct(file_text, map, 0, MAP_ERROR);
+		exit_error_and_destruct(map, 0, MAP_ERROR);
 	place_eol(line);
-	attribute_wall_sprite(map, line, file_text);
-	attribute_color(map, line, file_text);
-	exit_error_and_destruct(file_text, map, 0, "all have been made");
-	//parse_map((void*)ret_find, map, file_text);
+	attribute_wall_sprite(map, line);
+	attribute_color(map, line);
+	take_map((char*)ret_find, &map);
+	allocate_map((char*)ret_find, &map);
+	take_player(map);
+	check_valid_map(map, 0, 0);
+	exit_error_and_destruct(map, 0, "all have been made except map");
 }
 
 void	take_all_line(const int fd, t_cube map)
 {
-	t_string	file_text;
-
-	string_init(&file_text);
-	if (ft_read_file(&file_text, fd) == FAILURE)
-		exit_error_and_destruct(&file_text, map, fd, READ_ERROR);
+	string_init(&map.text_file);
+	if (ft_read_file(&map.text_file, fd) == FAILURE)
+		exit_error_and_destruct(map, fd, READ_ERROR);
 	close(fd);
-	take_sprite_and_color(map, &file_text);
+	take_sprite_and_color(map);
 }

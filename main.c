@@ -64,10 +64,10 @@ int main(int ac, char **av)
 //
 int main(int argc, char **argv)
 {
-	const char *file = argv[1];
 	t_cube 	map;
-	ft_bzero((void*)&map, sizeof(t_cube));
 
-	file_map_parsing(argc, file, map);
+	ft_bzero((void*)&map, sizeof(t_cube));
+	init_mlx(&map);
+	file_map_parsing(argc, argv, map);
 	return (0);
 }

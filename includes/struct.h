@@ -59,6 +59,7 @@ typedef struct s_mlx
 typedef struct	s_cube
 {
 	char		**map;
+	t_string	text_file;
 	int32_t		map_xlen;
 	int32_t		map_ylen;
 	int			minimap_tile_size;
