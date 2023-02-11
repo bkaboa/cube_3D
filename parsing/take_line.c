@@ -51,6 +51,8 @@ static void	take_player(t_cube map)
 			 }
 		}
 	}
+	if (n_player == 0)
+		exit_error_and_destruct(map, 0, MAP_ERROR);
 }
 
 static void	take_map(char *line, t_cube *map)
