@@ -17,14 +17,17 @@
 # define BAD_COLOR			"bad color in file\n"
 
 //MAP_ERROR
-# define MAP_ERROR			"map error\n"
-# define SYNTAX_ERROR		"syntax in file not correct\n"
-# define MAP_REQUEST		"please make sure you give all the needed informations before the map\n"
-# define WALL_ERROR			"Wall error\n"
-# define WALL_INVALID		"Wall invalid\n"
-# define MAP_TOO_SMALL		"map passed in files too small\n"
+# define MAP_ERROR					"map error in"
+# define SYNTAX_ERROR				"syntax in file not correct\n"
+# define MAP_REQUEST				"please make sure you give all the needed informations before the map\n"
+# define WALL_ERROR					"Wall error\n"
+# define WALL_INVALID				"Wall invalid\n"
+# define MAP_TOO_SMALL			"map passed in files too small\n"
 # define EMPTY_LINE_IN_MAP	"empty line in map\n"
-# define SEVERAL_PLAYER		"several player in the map\n"
+# define SEVERAL_PLAYER			"several player in the map\n"
+# define TWO_PLAYER_IN_MAP	"you can't have more than one player in map"
+# define UNKNOWN_CHAR				"unknown cahracter in map"
+# define NO_PLAYER_IN_MAP		"no player in map\n"
 
 //SYS_ERROR
 # define MALLOC_ERROR		"malloc error\n"
@@ -34,7 +37,7 @@
 //MLX_ERROR
 # define XPM_WALL_INVALID	"xpm file for for wall is invalid\n"
 
-# define PLAYER_POS			"NSEW"
+# define PLAYER_POS			"SNEW"
 # define MAP_CHAR			"01 "
 /*
  *

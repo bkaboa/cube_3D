@@ -124,3 +124,13 @@ int	check_char_in_str(char *str, char c)
 	}
 	return(-1);
 }
+
+void	ft_itoa_fd(u_int64_t num, int fd)
+{
+		char c;
+
+		c = num % 10 + 48;
+		if (num > 9)
+				ft_itoa_fd(num / 10, fd);
+		write(fd, &c, 1);
+}

@@ -31,6 +31,7 @@ void	drawBackground(t_mlx *mlx);
  */
 void	exit_error(const char *str);
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg);
+void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg);
 
 void	file_map_parsing(const int argc, char **argv, t_cube map);
 void	check_sprite_files(const int fd, t_cube map);
@@ -49,12 +50,13 @@ int			ft_read_file(t_string *line, int fd);
 void		init_map(t_cube *map);
 void		free_map(t_cube map);
 int			ft_strncomp(const char *str1, const char *str2, const int n);
-size_t		ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 void		free_double_pointer(void **pointer);
 int			add_line(t_cube map, t_string line);
 void 		init_mlx(t_cube *cube);
 void		ft_bzero(void *var, int64_t var_size);
 int			check_char_in_str(char *str, char c);
+void		ft_itoa_fd(u_int64_t num, int fd);
 
 /*
  *

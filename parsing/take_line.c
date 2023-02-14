@@ -5,13 +5,13 @@ static void	check_valid_map(t_cube map, int64_t x, int64_t y)
 	if (map.map[y] && map.map[y][x] == '0')
 	{
 		if (x == 0 || y == 0 || !map.map[y][x + 1])
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+				exit_map_error_and_destruct(map, y + 1, x + 2, MAP_ERROR);
 		if (x > (int32_t)ft_strlen(map.map[y + 1]) || x > (int32_t)ft_strlen(map.map[y - 1]))
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+				exit_map_error_and_destruct(map, y + 1, x + 1, MAP_ERROR);
 		if (map.map[y - 1][x] == ' ' || map.map[y - 1][x] == ' ')
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+				exit_map_error_and_destruct(map, y, x + 1, MAP_ERROR);
 		if (map.map[y][x - 1] == ' ' || map.map[y][x + 1] == ' ')
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+				exit_map_error_and_destruct(map, y + 1, x + 2, MAP_ERROR);
 	}
 	if (map.map[y] && x == 0)
 		check_valid_map(map, x, y + 1);
@@ -19,10 +19,23 @@ static void	check_valid_map(t_cube map, int64_t x, int64_t y)
 		check_valid_map(map, x + 1, y);
 }
 
-//static void	set_player_view(t_cube map, int32_t player_glance)
-//{
-//	map.player.delta_x = player_glance;
-//}
+static void	set_player_view(t_cube map, int player_glance)
+{
+		if (player_glance < 2)
+		{
+				if(player_glance % 2)
+						map.player.delta_y = -1;
+				else
+						map.player.delta_y = 1;
+		}
+		else
+		{
+				if (player_glance % 2)
+						map.player.delta_x = -1;
+				else
+						map.player.delta_x = 1;
+		}
+}
 
 static void	take_player(t_cube map)
 {
@@ -41,43 +54,45 @@ static void	take_player(t_cube map)
 			if (check_char_in_str(MAP_CHAR, map.map[y][x]) == -1)
 			 {
 				player_glance = check_char_in_str(PLAYER_POS, map.map[y][x]);
-				if (player_glance == -1 || n_player >= 1)
-					exit_error_and_destruct(map, 0, MAP_ERROR);
+				if (player_glance == -1)
+						exit_map_error_and_destruct(map, y + 1, x + 1, UNKNOWN_CHAR);
+				if (n_player >= 1)
+						exit_map_error_and_destruct(map, y + 1, x + 1, TWO_PLAYER_IN_MAP);
 				map.map[y][x] = '0';
 				n_player++;
-				//set_player_view(map, player_glance);
+				set_player_view(map, player_glance);
 				map.player.xPos = x;
 				map.player.yPos = y;
 			 }
 		}
 	}
 	if (n_player == 0)
-		exit_error_and_destruct(map, 0, MAP_ERROR);
+		exit_error_and_destruct(map, 0, NO_PLAYER_IN_MAP);
 }
 
 static void	take_map(char *line, t_cube *map)
 {
-	int	i;
+		int		i;
 
-	i = 0;
-	map->map_ylen = 1;
-	while (*line && *line == '\n')
-		line++;
-	while (line[i])
-	{
-		if (line[i] == '\n')
+		i = 0;
+		map->map_ylen = 1;
+		while (*line && *line == '\n')
+			line++;
+		while (line[i])
 		{
-			line[i] = '\0';
-			map->map_ylen++;
-			if (i > map->map_xlen)
-				map->map_xlen = i;
-			line = &line[i];
-			i = 0;
+			if (line[i] == '\n')
+			{
+				line[i] = '\0';
+				map->map_ylen++;
+				if (i > map->map_xlen)
+					map->map_xlen = i;
+				line = &line[i];
+				i = 0;
+			}
+			i++;
 		}
-		i++;
-	}
-	if (map->map_ylen < 3)
-		exit_error_and_destruct(*map, 0, MAP_TOO_SMALL);
+		if (map->map_ylen <= 3)
+			exit_error_and_destruct(*map, 0, MAP_TOO_SMALL);
 }
 
 static void	allocate_map(char *line, t_cube *map)
@@ -102,8 +117,8 @@ static void	allocate_map(char *line, t_cube *map)
 			line++;
 		}
 		line++;
-		if (is_empty == true)
-			exit_error_and_destruct(*map, 0, EMPTY_LINE_IN_MAP);
+		if (is_empty == true && i < map->map_ylen - 1)
+				exit_error_and_destruct(*map, 0, EMPTY_LINE_IN_MAP);
 		is_empty = true;
 	}
 }
@@ -214,14 +229,16 @@ static void	take_sprite_and_color(t_cube map)
 	allocate_map((char*)ret_find, &map);
 	take_player(map);
 	check_valid_map(map, 0, 0);
-	exit_error_and_destruct(map, 0, "all have been made except map");
+	exit_error_and_destruct(map, 0, "all have been made");
 }
 
 void	take_all_line(const int fd, t_cube map)
 {
-	string_init(&map.text_file);
-	if (ft_read_file(&map.text_file, fd) == FAILURE)
-		exit_error_and_destruct(map, fd, READ_ERROR);
-	close(fd);
-	take_sprite_and_color(map);
+		string_init(&map.text_file);
+		if (ft_read_file(&map.text_file, fd) == FAILURE)
+			exit_error_and_destruct(map, fd, READ_ERROR);
+		if (!map.text_file.str)
+				exit_error_and_destruct(map, 0, EMPTY_FILE);
+		close(fd);
+		take_sprite_and_color(map);
 }
