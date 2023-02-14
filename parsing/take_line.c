@@ -160,10 +160,24 @@ static int	ato_rgb(char **str, u_int8_t *value)
 	return (SUCCESS);
 }
 
+void	convert_rgb_to_hexa(u_int8_t rgb_color[3], char *hexa_color)
+{
+		int	j;
+		const char	hexa_code[] = "0123456789abcdef";
+
+		j = 6;
+		while ( --j >= 0)
+		{
+				hexa_color[j] = hexa_code[rgb_color[j >> 1] % 16];
+				rgb_color[(j >> 1)] = rgb_color[(j >> 1)] >> 4;
+		}
+}
+
 static void	attribute_color(t_cube map, char **line)
 {
 	u_int8_t	i;
 	u_int8_t	j;
+		u_int8_t	mlx_color[2][3];
 	char		*tmp_line;
 
 	i = 4;
@@ -178,13 +192,14 @@ static void	attribute_color(t_cube map, char **line)
 			tmp_line++;
 		while (*tmp_line && *tmp_line != '\n')
 		{
-			if (ato_rgb(&tmp_line, &map.mlx.color[i - 4][j]) == FAILURE)
+			if (ato_rgb(&tmp_line, &mlx_color[i - 4][j]) == FAILURE)
 				exit_error_and_destruct(map, 0, SYNTAX_ERROR);
 			if (*tmp_line == ',' && ++j)
 				tmp_line++;
 		}
 		if (j > 2 || j < 2)
 			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
+		convert_rgb_to_hexa(mlx_color[i - 4], map.mlx.hexa_color[i - 4]);
 		i++;
 	}
 }
