@@ -57,99 +57,88 @@
 // 	}
 // }
 
+
 float    protoRayDocument(t_cube *cube)
 {
+	t_ray ray;
 	drawBackground(&cube->mlx);
 	int x;
-	float cameraX;
-	t_vector rayDir;
-	int mapX;
-	int mapY;
-	float sideDistX;
-	float sideDistY;
-	float deltaDistX;
-	float deltaDistY;
-	float perpWallDist;
-	int stepX;
-	int stepY;
-	int hit; //was there a wall hit?
 
-	hit = 0;
 	x = 0;
 	while (x < WIDTH)
 	{
-		cameraX = 2 * x / (float)WIDTH - 1;
-		rayDir.dirX = cube->player.playerDir.dirX + cube->player.planeX * cameraX;
-		rayDir.dirY = cube->player.playerDir.dirY + cube->player.planeY * cameraX;
+		ray.hit = 0;
+		ray.cameraX = 2 * x / (float)WIDTH - 1;
+		ray.rayDir.dirX = cube->player.playerDir.dirX + cube->player.planeX * ray.cameraX;
+		ray.rayDir.dirY = cube->player.playerDir.dirY + cube->player.planeY * ray.cameraX;
 
-		mapX = (int)cube->player.xPos;//which box of the map we're in
-		mapY = (int)cube->player.yPos;
-		deltaDistX = (rayDir.dirX == 0) ? 1e30 : fabs(1 / rayDir.dirX);//length of ray from one x or y-side to next x or y-side
-		deltaDistY = (rayDir.dirY == 0) ? 1e30 : fabs(1 / rayDir.dirY);
+		ray.mapX = (int)cube->player.xPos;//which box of the map we're in
+		ray.mapY = (int)cube->player.yPos;
 
-		int side; //was a NS or a EW wall hit?
+		ray.deltaDistX = sqrt(1 + (ray.rayDir.dirY * ray.rayDir.dirY) / (ray.rayDir.dirX * ray.rayDir.dirX));
+		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
+
+		// deltaDistX = fabs(1 / (double)rayDir.dirX);//length of ray from one x or y-side to next x or y-side
+		// deltaDistY = fabs(1 / (double)rayDir.dirY);
 		//calculate step and initial sideDist
-		if (rayDir.dirX < 0)
+		if (ray.rayDir.dirX < 0)
 		{
-			stepX = -1;
-			sideDistX = (cube->player.xPos - mapX) * deltaDistX;
+			ray.stepX = -1;
+			ray.sideDistX = (cube->player.xPos - ray.mapX) * ray.deltaDistX;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - cube->player.xPos) * deltaDistX;
+			ray.stepX = 1;
+			ray.sideDistX = (ray.mapX + 1.0 - cube->player.xPos) * ray.deltaDistX;
 		}
-		if (rayDir.dirY < 0)
+		if (ray.rayDir.dirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (cube->player.yPos - mapY) * deltaDistY;
+			ray.stepY = -1;
+			ray.sideDistY = (cube->player.yPos - ray.mapY) * ray.deltaDistY;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - cube->player.yPos) * deltaDistY;
+			ray.stepY = 1;
+			ray.sideDistY = (ray.mapY + 1.0 - cube->player.yPos) * ray.deltaDistY;
 		}
 
-		while (hit == 0)
+		while (ray.hit == 0)
 		{		
 			//jump to next map square, either in x-direction, or in y-direction
-			if (sideDistX < sideDistY)
+			if (ray.sideDistX < ray.sideDistY)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				ray.sideDistX += ray.deltaDistX;
+				ray.mapX += ray.stepX;
+				ray.side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				ray.sideDistY += ray.deltaDistY;
+				ray.mapY += ray.stepY;
+				ray.side = 1;
 			}
-			if (cube->map[mapX][mapY] != 0)
-				hit = 1; 	//Check if ray has hit a wall
+			if (cube->map[ray.mapX][ray.mapY] != 0)
+				ray.hit = 1; // Check if ray has hit a wall
 		}
-		int i = 0;
-		if(side == 0) 
-			perpWallDist = (sideDistX - deltaDistX);
+		if (ray.side == 0)
+			ray.perpWallDist = (ray.sideDistX - ray.deltaDistX);
 		else
-			perpWallDist = (sideDistY - deltaDistY);
-		printf("perpWalldist %f\n", perpWallDist);
-		if(perpWallDist == 0)
-			perpWallDist = -1;
-		int lineHeight = (int)(WALL_SIZE / perpWallDist) * -1;
-		while (i < distance)
+			ray.perpWallDist = (ray.sideDistY - ray.deltaDistY);
+		if (ray.perpWallDist == 0)
+			ray.perpWallDist = -1;
+		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
+
+		ray.line = 0;
+		printf("line = %d\nlineHeight = %d\n", ray.line, ray.lineHeight);
+		while (ray.line < ray.lineHeight)
 		{
-			my_mlx_pixel_put(&cube->mlx.minimap, (minimapOffset(cube->player.xPos) + (rayDir.dirX * i)), (minimapOffset(cube->player.yPos) + (rayDir.dirY * i)), C_RED);
-			i++;
-		}
-		printf("lineheight = %d\n", lineHeight);
-		int line = 0;
-		while(line < lineHeight)
-		{
-			my_mlx_pixel_put(&cube->mlx.walls, x, (line + (-lineHeight / 2) + (HEIGHT / 2)), C_RED);
-			line++;
+			if (ray.side == 0)
+				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+			if (ray.side == 1)
+				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+			ray.line++;
 		}
 		x++;
 	}
-	return (perpWallDist);
+	return (0);
 }

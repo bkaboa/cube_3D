@@ -60,7 +60,6 @@ typedef struct s_mlx
 	void		*mlx_win;
 	t_img		minimap;
 	t_img		walls;
-	t_img		background;
 	t_sprite	wall_sprite[4];
 	u_int8_t	ceiling_color[3];
 	u_int8_t	floor_color[3];
@@ -76,5 +75,23 @@ typedef struct	s_cube
 	t_player	player;
 }	t_cube;
 
+typedef struct s_ray
+{
+	float cameraX;
+	t_vector rayDir;
+	int mapX;
+	int mapY;
+	float deltaDistX;
+	float deltaDistY;
+	float perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;  // was there a wall hit?
+	int side; // was a NS or a EW wall hit?
+	int line;
+	int lineHeight;
+	float sideDistX;
+	float sideDistY;
+} 	t_ray;
 
 #endif

@@ -18,14 +18,14 @@ int main(int ac, char **av)
 t_player	initPlayer(void)
 {
 	t_player	player;
-	player.xPos = 3;
-	player.yPos = 4;
+	player.xPos = 2.5;
+	player.yPos = 3.5;
 	printf("PLAYER %f\n", player.xPos);
 	printf("PLAYER %f\n", player.yPos);
 	player.playerDir.dirX = -1;
 	player.playerDir.dirY = 0;
 	player.planeX = 0;
-	player.planeY = 0.66;
+	player.planeY = -0.66;
 	return (player);
 }
 
@@ -49,8 +49,8 @@ int main(void)
 	cube.mlx.floor_color[2] = 0xff;
 
 	drawMinimap(&cube);
-	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0);
-	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.background.img, 0, 0);
+	protoRayDocument(&cube);
+	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
 	mlx_hook(cube.mlx.mlx_win, 2, 1L << 0, &control_hooks, &cube);
 	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube);

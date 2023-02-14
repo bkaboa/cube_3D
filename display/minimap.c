@@ -37,13 +37,13 @@ void	drawMinimap(t_cube *cube)
 	while (y < cube->map_ylen * MINIMAP_RATIO - 1)
 	{
 		x = 0;
-		while (x < cube->map_xlen * MINIMAP_RATIO - 1)
+		while (x < cube->map_xlen * MINIMAP_RATIO - 1 && (y % MINIMAP_RATIO) != 0)
 		{
-			if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '1')
+			if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '1' && (x % MINIMAP_RATIO) != 0)
 				my_mlx_pixel_put(&cube->mlx.minimap, x, y, C_WHITE);
-			else if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '0')
+			else if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '0' && (x % MINIMAP_RATIO) != 0)
 				my_mlx_pixel_put(&cube->mlx.minimap, x, y, C_BLUE);
-			else if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == ' ')
+			else if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == ' ' && (x % MINIMAP_RATIO) != 0)
 				my_mlx_pixel_put(&cube->mlx.minimap, x, y, C_WHITE);
 			x++;
 		}
@@ -56,6 +56,8 @@ void	drawMinimap(t_cube *cube)
 
 void	updateMinimap(t_cube *cube)
 {
+	// printf("------UPDATING PLAYER POS AND DIR------\n");
+	// printf("player xPos = %f\nplayer yPos = %f\nplayer xDir = %f\n player yDir = %f\n", cube->player.xPos, cube->player.yPos, cube->player.playerDir.dirX, cube->player.playerDir.dirY);
 	cube->mlx.minimap.img = mlx_new_image(cube->mlx.mlx, (int)(cube->map_xlen * MINIMAP_RATIO), (int)(cube->map_ylen * MINIMAP_RATIO));
 	cube->mlx.minimap.addr = mlx_get_data_addr(cube->mlx.minimap.img, \
 	&cube->mlx.minimap.bits_per_pixel, &cube->mlx.minimap.line_length, &cube->mlx.minimap.endian);

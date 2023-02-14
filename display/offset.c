@@ -2,7 +2,7 @@
 
 float playerOffset(float value)
 {
-    return (value * CELL_SIZE + CELL_SIZE / 2);
+    return (value * CELL_SIZE);
 }
 
 float minimapOffset(float value)
