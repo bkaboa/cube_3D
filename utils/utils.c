@@ -31,30 +31,31 @@ int	ft_strncomp(const char *str1, const char *str2, const int n)
 	i = 0;
 	if (!str1 || !str2)
 		return (-1);
-	while (i < n && str1[i] == str2[i] && str1[i] && str2[i])
+	while (i < n && str1[i] && str2[i])
 	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
-	return (*str1 - *str2);
+	return (0);
 }
 
 int	ft_read_file(t_string *line, const int fd)
 {
-	char		buf[2];
+	char		buf[10000];
 	int			read_ret;
 
 	line->string_destructor(line);
-	buf[1] = 0;
-	while (buf[1] != '\n')
+	while (true)
 	{
-		read_ret = read(fd, buf, 1);
+		read_ret = read(fd, buf, 10000);
 		if (read_ret == -1)
 			return (FAILURE);
 		if (read_ret == 0)
-			return (EOF);
-		if (buf[0] != '\n')
-			if (line->append(line, buf) == FAILURE)
-				return (FAILURE);
+			return (EOM);
+		buf[read_ret] = 0;
+		if (line->append(line, buf) == FAILURE)
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -100,4 +101,36 @@ int	add_line(t_cube map, t_string line)
 	free_double_pointer((void**)map.map);
 	map.map = new_map;
 	return (SUCCESS);
+}
+
+void	ft_bzero(void *var, int64_t var_size)
+{
+	const void	*var_str = var;
+
+	while (var - var_str < var_size)
+		*(char*)(var++) = 0;
+}
+
+int	check_char_in_str(char *str, char c)
+{
+	char	*tmp_str;
+
+	tmp_str = str;
+	while (*str)
+	{
+		if (*str == c)
+			return (str - tmp_str);
+		str++;
+	}
+	return(-1);
+}
+
+void	ft_itoa_fd(u_int64_t num, int fd)
+{
+		char c;
+
+		c = num % 10 + 48;
+		if (num > 9)
+				ft_itoa_fd(num / 10, fd);
+		write(fd, &c, 1);
 }
