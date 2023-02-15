@@ -63,7 +63,7 @@ typedef struct s_mlx
 	t_img		walls;
 	t_img		background;
 	t_sprite	wall_sprite[4];
-	char		hexa_color[2][7];
+	int32_t		hexa_color[2];
 }	t_mlx;
 
 typedef struct	s_cube

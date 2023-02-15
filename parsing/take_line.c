@@ -19,22 +19,22 @@ static void	check_valid_map(t_cube map, int64_t x, int64_t y)
 		check_valid_map(map, x + 1, y);
 }
 
-static void	ayer_view(t_cube map, int player_glance)
+static void	set_player_view(t_cube map, int player_glance)
 {
-		if (player_glance < 2)
-		{
-				if(player_glance % 2)
-						map.player.playerDir.dirY = -1;
-				else
-						map.player.playerDir.dirY = 1;
-		}
+	if (player_glance < 2)
+	{
+		if(player_glance % 2)
+			map.player.playerDir.dirY = -1;
 		else
-		{
-				if (player_glance % 2)
-						map.player.playerDir.dirX = -1;
-				else
-						map.player.playerDir.dirX = 1;
-		}
+			map.player.playerDir.dirY = 1;
+	}
+	else
+	{
+		if (player_glance % 2)
+			map.player.playerDir.dirX = -1;
+		else
+			map.player.playerDir.dirX = 1;
+	}
 }
 
 static void	take_player(t_cube map)
@@ -60,7 +60,7 @@ static void	take_player(t_cube map)
 						exit_map_error_and_destruct(map, y + 1, x + 1, TWO_PLAYER_IN_MAP);
 				map.map[y][x] = '0';
 				n_player++;
-				// set_player_view(map, player_glance);
+				set_player_view(map, player_glance);
 				map.player.xPos = x;
 				map.player.yPos = y;
 			 }
@@ -162,15 +162,15 @@ static int	ato_rgb(char **str, u_int8_t *value)
 
 void	convert_rgb_to_hexa(u_int8_t rgb_color[3], char *hexa_color)
 {
-		int	j;
-		const char	hexa_code[] = "0123456789abcdef";
+	int	j;
+	const char	hexa_code[] = "0123456789abcdef";
 
-		j = 6;
-		while ( --j >= 0)
-		{
-				hexa_color[j] = hexa_code[rgb_color[j >> 1] % 16];
-				rgb_color[(j >> 1)] = rgb_color[(j >> 1)] >> 4;
-		}
+	j = 6;
+	while ( --j >= 0)
+	{
+			hexa_color[j] = hexa_code[rgb_color[j >> 1] % 16];
+			rgb_color[(j >> 1)] = rgb_color[(j >> 1)] >> 4;
+	}
 }
 
 static void	attribute_color(t_cube map, char **line)
