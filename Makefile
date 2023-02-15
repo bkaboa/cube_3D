@@ -24,7 +24,7 @@ UNAME_S 	:= $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
         MLXPATH    	= mlx_linux
         MLX        	= $(DIR_MLX)/libmlx_Linux.a 
-        MLXFLAGS 		= -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
+        MLXFLAGS 		= -lm -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
     endif
     ifeq ($(UNAME_S),Darwin)
         MLXPATH    	= mlx

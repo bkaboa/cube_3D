@@ -78,9 +78,16 @@ float    protoRayDocument(t_cube *cube)
 		ray.deltaDistX = sqrt(1 + (ray.rayDir.dirY * ray.rayDir.dirY) / (ray.rayDir.dirX * ray.rayDir.dirX));
 		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
 
-		// deltaDistX = fabs(1 / (double)rayDir.dirX);//length of ray from one x or y-side to next x or y-side
-		// deltaDistY = fabs(1 / (double)rayDir.dirY);
-		//calculate step and initial sideDist
+		int i = 0;
+		while (i < 50)
+		{
+			if (x == 0)
+				my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, C_GREEN);
+			if (x == WIDTH - 1)
+			 	my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, C_RED);
+			i++;
+		}
+
 		if (ray.rayDir.dirX < 0)
 		{
 			ray.stepX = -1;
@@ -117,7 +124,7 @@ float    protoRayDocument(t_cube *cube)
 				ray.mapY += ray.stepY;
 				ray.side = 1;
 			}
-			if (cube->map[ray.mapX][ray.mapY] != 0)
+			if (cube->map[ray.mapX][ray.mapY] == '1')
 				ray.hit = 1; // Check if ray has hit a wall
 		}
 		if (ray.side == 0)
@@ -129,7 +136,6 @@ float    protoRayDocument(t_cube *cube)
 		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
 
 		ray.line = 0;
-		printf("line = %d\nlineHeight = %d\n", ray.line, ray.lineHeight);
 		while (ray.line < ray.lineHeight)
 		{
 			if (ray.side == 0)
