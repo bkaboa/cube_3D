@@ -11,23 +11,13 @@ SRC 		:=	parsing/error.c 				\
 				parsing/take_line.c 			\
 				object/string.c					\
 				display/init_mlx.c			\
-<<<<<<< HEAD
 				display/minimap.c			\
 				display/mlx_pixel_put.c			\
 				display/background.c 			\
 				controls/closing.c 			\
 				controls/controls.c 			\
-=======
->>>>>>> origin/parsing
-				main.c
-				
-				#parsing/parsing_map.c 			\
-				#display/minimap.c			\
-				#display/mlx_pixel_put.c			\
-				#controls/closing.c 			\
-				#controls/controls.c 			\
-				#display/background.c 			\
-				#main.c
+				display/raycasting.c		\
+				display/offset.c			\
 
 UNAME_S 	:= $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -45,21 +35,11 @@ OPATH 		:= 	.obj_dir
 OBJ 			:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	-Wall -Wextra -Werror
-<<<<<<< HEAD
-MEMFLAGS 	:= 	-fsanitize=address
-
-all 			: $(NAME)
-
-$(NAME) 		: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ -lm $(MLXFLAGS)
-
-=======
 MEMFLAGS 	:= 	-fsanitize=address -g3
 LLDB			:=	-g3
 
 all 			: $(NAME)
 
->>>>>>> origin/parsing
 $(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -68,18 +48,14 @@ $(NAME) 		: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
 leaks 			: CFLAGS += $(MEMFLAGS)
-<<<<<<< HEAD
-leaks 			: all
-=======
-leaks				: all
+leaks			: all
 
-debug				: CFLAGS += $(LLDB)
+debug			: CFLAGS += $(LLDB)
 debug 			: all
 
 norminette	:	
 	norminette $(SRC)
 	norminette $(HEADER)
->>>>>>> origin/parsing
 
 make_mlx 		:
 	@make -C $(MLXPATH)

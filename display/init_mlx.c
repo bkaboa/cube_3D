@@ -12,7 +12,4 @@ void init_mlx(t_cube *cube)
 	cube->mlx.walls.img = mlx_new_image(cube->mlx.mlx, WIDTH, HEIGHT);
 	cube->mlx.walls.addr = mlx_get_data_addr(cube->mlx.walls.img, &cube->mlx.walls.bits_per_pixel, \
 	&cube->mlx.walls.line_length, &cube->mlx.walls.endian);
-	cube->mlx.background.img = mlx_new_image(cube->mlx.mlx, WIDTH, HEIGHT);
-	cube->mlx.background.addr = mlx_get_data_addr(cube->mlx.background.img, &cube->mlx.background.bits_per_pixel, \
-	&cube->mlx.background.line_length, &cube->mlx.background.endian);
 }

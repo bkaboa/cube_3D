@@ -66,13 +66,14 @@ int main(int argc, char **argv)
 {
 <<<<<<< HEAD
 	t_player	player;
-	player.xPos = 3 * CELL_SIZE + CELL_SIZE / 2;
-	player.yPos = 4 * CELL_SIZE + CELL_SIZE / 2;
-	player.angle = M_PI;
-	player.delta_x = -1;
-	player.delta_y = 0;
-	player.planex = 0;
-	player.planey = 0.66;
+	player.xPos = 2.5;
+	player.yPos = 3.5;
+	printf("PLAYER %f\n", player.xPos);
+	printf("PLAYER %f\n", player.yPos);
+	player.playerDir.dirX = -1;
+	player.playerDir.dirY = 0;
+	player.planeX = 0;
+	player.planeY = -0.66;
 	return (player);
 }
 
@@ -85,7 +86,7 @@ int main(void)
 	cube.map_xlen = 7;
 	cube.map_ylen = 7;
 	init_mlx(&cube);
-    char* array[] = {"1111111", "1001001", "1001001", "1000001", "1000001", "1000001", "1111111"};
+    char* array[] = {"1111111", "1001001", "1101001", "1000001", "1100001", "1000001", "1111111"};
 	cube.player = initPlayer();
 	cube.map = array;
 	cube.mlx.ceiling_color[0] = 0xff;
@@ -96,10 +97,8 @@ int main(void)
 	cube.mlx.floor_color[2] = 0xff;
 
 	drawMinimap(&cube);
-	drawBackground(&cube.mlx);
-	my_mlx_pixel_put(&cube.mlx.walls, 500, 500, C_WHITE);
-	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0);
-	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.background.img, 0, 0);
+	protoRayDocument(&cube);
+	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
 	mlx_hook(cube.mlx.mlx_win, 2, 1L << 0, &control_hooks, &cube);
 	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube);

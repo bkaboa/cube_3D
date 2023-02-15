@@ -47,6 +47,7 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
+# define PI     3.14159
 
 /*
  *
@@ -57,6 +58,7 @@
 # define MINIMAP_RATIO 40
 # define CELL_SIZE 30
 # define PLAYER_MINI_SIZE 5
+# define WALL_SIZE    100
 /*
  *
  *********************************		DEFINE_COLOR
@@ -74,9 +76,9 @@
  *
  */
 
-#define MOVESPEED 2
-#define FOV		45
-#define ROTATIONSPEED 0.5
+#define MOVESPEED 0.2
+#define FOV		45 //Player's cone of vision (in angle)
+#define ROTATIONSPEED 0.05
 
 /*
  *

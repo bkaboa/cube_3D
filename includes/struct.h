@@ -17,16 +17,20 @@ typedef struct s_string
 	int64_t	(*find_file_instructions)(struct s_string, char**, const char**);
 }	t_string;
 
+typedef struct s_vector
+{
+	float dirX;
+	float dirY;
+} t_vector;
+
 typedef struct s_player
 {
-	float 	xPos;
-	float 	yPos;
-	float	angle;
-	float	planex;
-	float	planey;
-	float	delta_x;
-	float	delta_y;
-	int32_t	lastKey;
+	float 		xPos;
+	float 		yPos;
+	float		planeX;
+	float		planeY;
+	t_vector 	playerDir;
+	int32_t		lastKey;
 }	t_player;
 
 typedef struct s_sprite
@@ -53,6 +57,7 @@ typedef	struct s_img
 
 typedef struct s_mlx
 {
+<<<<<<< HEAD
 		void		*mlx;
 		void		*mlx_win;
 		t_img		minimap;
@@ -60,6 +65,15 @@ typedef struct s_mlx
 		t_img		background;
 		t_sprite	wall_sprite[4];
 		char			hexa_color[2][7];
+=======
+	void		*mlx;
+	void		*mlx_win;
+	t_img		minimap;
+	t_img		walls;
+	t_sprite	wall_sprite[4];
+	u_int8_t	ceiling_color[3];
+	u_int8_t	floor_color[3];
+>>>>>>> display
 }	t_mlx;
 
 typedef struct	s_cube
@@ -73,5 +87,23 @@ typedef struct	s_cube
 	t_player	player;
 }	t_cube;
 
+typedef struct s_ray
+{
+	float cameraX;
+	t_vector rayDir;
+	int mapX;
+	int mapY;
+	float deltaDistX;
+	float deltaDistY;
+	float perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;  // was there a wall hit?
+	int side; // was a NS or a EW wall hit?
+	int line;
+	int lineHeight;
+	float sideDistX;
+	float sideDistY;
+} 	t_ray;
 
 #endif

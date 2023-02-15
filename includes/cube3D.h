@@ -29,6 +29,13 @@ void	updateMinimap(t_cube *cube);
 
 /*
  *
+ *********************************		RAYCASTING
+ *
+ */
+float    protoRayDocument(t_cube *cube);
+
+/*
+ *
  *********************************		PARSING
  *
  */
@@ -42,6 +49,13 @@ void	check_color(const int fd, t_cube map, t_string line, unsigned int *y);
 void	check_map(int fd, t_cube map);
 void	take_all_line(const int fd, t_cube map);
 
+/*
+ *
+ *********************************		OFFSETS
+ *
+ */
+float		playerOffset(float value);
+float			minimapOffset(float value);
 
 /*
  *
