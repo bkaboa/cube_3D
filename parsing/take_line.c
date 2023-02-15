@@ -160,16 +160,18 @@ static int	ato_rgb(char **str, u_int8_t *value)
 	return (SUCCESS);
 }
 
-void	convert_rgb_to_hexa(u_int8_t rgb_color[3], char *hexa_color)
+void	convert_rgb_to_hexa(u_int8_t rgb_color[3], int *hexa_color)
 {
-	int	j;
-	const char	hexa_code[] = "0123456789abcdef";
+	int			j;
+	int			i;
 
 	j = 6;
+	i = 1;
 	while ( --j >= 0)
 	{
-			hexa_color[j] = hexa_code[rgb_color[j >> 1] % 16];
-			rgb_color[(j >> 1)] = rgb_color[(j >> 1)] >> 4;
+		*hexa_color += (rgb_color[j >> 1] % 16) * i;
+		rgb_color[(j >> 1)] = rgb_color[(j >> 1)] >> 4;
+		i = i << 4;
 	}
 }
 
@@ -199,7 +201,7 @@ static void	attribute_color(t_cube map, char **line)
 		}
 		if (j > 2 || j < 2)
 			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
-		convert_rgb_to_hexa(mlx_color[i - 4], map.mlx.hexa_color[i - 4]);
+		convert_rgb_to_hexa(mlx_color[i - 4], &map.mlx.hexa_color[i - 4]);
 		i++;
 	}
 }
