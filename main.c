@@ -86,6 +86,7 @@ int main(void)
 	cube.map_ylen = 7;
 	init_mlx(&cube);
     char* array[] = {"1111111", "1001001", "1101001", "1000001", "1100001", "1000001", "1111111"};
+	cube.map = array;
 	cube.player = initPlayer();
 
 	drawMinimap(&cube);

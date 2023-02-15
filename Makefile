@@ -18,6 +18,7 @@ SRC 		:=	parsing/error.c 				\
 				controls/controls.c 			\
 				display/raycasting.c		\
 				display/offset.c			\
+				main.c
 
 UNAME_S 	:= $(shell uname -s)
     ifeq ($(UNAME_S),Linux)

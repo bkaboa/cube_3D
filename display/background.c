@@ -13,9 +13,9 @@ void	drawBackground(t_mlx *mlx)
 		while (x < WIDTH)
 		{
 			if (y < (HEIGHT / 2))
-				my_mlx_pixel_put(&mlx->walls, x, y, mlx->ceiling_color[0] << 16 | mlx->ceiling_color[1] << 8 | mlx->ceiling_color[2]);
+				my_mlx_pixel_put(&mlx->walls, x, y, mlx->hexa_color[0]);
 			else
-				my_mlx_pixel_put(&mlx->walls, x, y, mlx->floor_color[0] << 16 | mlx->floor_color[1] << 8 | mlx->floor_color[2]);
+				my_mlx_pixel_put(&mlx->walls, x, y, mlx->hexa_color[1]);
 			x++;
 		}
 		y++;
