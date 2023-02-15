@@ -62,9 +62,8 @@ int main(int ac, char **av)
 //
 //
 //
-int main(int argc, char **argv)
+t_player initPlayer(void)
 {
-<<<<<<< HEAD
 	t_player	player;
 	player.xPos = 2.5;
 	player.yPos = 3.5;
@@ -82,19 +81,12 @@ int main(int argc, char **argv)
 int main(void)
 {
 	t_cube		cube;
-
+	ft_bzero((void*)&cube, sizeof(cube));
 	cube.map_xlen = 7;
 	cube.map_ylen = 7;
 	init_mlx(&cube);
     char* array[] = {"1111111", "1001001", "1101001", "1000001", "1100001", "1000001", "1111111"};
 	cube.player = initPlayer();
-	cube.map = array;
-	cube.mlx.ceiling_color[0] = 0xff;
-	cube.mlx.ceiling_color[1] = 0x00;
-	cube.mlx.ceiling_color[2] = 0xff;
-	cube.mlx.floor_color[0] = 0x0;
-	cube.mlx.floor_color[1] = 0x0;
-	cube.mlx.floor_color[2] = 0xff;
 
 	drawMinimap(&cube);
 	protoRayDocument(&cube);
@@ -105,12 +97,5 @@ int main(void)
 	mlx_hook(cube.mlx.mlx_win, 3, 1L << 1, &control_hooks_expose, &cube);
 	mlx_loop_hook(cube.mlx.mlx_win, &control_hooks_loop, &cube);
 	mlx_loop(cube.mlx.mlx);
-=======
-	t_cube 	map;
-
-	ft_bzero((void*)&map, sizeof(t_cube));
-	init_mlx(&map);
-	file_map_parsing(argc, argv, map);
->>>>>>> origin/parsing
 	return (0);
 }
