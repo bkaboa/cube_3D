@@ -65,12 +65,12 @@ int main(int ac, char **av)
 t_player initPlayer(void)
 {
 	t_player	player;
-	player.xPos = 4.5;
-	player.yPos = 2.5;
+	player.xPos = 3.5; //y
+	player.yPos = 2.5; //x
 	player.playerDir.dirX = -1;
 	player.playerDir.dirY = 0;
 	player.planeX = 0;
-	player.planeY = 0.5;
+	player.planeY = 0.66;
 	return (player);
 }
 
@@ -82,13 +82,14 @@ int main(int ac, char **av)
 	ft_bzero((void*)&cube, sizeof(cube));
 	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
+	cube.map_xlen--;
 	cube.mlx.minimap.img = mlx_new_image(cube.mlx.mlx, (int)(cube.map_xlen * MINIMAP_RATIO), (int)(cube.map_ylen * MINIMAP_RATIO));
 	cube.mlx.minimap.addr = mlx_get_data_addr(cube.mlx.minimap.img, &cube.mlx.minimap.bits_per_pixel, \
 											   &cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
 	cube.player = initPlayer();
 
 	drawMinimap(&cube);
-	protoRayDocument(&cube);
+	raycasting_loop(&cube);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
 	mlx_hook(cube.mlx.mlx_win, 2, 1L << 0, &control_hooks, &cube);

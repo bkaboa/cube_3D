@@ -1,0 +1,15 @@
+NO ./maps/wall_sprite.xpm
+SO ./maps/wall_sprite.xpm
+WE ./maps/wall_sprite.xpm
+EA ./maps/wall_sprite.xpm
+
+F 225,193,110
+C 173,216,230
+
+111111
+101011
+100011
+100W01
+101001
+100001
+111111

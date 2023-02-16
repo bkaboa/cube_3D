@@ -3,8 +3,8 @@ SO ./maps/wall_sprite.xpm
 WE ./maps/wall_sprite.xpm
 EA ./maps/wall_sprite.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,0,255
+C 225,30,50
 
 11111111111111
 10000110000001

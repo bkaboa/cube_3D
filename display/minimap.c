@@ -49,8 +49,8 @@ void	drawMinimap(t_cube *cube)
 		}
 		y++;
 	}
-	drawDirection(cube, minimapOffset(cube->player.yPos), minimapOffset(cube->player.xPos), 50);
-	drawPlayer(&cube->mlx, minimapOffset(cube->player.yPos), minimapOffset(cube->player.xPos));
+	drawDirection(cube, Offset(cube->player.yPos), Offset(cube->player.xPos), 50);
+	drawPlayer(&cube->mlx, Offset(cube->player.yPos), Offset(cube->player.xPos));
 	// mlx_string_put(&cube->mlx.minimap.img, cube->mlx.mlx_win, 50, 50, C_RED, "HELLO boys");
 }
 
@@ -62,8 +62,8 @@ void	updateMinimap(t_cube *cube)
 	cube->mlx.minimap.addr = mlx_get_data_addr(cube->mlx.minimap.img, \
 	&cube->mlx.minimap.bits_per_pixel, &cube->mlx.minimap.line_length, &cube->mlx.minimap.endian);
 	drawMinimap(cube);
-	protoRayDocument(cube);
-	drawPlayer(&cube->mlx, minimapOffset(cube->player.yPos), minimapOffset(cube->player.xPos));
+	raycasting_loop(cube);
+	drawPlayer(&cube->mlx, Offset(cube->player.yPos), Offset(cube->player.xPos));
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.minimap.img, 0, 0);
 	mlx_destroy_image(cube->mlx.mlx, cube->mlx.minimap.img);

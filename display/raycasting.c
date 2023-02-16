@@ -1,64 +1,6 @@
 #include "../includes/cube3D.h"
 
-// void	raycastVideo(t_cube *cube)
-// {
-// 	int r,mx,my,mp,dof; float rx,ry,xo,yo;
-// 	t_vector rayDir;
-// 	rayDir.dirX = cube->player.playerDir.dirX;
-// 	rayDir.dirY = cube->player.playerDir.dirY;
-// 	for (r = 0; r < 1; r++)
-// 	{
-// 		//check horizontal lines//
-// 		dof=0;
-// 		float aTan = -1/tan(rayDir.dirX + rayDir.dirY);
-// 		if (rayDir.dirY < 0) //raydir is pointing up
-// 		{
-// 			ry = (((int)cube->player.yPos>>6)<<6)-0.0001;
-// 			rx = (cube->player.yPos - ry) * aTan + cube->player.xPos;
-// 			yo = -64;
-// 			xo = -yo*aTan;
-// 		}
-// 		else if (rayDir.dirY > 0) //raydir is pointing down
-// 		{
-// 			ry = (((int)cube->player.yPos>>6)<<6)+64;
-// 			rx = (cube->player.yPos - ry) * aTan + cube->player.xPos;
-// 			yo = 64;
-// 			xo = -yo*aTan;
-// 		}
-// 		else if (rayDir.dirY == 0 && (rayDir.dirX == 1 || rayDir.dirX == -1)) //raydir is looking straight left or right
-// 		{
-// 			while (dof < 8)
-// 			{
-// 				mx = (int)(rx)>>6;
-// 				my = (int)(ry)>>6;
-// 				mp = my * cube->map_xlen + mx;
-// 				if (mp < cube->map_xlen * cube->map_ylen && cube->map[mp])
-// 			}
-// 		}
-// 	}
-// }
-
-// int	get_wall_dist()
-// {
-
-// }
-
-// void drawDirection(t_cube *cube, int x, int y, int length) 
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < length)
-// 	{
-// 		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.planeX* i)), (y + (cube->player.planeY * i)), C_RED);
-// 		my_mlx_pixel_put(&cube->mlx.minimap, (x - (cube->player.planeX* i)), (y - (cube->player.planeY * i)), C_RED);
-// 		my_mlx_pixel_put(&cube->mlx.minimap, (x + (cube->player.playerDir.dirX* i)), (y + (cube->player.playerDir.dirY * i)), C_GREEN);
-// 		i++;
-// 	}
-// }
-
-
-float    protoRayDocument(t_cube *cube)
+float    raycasting_loop(t_cube *cube)
 {
 	t_ray ray;
 	drawBackground(&cube->mlx);
@@ -79,15 +21,6 @@ float    protoRayDocument(t_cube *cube)
 		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
 
 		int i = 0;
-		while (i < 50)
-		{
-			if (x == 0)
-				my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, C_GREEN);
-			if (x == WIDTH - 1)
-			 	my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, C_RED);
-			i++;
-		}
-
 		if (ray.rayDir.dirX < 0)
 		{
 			ray.stepX = -1;
@@ -110,7 +43,7 @@ float    protoRayDocument(t_cube *cube)
 		}
 
 		while (ray.hit == 0)
-		{		
+		{
 			//jump to next map square, either in x-direction, or in y-direction
 			if (ray.sideDistX < ray.sideDistY)
 			{
@@ -131,20 +64,29 @@ float    protoRayDocument(t_cube *cube)
 			ray.perpWallDist = (ray.sideDistX - ray.deltaDistX);
 		else
 			ray.perpWallDist = (ray.sideDistY - ray.deltaDistY);
-		if (ray.perpWallDist == 0)
-			ray.perpWallDist = -1;
 		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
-
+		dprintf(2, "--------------\nRay number %d perpwallDist = %f\n", x, ray.perpWallDist);
 		ray.line = 0;
+		if (ray.lineHeight > HEIGHT)
+			ray.lineHeight = HEIGHT;
 		while (ray.line < ray.lineHeight)
 		{
 			if (ray.side == 0)
+			{
 				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+			}
+
 			if (ray.side == 1)
+			{
 				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+			}
 			ray.line++;
 		}
-		x++;
+		x += 3;
 	}
 	return (0);
 }

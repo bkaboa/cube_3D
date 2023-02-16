@@ -32,7 +32,7 @@ void	updateMinimap(t_cube *cube);
  *********************************		RAYCASTING
  *
  */
-float    protoRayDocument(t_cube *cube);
+float    raycasting_loop(t_cube *cube);
 
 /*
  *
@@ -54,8 +54,7 @@ void	take_all_line(const int fd, t_cube *map);
  *********************************		OFFSETS
  *
  */
-float		playerOffset(float value);
-float			minimapOffset(float value);
+float			Offset(float value);
 
 /*
  *
