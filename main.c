@@ -72,7 +72,7 @@ t_player initPlayer(void)
 	player.playerDir.dirX = -1;
 	player.playerDir.dirY = 0;
 	player.planeX = 0;
-	player.planeY = -0.66;
+	player.planeY = 0.5;
 	return (player);
 }
 
@@ -82,10 +82,10 @@ int main(void)
 {
 	t_cube		cube;
 	ft_bzero((void*)&cube, sizeof(cube));
-	cube.map_xlen = 7;
+	cube.map_xlen = 6;
 	cube.map_ylen = 7;
 	init_mlx(&cube);
-    char* array[] = {"1111111", "1001001", "1101001", "1000001", "1100001", "1000001", "1111111"};
+    char* array[] = {"111111", "101011", "101011", "100111", "101001", "100001", "111111"};
 	cube.map = array;
 	cube.player = initPlayer();
 

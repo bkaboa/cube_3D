@@ -9,7 +9,7 @@
  *
  */
 void rotatePlayer(int keycode, t_player *player);
-void movePlayer(int keycode, t_player *player);
+void movePlayer(int keycode, t_cube *cube);
 int control_hooks_loop(int keycode, t_cube *cube);
 int	control_hooks_expose(int keycode, t_cube *cube);
 int	control_hooks(int keycode, t_cube *cube);
