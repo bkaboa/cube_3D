@@ -36,6 +36,10 @@ typedef struct s_player
 typedef struct s_sprite
 {
 	void	*sprite;
+	char	*sprite_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	int32_t	sprite_lenght;
 	int32_t	sprite_width;
 }	t_sprite;
