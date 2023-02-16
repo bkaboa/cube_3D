@@ -65,7 +65,7 @@ int main(int ac, char **av)
 t_player initPlayer(void)
 {
 	t_player	player;
-	player.xPos = 2.5;
+	player.xPos = 4.5;
 	player.yPos = 3.5;
 	printf("PLAYER %f\n", player.xPos);
 	printf("PLAYER %f\n", player.yPos);

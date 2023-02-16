@@ -82,9 +82,9 @@ float    protoRayDocument(t_cube *cube)
 		while (i < 50)
 		{
 			if (x == 0)
-				my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, C_GREEN);
 			if (x == WIDTH - 1)
-			 	my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, C_RED);
+			 	my_mlx_pixel_put(&cube->mlx.minimap, minimapOffset(cube->player.yPos) + i * ray.rayDir.dirY, minimapOffset(cube->player.xPos) + i * ray.rayDir.dirX, C_RED);
 			i++;
 		}
 
