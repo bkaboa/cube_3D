@@ -37,7 +37,7 @@ static void	set_player_view(t_cube map, int player_glance)
 	}
 }
 
-static void	take_player(t_cube map)
+static void	take_player(t_cube *map)
 {
 	int	y;
 	int	x;
@@ -46,28 +46,28 @@ static void	take_player(t_cube map)
 
 	y = -1;
 	n_player = 0;
-	while (map.map[++y])
+	while (map->map[++y])
 	{
 		x = -1;
-		while (map.map[y][++x])
+		while (map->map[y][++x])
 		{
-			if (check_char_in_str(MAP_CHAR, map.map[y][x]) == -1)
+			if (check_char_in_str(MAP_CHAR, map->map[y][x]) == -1)
 			 {
-				player_glance = check_char_in_str(PLAYER_POS, map.map[y][x]);
+				player_glance = check_char_in_str(PLAYER_POS, map->map[y][x]);
 				if (player_glance == -1)
-						exit_map_error_and_destruct(map, y + 1, x + 1, UNKNOWN_CHAR);
+						exit_map_error_and_destruct(*map, y + 1, x + 1, UNKNOWN_CHAR);
 				if (n_player >= 1)
-						exit_map_error_and_destruct(map, y + 1, x + 1, TWO_PLAYER_IN_MAP);
-				map.map[y][x] = '0';
+						exit_map_error_and_destruct(*map, y + 1, x + 1, TWO_PLAYER_IN_MAP);
+				map->map[y][x] = '0';
 				n_player++;
-				set_player_view(map, player_glance);
-				map.player.xPos = x;
-				map.player.yPos = y;
+				set_player_view(*map, player_glance);
+				map->player.xPos = x;
+				map->player.yPos = y;
 			 }
 		}
 	}
 	if (n_player == 0)
-		exit_error_and_destruct(map, 0, NO_PLAYER_IN_MAP);
+		exit_error_and_destruct(*map, 0, NO_PLAYER_IN_MAP);
 }
 
 static void	take_map(char *line, t_cube *map)
@@ -244,7 +244,7 @@ static void	take_sprite_and_color(t_cube *map)
 	attribute_color(*map, line);
 	take_map((char*)ret_find, map);
 	allocate_map((char*)ret_find, map);
-	take_player(*map);
+	take_player(map);
 	check_valid_map(*map, 0, 0);
 	int j = 0;
 }

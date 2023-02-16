@@ -78,15 +78,16 @@ t_player initPlayer(void)
 
 
 
-int main(int argc, char **argv)
+int main(void)
 {
 	t_cube		cube;
 	ft_bzero((void*)&cube, sizeof(cube));
+	cube.map_xlen = 7;
+	cube.map_ylen = 7;
 	init_mlx(&cube);
-	file_map_parsing(argc, argv, &cube);
+    char* array[] = {"1111111", "1001001", "1101001", "1000001", "1100001", "1000001", "1111111"};
+	cube.map = array;
 	cube.player = initPlayer();
-
-	dprintf(2, "y = %d x = %d\n", cube.map_ylen, cube.map_xlen);
 
 	drawMinimap(&cube);
 	protoRayDocument(&cube);

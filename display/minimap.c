@@ -39,7 +39,6 @@ void	drawMinimap(t_cube *cube)
 		x = 0;
 		while (x < cube->map_xlen * MINIMAP_RATIO - 1 && (y % MINIMAP_RATIO) != 0)
 		{
-			dprintf(2, "x = %d, y = %d\n", x, y);
 			if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '1' && (x % MINIMAP_RATIO) != 0)
 				my_mlx_pixel_put(&cube->mlx.minimap, x, y, C_WHITE);
 			else if (cube->map[y / MINIMAP_RATIO][x / MINIMAP_RATIO] == '0' && (x % MINIMAP_RATIO) != 0)
