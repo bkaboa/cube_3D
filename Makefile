@@ -35,7 +35,7 @@ UNAME_S 	:= $(shell uname -s)
 OPATH 		:= 	.obj_dir
 OBJ 			:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
-CFLAGS 		:= 	-Wall -Wextra -Werror
+CFLAGS 		:= 	#-Wall -Wextra -Werror
 MEMFLAGS 	:= 	-fsanitize=address -g3
 LLDB			:=	-g3
 

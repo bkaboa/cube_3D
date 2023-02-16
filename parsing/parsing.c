@@ -16,7 +16,7 @@ static void	check_file(const char *file, int *fd)
 		exit_error(OPEN_ERROR);
 }
 
-void	file_map_parsing(const int argc, char **argv, t_cube map)
+void	file_map_parsing(const int argc, char **argv, t_cube *map)
 {
 	int		fd;
 	char	*file;

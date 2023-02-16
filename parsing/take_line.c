@@ -226,7 +226,7 @@ static void	attribute_wall_sprite(t_cube map, char **line)
 	}
 }
 
-static void	take_sprite_and_color(t_cube map)
+static void	take_sprite_and_color(t_cube *map)
 {
 	int64_t		ret_find;
 	char		*line[7];
@@ -236,26 +236,26 @@ static void	take_sprite_and_color(t_cube map)
 	i = -1;
 	while (++i < 7)
 		line[i] = NULL;
-	ret_find = map.text_file.find_file_instructions(map.text_file, line, map_instruct);
+	ret_find = map->text_file.find_file_instructions(map->text_file, line, map_instruct);
 	if (ret_find < 0)
-		exit_error_and_destruct(map, 0, MAP_ERROR);
+		exit_error_and_destruct(*map, 0, MAP_ERROR);
 	place_eol(line);
-	attribute_wall_sprite(map, line);
-	attribute_color(map, line);
-	take_map((char*)ret_find, &map);
-	allocate_map((char*)ret_find, &map);
-	take_player(map);
-	check_valid_map(map, 0, 0);
-	exit_error_and_destruct(map, 0, "all have been made");
+	attribute_wall_sprite(*map, line);
+	attribute_color(*map, line);
+	take_map((char*)ret_find, map);
+	allocate_map((char*)ret_find, map);
+	take_player(*map);
+	check_valid_map(*map, 0, 0);
+	int j = 0;
 }
 
-void	take_all_line(const int fd, t_cube map)
+void	take_all_line(const int fd, t_cube *map)
 {
-		string_init(&map.text_file);
-		if (ft_read_file(&map.text_file, fd) == FAILURE)
-			exit_error_and_destruct(map, fd, READ_ERROR);
-		if (!map.text_file.str)
-				exit_error_and_destruct(map, 0, EMPTY_FILE);
-		close(fd);
-		take_sprite_and_color(map);
+	string_init(&map->text_file);
+	if (ft_read_file(&map->text_file, fd) == FAILURE)
+		exit_error_and_destruct(*map, fd, READ_ERROR);
+	if (!map->text_file.str)
+			exit_error_and_destruct(*map, 0, EMPTY_FILE);
+	close(fd);
+	take_sprite_and_color(map);
 }
