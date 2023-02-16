@@ -23,17 +23,25 @@ static void	set_player_view(t_cube *map, int player_glance)
 {
 	if (player_glance < 2)
 	{
+		map->player.planeY = -0.5;
 		if(player_glance % 2)
-			map->player.playerDir.dirY = -1;
+		{
+			map->player.playerDir.dirX = 1;
+			map->player.planeX = 0.5;
+		}
 		else
-			map->player.playerDir.dirY = 1;
+			map->player.playerDir.dirX = 1;
 	}
 	else
 	{
+		map->player.planeX = 0.5;
 		if (player_glance % 2)
-			map->player.playerDir.dirX = -1;
+		{
+			map->player.planeX = -0.5;
+			map->player.playerDir.dirY = -1;
+		}
 		else
-			map->player.playerDir.dirX = 1;
+			map->player.playerDir.dirY = 1;
 	}
 }
 
@@ -61,8 +69,8 @@ static void	take_player(t_cube *map)
 				map->map[y][x] = '0';
 				n_player++;
 				set_player_view(map, player_glance);
-				map->player.xPos = x;
-				map->player.yPos = y;
+				map->player.yPos = x + 0.5;
+				map->player.xPos = y + 0.5;
 			 }
 		}
 	}
