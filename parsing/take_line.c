@@ -19,21 +19,21 @@ static void	check_valid_map(t_cube map, int64_t x, int64_t y)
 		check_valid_map(map, x + 1, y);
 }
 
-static void	set_player_view(t_cube map, int player_glance)
+static void	set_player_view(t_cube *map, int player_glance)
 {
 	if (player_glance < 2)
 	{
 		if(player_glance % 2)
-			map.player.playerDir.dirY = -1;
+			map->player.playerDir.dirY = -1;
 		else
-			map.player.playerDir.dirY = 1;
+			map->player.playerDir.dirY = 1;
 	}
 	else
 	{
 		if (player_glance % 2)
-			map.player.playerDir.dirX = -1;
+			map->player.playerDir.dirX = -1;
 		else
-			map.player.playerDir.dirX = 1;
+			map->player.playerDir.dirX = 1;
 	}
 }
 
@@ -60,7 +60,7 @@ static void	take_player(t_cube *map)
 						exit_map_error_and_destruct(*map, y + 1, x + 1, TWO_PLAYER_IN_MAP);
 				map->map[y][x] = '0';
 				n_player++;
-				set_player_view(*map, player_glance);
+				set_player_view(map, player_glance);
 				map->player.xPos = x;
 				map->player.yPos = y;
 			 }
@@ -175,7 +175,7 @@ void	convert_rgb_to_hexa(u_int8_t rgb_color[3], int *hexa_color)
 	}
 }
 
-static void	attribute_color(t_cube map, char **line)
+static void	attribute_color(t_cube *map, char **line)
 {
 	u_int8_t	i;
 	u_int8_t	j;
@@ -189,24 +189,24 @@ static void	attribute_color(t_cube map, char **line)
 		tmp_line = line[i];
 		tmp_line += 1;
 		if (*tmp_line != ' ')
-			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
+			exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')
 			tmp_line++;
 		while (*tmp_line && *tmp_line != '\n')
 		{
 			if (ato_rgb(&tmp_line, &mlx_color[i - 4][j]) == FAILURE)
-				exit_error_and_destruct(map, 0, SYNTAX_ERROR);
+				exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
 			if (*tmp_line == ',' && ++j)
 				tmp_line++;
 		}
 		if (j > 2 || j < 2)
-			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
-		convert_rgb_to_hexa(mlx_color[i - 4], &map.mlx.hexa_color[i - 4]);
+			exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
+		convert_rgb_to_hexa(mlx_color[i - 4], &map->mlx.hexa_color[i - 4]);
 		i++;
 	}
 }
 
-static void	attribute_wall_sprite(t_cube map, char **line)
+static void	attribute_wall_sprite(t_cube *map, char **line)
 {
 	int8_t	i;
 	char		*tmp_line;
@@ -217,12 +217,12 @@ static void	attribute_wall_sprite(t_cube map, char **line)
 		tmp_line = line[i];
 		tmp_line += 2;
 		if (*tmp_line != ' ')
-			exit_error_and_destruct(map, 0, SYNTAX_ERROR);
+			exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')
 			tmp_line++;
-		map.mlx.wall_sprite[i].sprite = mlx_xpm_file_to_image(map.mlx.mlx, tmp_line, &map.mlx.wall_sprite[i].sprite_lenght, &map.mlx.wall_sprite[i].sprite_width);
-		if (map.mlx.wall_sprite[i].sprite == NULL)
-			exit_error_and_destruct(map, 0, WALL_INVALID);
+		map->mlx.wall_sprite[i].sprite = mlx_xpm_file_to_image(map->mlx.mlx, tmp_line, &map->mlx.wall_sprite[i].sprite_lenght, &map->mlx.wall_sprite[i].sprite_width);
+		if (map->mlx.wall_sprite[i].sprite == NULL)
+			exit_error_and_destruct(*map, 0, WALL_INVALID);
 	}
 }
 
@@ -240,8 +240,8 @@ static void	take_sprite_and_color(t_cube *map)
 	if (ret_find < 0)
 		exit_error_and_destruct(*map, 0, MAP_ERROR);
 	place_eol(line);
-	attribute_wall_sprite(*map, line);
-	attribute_color(*map, line);
+	attribute_wall_sprite(map, line);
+	attribute_color(map, line);
 	take_map((char*)ret_find, map);
 	allocate_map((char*)ret_find, map);
 	take_player(map);

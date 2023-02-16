@@ -78,15 +78,14 @@ t_player initPlayer(void)
 
 
 
-int main(void)
+int main(int ac, char **av)
 {
 	t_cube		cube;
 	ft_bzero((void*)&cube, sizeof(cube));
-	cube.map_xlen = 6;
-	cube.map_ylen = 7;
 	init_mlx(&cube);
-    char* array[] = {"111111", "101011", "101011", "100111", "101001", "100001", "111111"};
-	cube.map = array;
+	file_map_parsing(ac, av, &cube);
+	cube.map_ylen--;
+	cube.map_xlen--;
 	cube.player = initPlayer();
 
 	drawMinimap(&cube);
