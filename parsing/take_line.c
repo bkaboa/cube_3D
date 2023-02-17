@@ -23,21 +23,21 @@ static void	set_player_view(t_cube *map, int player_glance)
 {
 	if (player_glance < 2)
 	{
-		map->player.planeY = -0.5;
+		map->player.planeY = -FOV;
 		if(player_glance % 2)
 		{
 			map->player.playerDir.dirX = 1;
-			map->player.planeX = 0.5;
+			map->player.planeX = FOV;
 		}
 		else
 			map->player.playerDir.dirX = 1;
 	}
 	else
 	{
-		map->player.planeX = 0.5;
+		map->player.planeX = FOV;
 		if (player_glance % 2)
 		{
-			map->player.planeX = -0.5;
+			map->player.planeX = -FOV;
 			map->player.playerDir.dirY = -1;
 		}
 		else

@@ -20,6 +20,11 @@ float    raycasting_loop(t_cube *cube)
 		ray.deltaDistX = sqrt(1 + (ray.rayDir.dirY * ray.rayDir.dirY) / (ray.rayDir.dirX * ray.rayDir.dirX));
 		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
 
+
+		for (int i = 0; i < 20; i++)
+		{
+			my_mlx_pixel_put(&cube->mlx.minimap, Offset(cube->player.yPos + ray.rayDir.dirY * i ), Offset(cube->player.xPos + ray.rayDir.dirX * i), C_RED);
+		}
 		int i = 0;
 		if (ray.rayDir.dirX < 0)
 		{
