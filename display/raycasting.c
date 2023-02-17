@@ -65,7 +65,6 @@ float    raycasting_loop(t_cube *cube)
 		else
 			ray.perpWallDist = (ray.sideDistY - ray.deltaDistY);
 		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
-		dprintf(2, "--------------\nRay number %d perpwallDist = %f\n", x, ray.perpWallDist);
 		ray.line = 0;
 		if (ray.lineHeight > HEIGHT)
 			ray.lineHeight = HEIGHT;

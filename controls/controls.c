@@ -1,17 +1,14 @@
 #include "../includes/cube3D.h"
-#define KEY_LEFT 97
-#define KEY_RIGHT 100
-#define KEY_FORWARD 119
-#define KEY_BACKWARD 115
+
 
 
 void rotatePlayer(int keycode, t_player *player)
 {
 	float oldDirX;
 	float oldplaneX;
-	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	if (keycode == ARROW_LEFT || keycode == ARROW_RIGHT)
 	{
-		if (keycode == KEY_LEFT)
+		if (keycode == ARROW_LEFT)
 		{
 			oldDirX = player->playerDir.dirX;
 			player->playerDir.dirX = player->playerDir.dirX * cos(ROTATIONSPEED) - player->playerDir.dirY * sin(ROTATIONSPEED);
@@ -32,7 +29,7 @@ void rotatePlayer(int keycode, t_player *player)
 	}
 }
 
-void movePlayer(int keycode, t_cube *cube)
+void movePlayerFrontBack(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_FORWARD || keycode == KEY_BACKWARD)
 	{
@@ -53,11 +50,33 @@ void movePlayer(int keycode, t_cube *cube)
 	}
 }
 
+void movePlayerSides(int keycode, t_cube *cube)
+{
+	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	{
+		if (keycode == KEY_LEFT)
+		{
+			if (cube->map[(int)(cube->player.xPos - cube->player.playerDir.dirY * MOVESPEED)][(int)(cube->player.yPos)] == '0')
+				cube->player.xPos -= cube->player.playerDir.dirY * MOVESPEED;
+			if (cube->map[(int)(cube->player.xPos)][(int)(cube->player.yPos + cube->player.playerDir.dirX * MOVESPEED)] == '0')
+				cube->player.yPos += cube->player.playerDir.dirX * MOVESPEED;
+		}
+		else
+		{
+			if (cube->map[(int)(cube->player.xPos + cube->player.playerDir.dirY * MOVESPEED)][(int)(cube->player.yPos)] == '0')
+				cube->player.xPos += cube->player.playerDir.dirY * MOVESPEED;
+			if (cube->map[(int)(cube->player.xPos)][(int)(cube->player.yPos - cube->player.playerDir.dirX * MOVESPEED)] == '0')
+				cube->player.yPos -= cube->player.playerDir.dirX * MOVESPEED;
+		}
+	}
+}
+
 int	control_hooks(int keycode, t_cube *cube)
 {
 	if (keycode != 47)
 		cube->player.lastKey = keycode;
-	movePlayer(keycode, cube);
+	movePlayerFrontBack(keycode, cube);
+	movePlayerSides(keycode, cube);
 	rotatePlayer(keycode, &cube->player);
 	win_keyclose(keycode, cube);
 	updateMinimap(cube);
@@ -69,7 +88,8 @@ int control_hooks_loop(int keycode, t_cube *cube)
 	if (cube->player.lastKey != 60)
 	{
 		rotatePlayer(keycode, &cube->player);
-		movePlayer(keycode, cube);
+		movePlayerFrontBack(keycode, cube);
+		movePlayerSides(keycode, cube);
 		updateMinimap(cube);
 	}
 	return (0);
