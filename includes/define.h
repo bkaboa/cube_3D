@@ -52,6 +52,19 @@
 
 /*
  *
+ *********************************		DEFINE_CONTROLS
+ *
+ */
+
+# define KEY_LEFT 97
+# define KEY_RIGHT 100
+# define KEY_FORWARD 119
+# define KEY_BACKWARD 115
+# define ARROW_RIGHT 65363
+# define ARROW_LEFT	65361
+
+/*
+ *
  *********************************		DEFINE_MINIMAP
  *
  */
