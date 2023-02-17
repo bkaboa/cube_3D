@@ -9,86 +9,86 @@ float    raycasting_loop(t_cube *cube)
 	x = 0;
 	while (x < WIDTH)
 	{
-		ray.hit = 0;
-		ray.cameraX = 2 * x / (float)WIDTH - 1;
-		ray.rayDir.dirX = cube->player.playerDir.dirX + cube->player.planeX * ray.cameraX;
-		ray.rayDir.dirY = cube->player.playerDir.dirY + cube->player.planeY * ray.cameraX;
+		cube->ray.hit = 0;
+		cube->ray.cameraX = 2 * x / (float)WIDTH - 1;
+		cube->ray.rayDir.dirX = cube->player.playerDir.dirX + cube->player.planeX * cube->ray.cameraX;
+		cube->ray.rayDir.dirY = cube->player.playerDir.dirY + cube->player.planeY * cube->ray.cameraX;
 
-		ray.mapX = (int)cube->player.xPos;//which box of the map we're in
-		ray.mapY = (int)cube->player.yPos;
+		cube->ray.mapX = (int)cube->player.xPos;//which box of the map we're in
+		cube->ray.mapY = (int)cube->player.yPos;
 
-		ray.deltaDistX = sqrt(1 + (ray.rayDir.dirY * ray.rayDir.dirY) / (ray.rayDir.dirX * ray.rayDir.dirX));
-		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
+		cube->ray.deltaDistX = sqrt(1 + (cube->ray.rayDir.dirY * cube->ray.rayDir.dirY) / (cube->ray.rayDir.dirX * cube->ray.rayDir.dirX));
+		cube->ray.deltaDistY = sqrt(1 + (cube->ray.rayDir.dirX * cube->ray.rayDir.dirX) / (cube->ray.rayDir.dirY * cube->ray.rayDir.dirY));
 
 
 		int i = 0;
-		if (ray.rayDir.dirX < 0)
+		if (cube->ray.rayDir.dirX < 0)
 		{
-			ray.stepX = -1;
-			ray.sideDistX = (cube->player.xPos - ray.mapX) * ray.deltaDistX;
+			cube->ray.stepX = -1;
+			cube->ray.sideDistX = (cube->player.xPos - cube->ray.mapX) * cube->ray.deltaDistX;
 		}
 		else
 		{
-			ray.stepX = 1;
-			ray.sideDistX = (ray.mapX + 1.0 - cube->player.xPos) * ray.deltaDistX;
+			cube->ray.stepX = 1;
+			cube->ray.sideDistX = (cube->ray.mapX + 1.0 - cube->player.xPos) * cube->ray.deltaDistX;
 		}
-		if (ray.rayDir.dirY < 0)
+		if (cube->ray.rayDir.dirY < 0)
 		{
-			ray.stepY = -1;
-			ray.sideDistY = (cube->player.yPos - ray.mapY) * ray.deltaDistY;
+			cube->ray.stepY = -1;
+			cube->ray.sideDistY = (cube->player.yPos - cube->ray.mapY) * cube->ray.deltaDistY;
 		}
 		else
 		{
-			ray.stepY = 1;
-			ray.sideDistY = (ray.mapY + 1.0 - cube->player.yPos) * ray.deltaDistY;
+			cube->ray.stepY = 1;
+			cube->ray.sideDistY = (cube->ray.mapY + 1.0 - cube->player.yPos) * cube->ray.deltaDistY;
 		}
 
-		while (ray.hit == 0)
+		while (cube->ray.hit == 0)
 		{
 			//jump to next map square, either in x-direction, or in y-direction
-			if (ray.sideDistX < ray.sideDistY)
+			if (cube->ray.sideDistX < cube->ray.sideDistY)
 			{
-				ray.sideDistX += ray.deltaDistX;
-				ray.mapX += ray.stepX;
-				ray.side = 0;
+				cube->ray.sideDistX += cube->ray.deltaDistX;
+				cube->ray.mapX += cube->ray.stepX;
+				cube->ray.side = 0;
 			}
 			else
 			{
-				ray.sideDistY += ray.deltaDistY;
-				ray.mapY += ray.stepY;
-				ray.side = 1;
+				cube->ray.sideDistY += cube->ray.deltaDistY;
+				cube->ray.mapY += cube->ray.stepY;
+				cube->ray.side = 1;
 			}
-			if (cube->map[ray.mapX][ray.mapY] == '1')
-				ray.hit = 1; // Check if ray has hit a wall
+			if (cube->map[cube->ray.mapX][cube->ray.mapY] == '1')
+				cube->ray.hit = 1; // Check if ray has hit a wall
 		}
 		for (int i = 0; i < 50; i++)
 		{
-			my_mlx_pixel_put(&cube->mlx.minimap, Offset(cube->player.yPos ) + ray.rayDir.dirY * i , Offset(cube->player.xPos) + ray.rayDir.dirX * i, C_RED);
+			my_mlx_pixel_put(&cube->mlx.minimap, Offset(cube->player.yPos ) + cube->ray.rayDir.dirY * i , Offset(cube->player.xPos) + cube->ray.rayDir.dirX * i, C_RED);
 		}
-		if (ray.side == 0)
-			ray.perpWallDist = ((ray.mapX - cube->player.xPos + (1 - ray.stepX) / 2) / ray.rayDir.dirX);
+		if (cube->ray.side == 0)
+			cube->ray.perpWallDist = ((cube->ray.mapX - cube->player.xPos + (1 - cube->ray.stepX) / 2) / cube->ray.rayDir.dirX);
 		else
-			ray.perpWallDist = ((ray.mapY - cube->player.yPos + (1 - ray.stepY) / 2) / ray.rayDir.dirY);
-		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
-		ray.line = 0;
-		if (ray.lineHeight > HEIGHT)
-			ray.lineHeight = HEIGHT;
-		while (ray.line < ray.lineHeight)
+			cube->ray.perpWallDist = ((cube->ray.mapY - cube->player.yPos + (1 - cube->ray.stepY) / 2) / cube->ray.rayDir.dirY);
+		cube->ray.lineHeight = (int)(WALL_SIZE / cube->ray.perpWallDist);
+		cube->ray.line = 0;
+		if (cube->ray.lineHeight > HEIGHT)
+			cube->ray.lineHeight = HEIGHT;
+		while (cube->ray.line < cube->ray.lineHeight)
 		{
-			if (ray.side == 0)
+			if (cube->ray.side == 0)
 			{
-				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
-				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
-				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+				my_mlx_pixel_put(&cube->mlx.walls, x, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
 			}
 
-			if (ray.side == 1)
+			if (cube->ray.side == 1)
 			{
-				my_mlx_pixel_put(&cube->mlx.walls, x, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
-				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
-				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (ray.line + (-ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.walls, x, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 1, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+				my_mlx_pixel_put(&cube->mlx.walls, x + 2, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
 			}
-			ray.line++;
+			cube->ray.line++;
 		}
 		x += 3;
 	}

@@ -228,12 +228,12 @@ static void	attribute_wall_sprite(t_cube *map, char **line)
 			exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')
 			tmp_line++;
-		map->mlx.wall_sprite[i].sprite = mlx_xpm_file_to_image(map->mlx.mlx, tmp_line, &map->mlx.wall_sprite[i].sprite_lenght, &map->mlx.wall_sprite[i].sprite_width);
+		map->mlx.wall_sprite[i].sprite = mlx_xpm_file_to_image(map->mlx.mlx, tmp_line, &map->mlx.wall_sprite[i].height, &map->mlx.wall_sprite[i].width);
 		if (map->mlx.wall_sprite[i].sprite == NULL)
 			exit_error_and_destruct(*map, 0, WALL_INVALID);
-		map->mlx.wall_sprite[i].sprite_addr = mlx_get_data_addr(map->mlx.wall_sprite[i].sprite,
+		map->mlx.wall_sprite[i].addr = mlx_get_data_addr(map->mlx.wall_sprite[i].sprite,
 																&map->mlx.wall_sprite[i].bits_per_pixel, &map->mlx.wall_sprite[i].line_length, &map->mlx.wall_sprite[i].endian);
-		if (map->mlx.wall_sprite[i].sprite_addr == NULL)
+		if (map->mlx.wall_sprite[i].addr == NULL)
 			exit_error_and_destruct(*map, 0, WALL_ERROR);
 	}
 }
