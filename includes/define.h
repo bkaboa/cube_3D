@@ -15,6 +15,7 @@
 # define EMPTY_FILE			"files passed in argument is empty\n"
 # define BAD_FILE_NAME		"the file passed in argument doesn't exist\n"
 # define BAD_COLOR			"bad color in file\n"
+# define RGB_ERROR			"rgb color can only be between 0 255 and contain numbers only\n"
 
 //MAP_ERROR
 # define MAP_ERROR					"map error in"
@@ -45,8 +46,8 @@
  *
  */
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 2000
+# define HEIGHT 2000
 # define PI     3.14159
 
 /*
@@ -55,20 +56,22 @@
  *
  */
 
-# define MINIMAP_RATIO 30
-# define CELL_SIZE 10
-# define PLAYER_MINI_SIZE 5
-# define WALL_SIZE   150
+# define MINIMAP_RATIO		15
+# define MINIMAP_LENGHT		(int)(WIDTH / 10)
+# define MINIMAP_HIGHT		(int)(HEIGHT / 10)
+# define PLAYER_MINI_SIZE	5
+# define WALL_SIZE			150
 /*
  *
  *********************************		DEFINE_COLOR
  *
  */
 
-# define C_WHITE 0xFFFFFF
-# define C_BLUE  0x0000FF
-# define C_RED	 0xFF0000
-# define C_GREEN 0x00FF00
+# define C_BLACK	0x000000
+# define C_WHITE	0xFFFFFF
+# define C_BLUE  	0x0000FF
+# define C_RED	 	0xFF0000
+# define C_GREEN 	0x00FF00
 
 /*
  *

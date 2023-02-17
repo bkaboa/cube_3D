@@ -159,10 +159,10 @@ static int	ato_rgb(char **str, u_int8_t *value)
 		return (FAILURE);
 	while (**str >= '0' && **str <= '9')
 	{
-		if (ret > 255)
-			return (FAILURE);
 		ret = ret * 10 + (**str - '0');
 		(*str)++;
+		if (ret > 255)
+			return (FAILURE);
 	}
 	*value = ret;
 	return (SUCCESS);
@@ -203,7 +203,7 @@ static void	attribute_color(t_cube *map, char **line)
 		while (*tmp_line && *tmp_line != '\n')
 		{
 			if (ato_rgb(&tmp_line, &mlx_color[i - 4][j]) == FAILURE)
-				exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
+				exit_error_and_destruct(*map, 0, RGB_ERROR);
 			if (*tmp_line == ',' && ++j)
 				tmp_line++;
 		}

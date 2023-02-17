@@ -4,9 +4,12 @@ static void	check_file(const char *file, int *fd)
 {
 	size_t	i;
 
+	dprintf(2, "%s\n", file);
 	if (ft_strlen(file) <= 4)
 		exit_error(CUB_FILE);
 	i = ft_strlen(file) - 4;
+	if (file[i - 1] == '/')
+		exit_error(CUB_FILE);
 	if (ft_strcomp(&file[i], ".cub"))
 		exit_error(CUB_FILE);
 	if (open(file, O_DIRECTORY) == 1)
