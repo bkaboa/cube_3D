@@ -70,8 +70,8 @@
  */
 
 # define MINIMAP_RATIO		15
-# define MINIMAP_LENGHT		(int)(WIDTH / 10)
-# define MINIMAP_HIGHT		(int)(HEIGHT / 10)
+# define MINIMAP_LENGHT		(int)(WIDTH / 2)
+# define MINIMAP_HIGHT		(int)(HEIGHT / 2)
 # define PLAYER_MINI_SIZE	5
 # define WALL_SIZE			150
 /*

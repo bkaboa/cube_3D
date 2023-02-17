@@ -36,12 +36,12 @@ void	drawMinimap(t_cube *cube)
 {
 	int y = 0;
 	int x = 0;
-	int	x2 = (cube->player.xPos - 2) * MINIMAP_LENGHT;
-	int	y2 = (cube->player.yPos + 2) * MINIMAP_HIGHT;
+	int	y2 = (cube->player.xPos / 2) * MINIMAP_HIGHT;
+	int	x2 = (cube->player.yPos / 2) * MINIMAP_LENGHT;
 	while (y < MINIMAP_HIGHT)
 	{
 		x = 0;
-		x2 = (cube->player.xPos - 2) * MINIMAP_LENGHT;
+		x2 = (cube->player.yPos / 2) * MINIMAP_LENGHT;
 		while (x < MINIMAP_LENGHT)
 		{
 			if (cube->map[y2 / MINIMAP_HIGHT][x2 / MINIMAP_LENGHT] == '1')
@@ -56,7 +56,7 @@ void	drawMinimap(t_cube *cube)
 		y2++;
 		y++;
 	}
-	// drawDirection(cube, Offset(cube->player.yPos), Offset(cube->player.xPos), 50);
+	drawDirection(cube, MINIMAP_LENGHT / 2, MINIMAP_HIGHT / 2, 50);
 	// drawPlayer(&cube->mlx, Offset(cube->player.yPos), Offset(cube->player.xPos));
 	// mlx_string_put(&cube->mlx.minimap.img, cube->mlx.mlx_win, 50, 50, C_RED, "HELLO boys");
 }
