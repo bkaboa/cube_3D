@@ -50,7 +50,8 @@ int main(int ac, char **av)
 //	drawMinimap(&cube);
 //	drawBackground(&cube.mlx);
 //	my_mlx_pixel_put(&cube.mlx.walls, 500, 500, C_WHITE);
-//	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0); mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.background.img, 0, 0);
+//	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.walls.img, 0, 0);
+//	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.background.img, 0, 0);
 //	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
 //	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube.mlx);
 //	mlx_loop_hook(cube.mlx.mlx_win, &control_hooks_loop, &cube.player);
@@ -68,9 +69,9 @@ int main(int ac, char **av)
 	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
 	cube.map_xlen--;
-	cube.mlx.minimap.img = mlx_new_image(cube.mlx.mlx, (int)(MINIMAP_LENGHT), (int)(MINIMAP_HIGHT));
+	cube.mlx.minimap.img = mlx_new_image(cube.mlx.mlx, (int)(cube.map_xlen * MINIMAP_RATIO), (int)(cube.map_ylen * MINIMAP_RATIO));
 	cube.mlx.minimap.addr = mlx_get_data_addr(cube.mlx.minimap.img, &cube.mlx.minimap.bits_per_pixel, \
-		&cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
+	   &cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
 	drawMinimap(&cube);
 	raycasting_loop(&cube);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
