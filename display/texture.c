@@ -6,3 +6,5 @@ int load_texture(t_cube *cube, )
 }
 
 int lol
+
+int merde
