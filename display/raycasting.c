@@ -21,10 +21,6 @@ float    raycasting_loop(t_cube *cube)
 		ray.deltaDistY = sqrt(1 + (ray.rayDir.dirX * ray.rayDir.dirX) / (ray.rayDir.dirY * ray.rayDir.dirY));
 
 
-		for (int i = 0; i < 20; i++)
-		{
-			my_mlx_pixel_put(&cube->mlx.minimap, Offset(cube->player.yPos + ray.rayDir.dirY * i ), Offset(cube->player.xPos + ray.rayDir.dirX * i), C_RED);
-		}
 		int i = 0;
 		if (ray.rayDir.dirX < 0)
 		{
@@ -65,10 +61,14 @@ float    raycasting_loop(t_cube *cube)
 			if (cube->map[ray.mapX][ray.mapY] == '1')
 				ray.hit = 1; // Check if ray has hit a wall
 		}
+		for (int i = 0; i < 50; i++)
+		{
+			my_mlx_pixel_put(&cube->mlx.minimap, Offset(cube->player.yPos ) + ray.rayDir.dirY * i , Offset(cube->player.xPos) + ray.rayDir.dirX * i, C_RED);
+		}
 		if (ray.side == 0)
-			ray.perpWallDist = (ray.sideDistX - ray.deltaDistX);
+			ray.perpWallDist = ((ray.mapX - cube->player.xPos + (1 - ray.stepX) / 2) / ray.rayDir.dirX);
 		else
-			ray.perpWallDist = (ray.sideDistY - ray.deltaDistY);
+			ray.perpWallDist = ((ray.mapY - cube->player.yPos + (1 - ray.stepY) / 2) / ray.rayDir.dirY);
 		ray.lineHeight = (int)(WALL_SIZE / ray.perpWallDist);
 		ray.line = 0;
 		if (ray.lineHeight > HEIGHT)

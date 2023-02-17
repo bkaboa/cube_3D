@@ -93,7 +93,7 @@
  */
 
 #define MOVESPEED 0.05
-#define FOV		1 //Player's cone of vision (in plane)
+#define FOV	0.70 //Player's cone of vision (in plane)
 #define ROTATIONSPEED 0.05
 
 /*
