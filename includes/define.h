@@ -37,7 +37,7 @@
 //MLX_ERROR
 # define XPM_WALL_INVALID	"xpm file for for wall is invalid\n"
 
-# define PLAYER_POS			"SNEW"
+# define PLAYER_POS			"NSEW"
 # define MAP_CHAR			"01 "
 /*
  *

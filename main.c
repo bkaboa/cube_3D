@@ -62,20 +62,6 @@ int main(int ac, char **av)
 //
 //
 //
-t_player initPlayer(void)
-{
-	t_player	player;
-	player.xPos = 3.5; //y
-	player.yPos = 2.5; //x
-	player.playerDir.dirX = -1;
-	player.playerDir.dirY = 0;
-	player.planeX = 0;
-	player.planeY = 0.66;
-	return (player);
-}
-
-
-
 int main(int ac, char **av)
 {
 	t_cube		cube;
@@ -85,9 +71,7 @@ int main(int ac, char **av)
 	cube.map_xlen--;
 	cube.mlx.minimap.img = mlx_new_image(cube.mlx.mlx, (int)(cube.map_xlen * MINIMAP_RATIO), (int)(cube.map_ylen * MINIMAP_RATIO));
 	cube.mlx.minimap.addr = mlx_get_data_addr(cube.mlx.minimap.img, &cube.mlx.minimap.bits_per_pixel, \
-											   &cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
-	cube.player = initPlayer();
-
+		&cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
 	drawMinimap(&cube);
 	raycasting_loop(&cube);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
