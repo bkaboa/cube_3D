@@ -33,13 +33,13 @@ void	updateMinimap(t_cube *cube);
  *
  */
 float    raycasting_loop(t_cube *cube);
-
-/*
- *
- *********************************		PARSING
- *
- */
-void	exit_error(const char *str);
+void	trace_line_from_ray(t_cube *cube, int x);
+    /*
+     *
+     *********************************		PARSING
+     *
+     */
+    void exit_error(const char *str);
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg);
 void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg);
 

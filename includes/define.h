@@ -46,8 +46,8 @@
  *
  */
 
-# define WIDTH 1230
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 # define PI     3.14159
 
 /*
@@ -73,7 +73,7 @@
 # define MINIMAP_LENGHT		(int)(WIDTH / 2)
 # define MINIMAP_HIGHT		(int)(HEIGHT / 2)
 # define PLAYER_MINI_SIZE	5
-# define WALL_SIZE			300
+# define WALL_SIZE			500
 /*
  *
  *********************************		DEFINE_COLOR

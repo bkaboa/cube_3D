@@ -87,11 +87,13 @@ typedef struct s_ray
 	int lineHeight;
 	float sideDistX;
 	float sideDistY;
-	int	texDirX;
-	int texDirY;
 	float tex_step;
 	float tex_pos;
+	float wallX;
 	float f_step;
+	int	texX;
+	int texY;
+	int textnum;
 } 	t_ray;
 
 typedef struct	s_cube

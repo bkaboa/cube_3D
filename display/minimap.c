@@ -66,5 +66,6 @@ void updateMinimap(t_cube *cube)
 	drawPlayer(&cube->mlx, Offset(cube->player.yPos), Offset(cube->player.xPos));
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.minimap.img, 0, 0);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.wall_sprite[0].sprite, 0, 0);
 	mlx_destroy_image(cube->mlx.mlx, cube->mlx.minimap.img);
 }
