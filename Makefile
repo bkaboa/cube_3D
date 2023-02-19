@@ -8,8 +8,11 @@ INCLUDES 	:= 	cube3D.h 					\
 SRC 		:=	parsing/error.c 				\
 				parsing/parsing.c 			\
 				utils/utils.c 				\
-				parsing/take_line.c 			\
+				utils/utils2.c 				\
+				parsing/map_parsing.c		\
+				parsing/metadata_parsing.c	\
 				object/string.c					\
+				object/string2.c					\
 				display/init_mlx.c			\
 				display/minimap.c			\
 				display/mlx_pixel_put.c			\

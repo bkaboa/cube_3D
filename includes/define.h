@@ -16,6 +16,7 @@
 # define BAD_FILE_NAME		"the file passed in argument doesn't exist\n"
 # define BAD_COLOR			"bad color in file\n"
 # define RGB_ERROR			"rgb color can only be between 0 255 and contain numbers only\n"
+# define FILE_TOO_BIG		"file passed in argument can't be over 30000 character\n"
 
 //MAP_ERROR
 # define MAP_ERROR					"map error in"
@@ -26,9 +27,9 @@
 # define MAP_TOO_SMALL			"map passed in files too small\n"
 # define EMPTY_LINE_IN_MAP	"empty line in map\n"
 # define SEVERAL_PLAYER			"several player in the map\n"
-# define TWO_PLAYER_IN_MAP	"you can't have more than one player in map"
+# define TWO_PLAYER				"you can't have more than one player in map"
 # define UNKNOWN_CHAR				"unknown cahracter in map"
-# define NO_PLAYER_IN_MAP		"no player in map\n"
+# define NO_PLAYER					"no player in map\n"
 
 //SYS_ERROR
 # define MALLOC_ERROR		"malloc error\n"
@@ -46,9 +47,9 @@
  *
  */
 
-# define WIDTH 2000
-# define HEIGHT 2000
-# define PI     3.14159
+# define WIDTH 1920
+# define HEIGHT 1080
+# define MID_HEIGHT_SCREEN HEIGHT >> 1
 
 /*
  *
@@ -69,7 +70,7 @@
  *
  */
 
-# define MINIMAP_RATIO		15
+# define MINIMAP_RATIO		3
 # define PLAYER_MINI_SIZE	5
 # define WALL_SIZE			150
 /*
@@ -112,6 +113,7 @@
  *
  */
 # define FAILURE		-1
+# define FAILURE_2		-2
 # define SUCCESS		0
 # define EOM			2
 

@@ -43,18 +43,27 @@ void	exit_error(const char *str);
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg);
 void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg);
 
-void	file_map_parsing(const int argc, char **argv, t_cube *map);
-void	check_sprite_files(const int fd, t_cube map);
-void	check_color(const int fd, t_cube map, t_string line, unsigned int *y);
-void	check_map(int fd, t_cube map);
+void	check_valid_map(t_cube map);
+void	set_player(t_cube *map, int player_glance, int y, int x);
+void	take_player(t_cube *map);
+void	take_map(char *line, t_cube *map);
 void	take_all_line(const int fd, t_cube *map);
+void	allocate_map(char *line, t_cube *map);
 
+int	ato_rgb(char **str, u_int8_t *value);
+void	convert_rgb_to_hexa(u_int8_t rgb_color[3], int *hexa_color);
+void	attribute_color(t_cube *map, char **line);
+void	attribute_wall_sprite(t_cube *map, char **line);
+void	take_sprite_and_color(t_cube *map);
+void	place_eol(char **line);
+
+void	file_map_parsing(const int argc, char **argv, t_cube *map);
 /*
  *
  *********************************		OFFSETS
  *
  */
-float			Offset(float value);
+float			Offset(t_cube cube, float value);
 
 /*
  *
@@ -66,7 +75,7 @@ int			ft_read_file(t_string *line, int fd);
 void		init_map(t_cube *map);
 void		free_map(t_cube map);
 int			ft_strncomp(const char *str1, const char *str2, const int n);
-size_t	ft_strlen(const char *str);
+size_t		ft_strlen(const char *str);
 void		free_double_pointer(void **pointer);
 int			add_line(t_cube map, t_string line);
 void 		init_mlx(t_cube *cube);
@@ -80,6 +89,13 @@ void		ft_itoa_fd(u_int64_t num, int fd);
  *
  */
 void	string_init(t_string *str);
+int32_t	alloc_string(t_string *str1, size_t lenght);
+int32_t	append(t_string *str1, const char *str2);
+void	reference_copy_operator(const t_string to_copy, t_string *copy);
+int32_t	profond_copy_operator(const t_string to_copy, t_string *copy);
+int64_t	find(t_string *str, const char *str2);
+int64_t	find_file_instructions(t_string str, char **lines, const char **find);
+void	string_destructor(t_string *str);
 
 
 #endif

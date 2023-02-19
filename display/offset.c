@@ -1,7 +1,7 @@
 #include "../includes/cube3D.h"
 
 
-float Offset(float value)
+float Offset(t_cube cube, float value)
 {
-    return (value * MINIMAP_RATIO);
+    return (value * cube.mlx.minimap_ratio);
 }

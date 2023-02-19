@@ -12,7 +12,7 @@ void	drawBackground(t_mlx *mlx)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < (HEIGHT / 2))
+			if (y < MID_HEIGHT_SCREEN)
 				my_mlx_pixel_put(&mlx->walls, x, y, mlx->hexa_color[0]);
 			else
 				my_mlx_pixel_put(&mlx->walls, x, y, mlx->hexa_color[1]);

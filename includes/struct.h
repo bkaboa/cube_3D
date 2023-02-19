@@ -62,6 +62,7 @@ typedef	struct s_img
 typedef struct s_mlx
 {
 	void		*mlx;
+	int			minimap_ratio;
 	void		*mlx_win;
 	t_img		minimap;
 	t_img		walls;

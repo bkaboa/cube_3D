@@ -3,10 +3,10 @@
 float    raycasting_loop(t_cube *cube)
 {
 	t_ray ray;
-	drawBackground(&cube->mlx);
 	int x;
 
 	x = 0;
+	drawBackground(&cube->mlx);
 	while (x < WIDTH)
 	{
 		ray.hit = 0;

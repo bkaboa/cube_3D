@@ -14,6 +14,7 @@ int main(int ac, char **av)
 */
 
 #include "includes/cube3D.h"
+#include "includes/struct.h"
 
 //t_player	initPlayer(void)
 //{
@@ -59,23 +60,26 @@ int main(int ac, char **av)
 //	return (0);
 //}
 //
-//
-//
-//
+
+void	init_ratio(t_cube *cube)
+{
+	if (cube->map_ylen > cube->map_xlen)
+		cube->mlx.minimap_ratio = HEIGHT / 3 / cube->map_ylen;
+	else
+		cube->mlx.minimap_ratio = WIDTH / 3 / cube->map_xlen;
+}
+
 int main(int ac, char **av)
 {
 	t_cube		cube;
 	ft_bzero((void*)&cube, sizeof(cube));
 	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
+	init_ratio(&cube);
 	cube.map_xlen--;
-	cube.mlx.minimap.img = mlx_new_image(cube.mlx.mlx, (int)(cube.map_xlen * MINIMAP_RATIO), (int)(cube.map_ylen * MINIMAP_RATIO));
-	cube.mlx.minimap.addr = mlx_get_data_addr(cube.mlx.minimap.img, &cube.mlx.minimap.bits_per_pixel, \
-	   &cube.mlx.minimap.line_length, &cube.mlx.minimap.endian);
-	drawMinimap(&cube);
 	raycasting_loop(&cube);
+	drawMinimap(&cube);
 	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win,cube.mlx.walls.img, 0, 0);
-	mlx_put_image_to_window(cube.mlx.mlx, cube.mlx.mlx_win, cube.mlx.minimap.img, 0, 0);
 	mlx_hook(cube.mlx.mlx_win, 2, 1L << 0, &control_hooks, &cube);
 	mlx_hook(cube.mlx.mlx_win, 17, 1L << 0, &click_close, &cube);
 	mlx_hook(cube.mlx.mlx_win, 3, 1L << 1, &control_hooks_expose, &cube);
