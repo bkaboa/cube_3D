@@ -74,7 +74,7 @@ void	check_sprite(t_cube map)
 	while (++i < 4)
 	{
 		if (map.mlx.wall_sprite[i].sprite_lenght != map.mlx.wall_sprite[i].sprite_width)
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+			exit_error_and_destruct(map, 0, SPRITE_ERROR);
 		while (j < 2048)
 		{
 			if ((j ^ map.mlx.wall_sprite[i].sprite_lenght) == 0)
@@ -82,7 +82,7 @@ void	check_sprite(t_cube map)
 			j = j << 1;
 		}
 		if (valid_sprite == false)
-			exit_error_and_destruct(map, 0, MAP_ERROR);
+			exit_error_and_destruct(map, 0, SPRITE_ERROR);
 	}
 }
 
@@ -112,6 +112,7 @@ void	attribute_wall_sprite(t_cube *map, char **line)
 			&map->mlx.wall_sprite[i].endian);
 		if (map->mlx.wall_sprite[i].sprite_addr == NULL)
 			exit_error_and_destruct(*map, 0, WALL_ERROR);
+		check_sprite(*map);
 	}
 }
 
