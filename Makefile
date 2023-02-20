@@ -23,28 +23,28 @@ SRC 		:=	parsing/error.c 				\
 				display/offset.c			\
 				main.c
 
-UNAME_S 	:= $(shell uname -s)
-    ifeq ($(UNAME_S),Linux)
-        MLXPATH    	= mlx_linux
-        MLX        	= $(DIR_MLX)/libmlx_Linux.a 
-        MLXFLAGS 		= -lm -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
-    endif
-    ifeq ($(UNAME_S),Darwin)
-        MLXPATH    	= mlx
-        MLX        	= $(DIR_MLX)/libmlx.a
-        MLXFLAGS 		= -Lmlx -lmlx -framework OpenGL -framework AppKit
-    endif
-
 OPATH 		:= 	.obj_dir
-OBJ 			:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
+OBJ 		:= 	$(addprefix $(OPATH)/,$(SRC:.c=.o))
 HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	#-Wall -Wextra -Werror
 MEMFLAGS 	:= 	-fsanitize=address -g3
-LLDB			:=	-g3
+LLDB		:=	-g3
 
-all 			: $(NAME)
+ UNAME_S 	:= $(shell uname -s)
+     ifeq ($(UNAME_S),Linux)
+         MLXPATH    	= mlx_linux
+         MLX        	= $(DIR_MLX)/libmlx_Linux.a 
+         MLXFLAGS 	= -lm -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
+     endif
+     ifeq ($(UNAME_S),Darwin)
+         MLXPATH    	= mlx
+         MLX        	= $(DIR_MLX)/libmlx.a
+         MLXFLAGS 	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+     endif
 
-$(OPATH)/%.o 	: %.c $(HEADER) make_mlx Makefile
+all 			: make_mlx $(NAME)
+
+$(OPATH)/%.o 	: %.c $(HEADER) Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -62,7 +62,7 @@ norminette	:
 	norminette $(HEADER)
 
 make_mlx 		:
-	@make -C $(MLXPATH)
+	@make -C $(MLXPATH) || true
 
 clean_mlx 	:
 	@make clean -C $(MLXPATH) || true
@@ -75,4 +75,4 @@ fclean 			: clean
 
 re 					: fclean all
 
-.PHONY 			: all clean fclean clean_mlx re make_mlx debug norminette norm
+.PHONY 			: clean fclean clean_mlx re make_mlx debug norminette norm
