@@ -32,10 +32,10 @@ void	updateMinimap(t_cube *cube);
  *********************************		RAYCASTING
  *
  */
-void raycasting_loop(t_cube *cube);
-void trace_line_from_ray(t_cube *cube, int x);
+float	raycasting_loop(t_cube *cube);
+void	trace_line_from_ray(t_cube *cube, int x);
 int     init_pixel_ray(t_cube *cube, int textnum);
-void select_wall_to_put_pixel(t_cube *cube, int x);
+void	select_wall_to_put_pixel(t_cube *cube, int x);
 
     /*
      *

@@ -66,7 +66,6 @@ typedef struct s_mlx
 	void		*mlx_win;
 	t_img		minimap;
 	t_img		walls;
-	t_img		background;
 	t_sprite	wall_sprite[4];
 	int32_t		hexa_color[2];
 }	t_mlx;

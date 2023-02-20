@@ -35,9 +35,10 @@ void define_height_start_end(t_cube *cube)
 		cube->ray.drawend = HEIGHT - 1;
 }
 
-void    raycasting_loop(t_cube *cube)
+float    raycasting_loop(t_cube *cube)
 {
 	t_ray ray;
+	// drawBackground(&cube->mlx);
 	int x;
 
 	x = 0;
@@ -84,6 +85,29 @@ void    raycasting_loop(t_cube *cube)
 		if (cube->ray.lineHeight > HEIGHT)
 			cube->ray.lineHeight = HEIGHT;
 		trace_line_from_ray(cube, x);
+		// while (cube->ray.line < cube->ray.lineHeight)
+		// {
+		// 	if (cube->ray.side == 0)
+		// 	{
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x + 1, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x + 2, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_RED);
+		// 	}
+
+		// 	if (cube->ray.side == 1)
+		// 	{
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x + 1, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+		// 		my_mlx_pixel_put(&cube->mlx.walls, x + 2, (cube->ray.line + (-cube->ray.lineHeight / 2) + (HEIGHT / 2)), C_GREEN);
+		// 	}
+		// 	cube->ray.line++;
+		// }
 		x++;
 	}
+	return (0);
+}
+
+void render_loop(t_cube *cube)
+{
+
 }

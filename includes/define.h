@@ -20,17 +20,17 @@
 # define SPRITE_ERROR		"the sprite passed in file must be a square, and the lenght must be a pow 2 inferior to 2048\n"
 
 //MAP_ERROR
-# define MAP_ERROR					"map error in"
-# define SYNTAX_ERROR				"syntax in file not correct\n"
-# define MAP_REQUEST				"please make sure you give all the needed informations before the map\n"
-# define WALL_ERROR					"Wall error\n"
-# define WALL_INVALID				"Wall invalid\n"
-# define MAP_TOO_SMALL			"map passed in files too small\n"
+# define MAP_ERROR			"map error in"
+# define SYNTAX_ERROR		"syntax in file not correct\n"
+# define MAP_REQUEST		"please make sure you give all the needed informations before the map\n"
+# define WALL_ERROR			"Wall error\n"
+# define WALL_INVALID		"Wall invalid\n"
+# define MAP_TOO_SMALL		"map passed in files too small\n"
 # define EMPTY_LINE_IN_MAP	"empty line in map\n"
-# define SEVERAL_PLAYER			"several player in the map\n"
-# define TWO_PLAYER				"you can't have more than one player in map"
-# define UNKNOWN_CHAR				"unknown cahracter in map"
-# define NO_PLAYER					"no player in map\n"
+# define SEVERAL_PLAYER		"several player in the map\n"
+# define TWO_PLAYER			"you can't have more than one player in map"
+# define UNKNOWN_CHAR		"unknown cahracter in map"
+# define NO_PLAYER			"no player in map\n"
 
 //SYS_ERROR
 # define MALLOC_ERROR		"malloc error\n"
@@ -71,7 +71,6 @@
  *
  */
 
-# define MINIMAP_RATIO		3
 # define PLAYER_MINI_SIZE	5
 # define WALL_SIZE			500
 /*
@@ -93,7 +92,7 @@
  */
 
 #define MOVESPEED 0.05
-#define FOV	0.66 //Player's cone of vision (in plane)
+#define FOV	0.70 //Player's cone of vision (in plane)
 #define ROTATIONSPEED 0.05
 
 /*

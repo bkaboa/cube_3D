@@ -46,8 +46,6 @@ void drawMinimap(t_cube *cube)
 					;
 				else if (y / cube->mlx.minimap_ratio > cube->map_ylen)
 					;
-				else if (!(x % cube->mlx.minimap_ratio) || !(y % cube->mlx.minimap_ratio))
-					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_BLACK);
 				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
 					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_WHITE);
 				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
@@ -63,7 +61,11 @@ void drawMinimap(t_cube *cube)
 
 void updateMinimap(t_cube *cube)
 {
+	cube->mlx.walls.img = mlx_new_image(cube->mlx.mlx, WIDTH, HEIGHT);
+	cube->mlx.walls.addr = mlx_get_data_addr(cube->mlx.walls.img, &cube->mlx.walls.bits_per_pixel, \
+		&cube->mlx.walls.line_length, &cube->mlx.walls.endian);
 	raycasting_loop(cube);
-	// drawMinimap(cube);
+	drawMinimap(cube);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
+	mlx_destroy_image(cube->mlx.mlx, cube->mlx.walls.img);
 }

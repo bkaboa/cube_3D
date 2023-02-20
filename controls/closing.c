@@ -15,7 +15,7 @@ int	win_keyclose(int keycode, t_cube *cube)
 int	click_close(t_cube *cube)
 {
 	mlx_clear_window(cube->mlx.mlx,cube->mlx.mlx_win);
-	mlx_destroy_window(cube->mlx.mlx,cube->mlx.mlx_win);
+	mlx_destroy_window(cube->mlx.mlx, cube->mlx.mlx_win);
 	exit(0);
 	return (0);
 }
