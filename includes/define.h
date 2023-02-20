@@ -16,7 +16,7 @@
 # define BAD_FILE_NAME		"the file passed in argument doesn't exist\n"
 # define BAD_COLOR			"bad color in file\n"
 # define RGB_ERROR			"rgb color can only be between 0 255 and contain numbers only\n"
-# define FILE_TOO_BIG		"file passed in argument can't be over 30000 character\n"
+# define FILE_TOO_BIG		"file passed in argument can't be over 25000 character rethink your file\n"
 
 //MAP_ERROR
 # define MAP_ERROR					"map error in"

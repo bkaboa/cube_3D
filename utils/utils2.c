@@ -51,7 +51,7 @@ int	ft_read_file(t_string *line, const int fd)
 		read_ret = read(fd, buf, 10000);
 		if (read_ret == -1)
 			return (FAILURE);
-		if (line->lenght > 30000)
+		if (line->lenght > 25000)
 			return (FAILURE_2);
 		if (read_ret == 0)
 			return (EOM);
