@@ -1,6 +1,6 @@
 #include "../includes/cube3D.h"
 
-void drawDirection(t_cube *cube, int x, int y, int length) 
+void drawDirection(t_cube *cube, int x, int y, int length)
 {
 	int i;
 
@@ -14,7 +14,7 @@ void drawDirection(t_cube *cube, int x, int y, int length)
 	}
 }
 
-void	drawPlayer(t_mlx *mlx, int x, int y)
+void drawPlayer(t_mlx *mlx, int x, int y)
 {
 	int j = -PLAYER_MINI_SIZE;
 
@@ -30,7 +30,7 @@ void	drawPlayer(t_mlx *mlx, int x, int y)
 	}
 }
 
-void	drawMinimap(t_cube *cube)
+void drawMinimap(t_cube *cube)
 {
 	int y = 0;
 	int x = 0;
@@ -58,17 +58,12 @@ void	drawMinimap(t_cube *cube)
 		}
 		drawDirection(cube, Offset(*cube, cube->player.yPos), Offset(*cube, cube->player.xPos), 50);
 		drawPlayer(&cube->mlx, Offset(*cube, cube->player.yPos), Offset(*cube, cube->player.xPos));
-		// mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.minimap.img, 0, 0);
-		// mlx_destroy_image(cube->mlx.mlx, cube->mlx.minimap.img);
-		// mlx_string_put(&cube->mlx.minimap.img, cube->mlx.mlx_win, 50, 50, C_RED, "HELLO boys");
 	}
 }
 
-void	updateMinimap(t_cube *cube)
+void updateMinimap(t_cube *cube)
 {
-	// printf("------UPDATING PLAYER POS AND DIR------\n");
-	// printf("player xPos = %f\nplayer yPos = %f\nplayer xDir = %f\n player yDir = %f\n", cube->player.xPos, cube->player.yPos, cube->player.playerDir.dirX, cube->player.playerDir.dirY);
 	raycasting_loop(cube);
-	drawMinimap(cube);
+	// drawMinimap(cube);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
 }

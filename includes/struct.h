@@ -36,12 +36,12 @@ typedef struct s_player
 typedef struct s_sprite
 {
 	void	*sprite;
-	char	*sprite_addr;
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int32_t	sprite_lenght;
-	int32_t	sprite_width;
+	int32_t	height;
+	int32_t	width;
 }	t_sprite;
 
 typedef struct s_position
@@ -71,17 +71,6 @@ typedef struct s_mlx
 	int32_t		hexa_color[2];
 }	t_mlx;
 
-typedef struct	s_cube
-{
-	char		**map;
-	t_string	text_file;
-	int32_t		map_xlen;
-	int32_t		map_ylen;
-	int			minimap_tile_size;
-	t_mlx		mlx;
-	t_player	player;
-}	t_cube;
-
 typedef struct s_ray
 {
 	float cameraX;
@@ -99,6 +88,30 @@ typedef struct s_ray
 	int lineHeight;
 	float sideDistX;
 	float sideDistY;
+	float tex_step;
+	float tex_pos;
+	float wallX;
+	float f_step;
+	int	texX;
+	int texY;
+	int textnum;
+	float ty_off;
+	float ty_step;
+	int	drawstart;
+	int drawend;
 } 	t_ray;
+
+typedef struct	s_cube
+{
+	char		**map;
+	t_string	text_file;
+	int32_t		map_xlen;
+	int32_t		map_ylen;
+	int			minimap_tile_size;
+	t_mlx		mlx;
+	t_player	player;
+	t_ray		ray;
+}	t_cube;
+
 
 #endif

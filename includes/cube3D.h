@@ -32,14 +32,17 @@ void	updateMinimap(t_cube *cube);
  *********************************		RAYCASTING
  *
  */
-float    raycasting_loop(t_cube *cube);
+void raycasting_loop(t_cube *cube);
+void trace_line_from_ray(t_cube *cube, int x);
+int     init_pixel_ray(t_cube *cube, int textnum);
+void select_wall_to_put_pixel(t_cube *cube, int x);
 
-/*
- *
- *********************************		PARSING
- *
- */
-void	exit_error(const char *str);
+    /*
+     *
+     *********************************		PARSING
+     *
+     */
+    void exit_error(const char *str);
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg);
 void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg);
 
@@ -50,7 +53,7 @@ void	take_map(char *line, t_cube *map);
 void	take_all_line(const int fd, t_cube *map);
 void	allocate_map(char *line, t_cube *map);
 
-int	ato_rgb(char **str, u_int8_t *value);
+int		ato_rgb(char **str, u_int8_t *value);
 void	convert_rgb_to_hexa(u_int8_t rgb_color[3], int *hexa_color);
 void	attribute_color(t_cube *map, char **line);
 void	attribute_wall_sprite(t_cube *map, char **line);

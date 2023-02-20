@@ -73,7 +73,7 @@
 
 # define MINIMAP_RATIO		3
 # define PLAYER_MINI_SIZE	5
-# define WALL_SIZE			150
+# define WALL_SIZE			500
 /*
  *
  *********************************		DEFINE_COLOR
@@ -93,7 +93,7 @@
  */
 
 #define MOVESPEED 0.05
-#define FOV		10 //Player's cone of vision (in angle)
+#define FOV	0.66 //Player's cone of vision (in plane)
 #define ROTATIONSPEED 0.05
 
 /*

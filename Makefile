@@ -16,11 +16,11 @@ SRC 		:=	parsing/error.c 				\
 				display/init_mlx.c			\
 				display/minimap.c			\
 				display/mlx_pixel_put.c			\
-				display/background.c 			\
 				controls/closing.c 			\
 				controls/controls.c 			\
 				display/raycasting.c		\
 				display/offset.c			\
+				display/texture.c			\
 				main.c
 
 OPATH 		:= 	.obj_dir
