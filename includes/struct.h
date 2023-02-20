@@ -94,6 +94,8 @@ typedef struct s_ray
 	int	texX;
 	int texY;
 	int textnum;
+	float ty_off;
+	float ty_step;
 } 	t_ray;
 
 typedef struct	s_cube

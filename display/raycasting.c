@@ -70,8 +70,14 @@ float    raycasting_loop(t_cube *cube)
 			cube->ray.perpWallDist = ((cube->ray.mapY - cube->player.yPos + (1 - cube->ray.stepY) / 2) / cube->ray.rayDir.dirY);
 		cube->ray.lineHeight = (int)HEIGHT/ cube->ray.perpWallDist;
 		cube->ray.line = 0;
+		cube->ray.ty_step = (HEIGHT / 10) / cube->ray.lineHeight;
+		int ty_off = 0;
 		if (cube->ray.lineHeight > HEIGHT)
+		{
+			cube->ray.ty_off = (cube->ray.lineHeight) / 2;
 			cube->ray.lineHeight = HEIGHT;
+		}
+		cube->ray.texY = cube->ray.ty_off * cube->ray.ty_step;
 		trace_line_from_ray(cube, x);
 		// while (cube->ray.line < cube->ray.lineHeight)
 		// {
