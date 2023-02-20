@@ -24,6 +24,17 @@ void	init_step(t_cube *cube)
 	}
 }
 
+void define_height_start_end(t_cube *cube)
+{
+	cube->ray.lineHeight = (int)HEIGHT / cube->ray.perpWallDist;
+	cube->ray.drawstart = -(cube->ray.lineHeight >> 1) + (HEIGHT >> 1) + 1;
+	if (cube->ray.drawstart < 0)
+		cube->ray.drawstart = 0;
+	cube->ray.drawend = (cube->ray.lineHeight >> 1) + (HEIGHT >> 1) - 1;
+	if (cube->ray.drawend >= HEIGHT)
+		cube->ray.drawend = HEIGHT - 1;
+}
+
 float    raycasting_loop(t_cube *cube)
 {
 	t_ray ray;
@@ -68,16 +79,11 @@ float    raycasting_loop(t_cube *cube)
 			cube->ray.perpWallDist = ((cube->ray.mapX - cube->player.xPos + (1 - cube->ray.stepX) / 2) / cube->ray.rayDir.dirX);
 		else
 			cube->ray.perpWallDist = ((cube->ray.mapY - cube->player.yPos + (1 - cube->ray.stepY) / 2) / cube->ray.rayDir.dirY);
-		cube->ray.lineHeight = (int)HEIGHT/ cube->ray.perpWallDist;
-		cube->ray.line = 0;
-		cube->ray.ty_step = (HEIGHT / 10) / cube->ray.lineHeight;
-		int ty_off = 0;
+		select_wall_to_put_pixel(cube, x);
+		define_height_start_end(cube);
+		init_pixel_ray(cube, cube->ray.textnum);
 		if (cube->ray.lineHeight > HEIGHT)
-		{
-			cube->ray.ty_off = (cube->ray.lineHeight) / 2;
 			cube->ray.lineHeight = HEIGHT;
-		}
-		cube->ray.texY = cube->ray.ty_off * cube->ray.ty_step;
 		trace_line_from_ray(cube, x);
 		// while (cube->ray.line < cube->ray.lineHeight)
 		// {

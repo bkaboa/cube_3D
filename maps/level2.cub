@@ -1,7 +1,7 @@
+WE ./maps/test.xpm
+EA ./maps/bird.xpm
 NO ./maps/wall_sprite.xpm
 SO ./maps/wall_sprite.xpm
-WE ./maps/wall_sprite.xpm
-EA ./maps/test.xpm
 
 F 225,193,110
 C 173,216,230

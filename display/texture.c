@@ -42,7 +42,6 @@
 int init_pixel_ray(t_cube *cube, int textnum)
 {
 	cube->ray.ty_step = (HEIGHT / 10) / cube->ray.lineHeight;
-	int drawstart = -cube->ray.lineHeight / 2 + HEIGHT / 2;
 	if (cube->ray.side == 0)
 		cube->ray.wallX = cube->player.yPos + cube->ray.perpWallDist * cube->ray.rayDir.dirY;
 	else
@@ -51,7 +50,7 @@ int init_pixel_ray(t_cube *cube, int textnum)
 	cube->ray.texX = (int)(cube->ray.wallX * (float)cube->mlx.wall_sprite[textnum].width);
 	cube->ray.texX = cube->mlx.wall_sprite[textnum].width - cube->ray.texX - 1;
 	cube->ray.f_step = 1.0 * cube->mlx.wall_sprite[textnum].height / cube->ray.lineHeight / 1.0;
-	cube->ray.tex_pos = (drawstart - (HEIGHT / 2) + (cube->ray.lineHeight / 2)) * cube->ray.f_step;
+	cube->ray.tex_pos = (cube->ray.drawstart - (HEIGHT / 2) + (cube->ray.lineHeight / 2)) * cube->ray.f_step;
 
 }
 
@@ -62,22 +61,19 @@ void get_tex_color(t_cube *cube, int texnum, int x, int y)
 	new_addr = (int *)cube->mlx.wall_sprite[texnum].addr;
 	cube->ray.texY = (int)cube->ray.tex_pos & (cube->mlx.wall_sprite[texnum].height - 1);
 	cube->ray.tex_pos += cube->ray.f_step;
-	if (x == 3)
-		printf("want to put pixel on y %d\ntext_pos %d\ntexy = %d\n", y, (int)cube->ray.tex_pos, cube->ray.texY);
 	my_mlx_pixel_put(&cube->mlx.walls, x, y, new_addr[cube->ray.texY * cube->mlx.wall_sprite[texnum].height + cube->ray.texX]);
-	// my_mlx_pixel_put(&cube->mlx.walls, x, y, new_addr[cube->ray.texY * cube->mlx.wall_sprite[texnum].height + cube->ray.texX]);
 }
 
 void select_wall_to_put_pixel(t_cube *cube, int x)
 {
-	if (cube->ray.side == 1 && cube->ray.mapY < cube->player.yPos)
-		cube->ray.textnum = 0;
-	else if (cube->ray.side == 1)
-		cube->ray.textnum = 1;
-	if (cube->ray.side == 0 && cube->ray.mapX > cube->player.xPos)
-		cube->ray.textnum = 3;
-	else
+	if (cube->ray.side == 1 && cube->ray.mapY < cube->player.yPos)//est
 		cube->ray.textnum = 2;
+	else if (cube->ray.side == 1)//west
+		cube->ray.textnum = 3;
+	else if (cube->ray.side == 0 && cube->ray.mapX > cube->player.xPos) //north
+		cube->ray.textnum = 0;
+	else //sud
+		cube->ray.textnum = 1;
 }
 
 void trace_line_from_ray(t_cube *cube, int x)
@@ -86,14 +82,13 @@ void trace_line_from_ray(t_cube *cube, int x)
 
 	j = 0;
 	select_wall_to_put_pixel(cube, x);
-	init_pixel_ray(cube, cube->ray.textnum);
 	while (++j < HEIGHT)
 	{
-		if (j < (-cube->ray.lineHeight / 2) + (HEIGHT / 2))
+		if (j < cube->ray.drawstart)
 			my_mlx_pixel_put(&cube->mlx.walls, x, j, C_RED);
-		if (j >= (-cube->ray.lineHeight / 2) + (HEIGHT / 2) && j <= (cube->ray.lineHeight / 2) + (HEIGHT / 2))
+		if (j >= cube->ray.drawstart && j <= cube->ray.drawend)
 			get_tex_color(cube, cube->ray.textnum, x, j);
-		else if (j > (cube->ray.lineHeight / 2) + (HEIGHT / 2))
+		else if (j > cube->ray.drawend)
 			my_mlx_pixel_put(&cube->mlx.walls, x, j, C_BLUE);
 	}
 }

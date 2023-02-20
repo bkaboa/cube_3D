@@ -46,8 +46,8 @@
  *
  */
 
-# define WIDTH 1080
-# define HEIGHT 500
+# define WIDTH 1920
+# define HEIGHT 1080
 # define PI     3.14159
 
 /*
