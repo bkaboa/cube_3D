@@ -20,13 +20,17 @@ typedef struct s_string
 	size_t	lenght;
 	size_t	size;
 	char	*str;
-	int32_t	(*append)(struct s_string *p1, const char *p2);
-	int32_t	(*alloc_string)(struct s_string *p1, size_t p2);
-	void	(*string_destructor)(struct s_string *p);
-	void	(*reference_copy_operator)(const struct s_string p1, struct s_string *p2);
-	int32_t	(*profond_copy_operator)(const struct s_string p1, struct s_string *p2);
-	int64_t	(*find)(struct s_string *p1, const char *p2);
-	int64_t	(*find_file_instructions)(struct s_string p1, char **p2, const char **p3);
+
+	int32_t	((*append)(struct s_string *, const char *));
+	int32_t	((*alloc_string)(struct s_string *, size_t));
+	void	((*string_destructor)(struct s_string *));
+	void	((*reference_copy_operator)(const struct s_string, \
+			struct s_string *));
+	int32_t	((*profond_copy_operator)(const struct s_string, \
+			struct s_string *));
+	int64_t	((*find)(struct s_string *, const char *));
+	int64_t	((*find_file_instructions)(struct s_string, char **, \
+			const char **));
 }	t_string;
 
 typedef struct s_vector
