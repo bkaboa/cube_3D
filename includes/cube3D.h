@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:41:59 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 20:08:00 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:48:39 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	take_sprite_and_color(t_cube *map);
 void	place_eol(char **line);
 void	check_sprite(t_cube map);
 void	file_map_parsing(const int argc, char **argv, t_cube *map);
+void	free_all(t_cube cube, const int fd);
 /*
 *
 *********************************		OFFSETS

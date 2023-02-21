@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:32:59 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:42:49 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:45:54 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ void	exit_error(const char *str)
 
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg)
 {
-	map.text_file.string_destructor(&map.text_file);
-	if (fd)
-		close(fd);
-	if (map.map)
-		free(map.map);
+	free_all(map, fd);
 	write(2, ERROR_MSG, ft_strlen(ERROR_MSG));
 	write(2, msg, ft_strlen(msg));
 	exit(EXIT_FAILURE);
@@ -33,9 +29,7 @@ void	exit_error_and_destruct(t_cube map, const int fd, const char *msg)
 
 void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg)
 {
-	map.text_file.string_destructor(&map.text_file);
-	if (map.map)
-		free(map.map);
+	free_all(map, 0);
 	write(2, ERROR_MSG, ft_strlen(ERROR_MSG));
 	write(2, msg, ft_strlen(msg));
 	write(2, " ,line ", 7);
@@ -67,5 +61,32 @@ void	check_sprite(t_cube map)
 		}
 		if (valid_sprite == false)
 			exit_error_and_destruct(map, 0, SPRITE_ERROR);
+	}
+}
+
+void	free_all(t_cube cube, const int fd)
+{
+	int	i;
+
+	i = -1;
+	while (i < 4)
+	{
+		if (cube.mlx.wall_sprite[i].sprite)
+			mlx_destroy_image(cube.mlx.mlx, cube.mlx.wall_sprite[i].sprite);
+		i++;
+	}
+	if (fd)
+		close(fd);
+	cube.text_file.string_destructor(&cube.text_file);
+	if (cube.map)
+		free(cube.map);
+	if (cube.mlx.walls.img)
+		mlx_destroy_image(cube.mlx.mlx, cube.mlx.walls.img);
+	if (cube.mlx.mlx_win)
+		mlx_destroy_window(cube.mlx.mlx, cube.mlx.mlx_win);
+	if (cube.mlx.mlx)
+	{
+		mlx_destroy_display(cube.mlx.mlx);
+		free(cube.mlx.mlx);
 	}
 }

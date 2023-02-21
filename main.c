@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:36:32 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 21:05:17 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:18:47 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	main(int ac, char **av)
 {
 	t_cube	cube;
 
+	if (ac != 2)
+		return (1);
 	ft_bzero((void *)&cube, sizeof(cube));
-	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
 	init_ratio(&cube);
 	cube.map_xlen--;

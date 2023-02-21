@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:33:03 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:33:04 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:19:13 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	file_map_parsing(const int argc, char **argv, t_cube *map)
 		exit_error(INV_NUM_ARG);
 	file = argv[1];
 	check_file(file, &fd);
+	init_mlx(map);
 	take_all_line(fd, map);
 	close(fd);
 }
