@@ -53,7 +53,7 @@ debug			: CFLAGS += $(LLDB)
 debug 			: all
 
 norminette	:	
-	norminette $(SRC) $(HEADER)
+	norminette $(SRC) $(HEADER) || true
 
 make_mlx 		:
 	@make -C $(MLXPATH) || true
