@@ -28,11 +28,6 @@ int	main(int ac, char **av)
 	ft_bzero((void *)&cube, sizeof(cube));
 	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
-	// printf("posx %f posy %f\n", cube.player.x_pos, cube.player.y_pos);
-	// int i = -1;
-	// while (cube.map[++i])
-	// 	dprintf(2, "%s\n", cube.map[i]);
-	// exit(1);
 	init_ratio(&cube);
 	cube.map_xlen--;
 	render_frame(&cube);

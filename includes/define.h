@@ -55,8 +55,7 @@
 
 # define WIDTH				1080
 # define HEIGHT				720
-# define MID_HEIGHT_SCREEN	(HEIGHT >> 1)
-
+# define MID_HEIGHT_SCREEN	360
 /*
  *
  *********************************		DEFINE_CONTROLS
