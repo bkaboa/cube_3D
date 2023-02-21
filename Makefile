@@ -32,18 +32,10 @@ HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
 CFLAGS 		:= 	-Wall -Wextra -Werror
 MEMFLAGS 	:= 	-fsanitize=address -g3
 LLDB		:=	-g3
+MLXPATH    	= mlx_linux
+MLX        	= $(DIR_MLX)/libmlx_Linux.a 
+MLXFLAGS 	= -lm -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
 
- UNAME_S 	:= $(shell uname -s)
-     ifeq ($(UNAME_S),Linux)
-         MLXPATH    	= mlx_linux
-         MLX        	= $(DIR_MLX)/libmlx_Linux.a 
-         MLXFLAGS 	= -lm -Lmlx_linux -lbsd -lmlx_Linux -lXext -lX11
-     endif
-     ifeq ($(UNAME_S),Darwin)
-         MLXPATH    	= mlx
-         MLX        	= $(DIR_MLX)/libmlx.a
-         MLXFLAGS 	= -Lmlx -lmlx -framework OpenGL -framework AppKit
-     endif
 
 all 			: make_mlx $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:34:24 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:34:25 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:09:29 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,29 @@ void	set_player(t_cube *map, int player_glance, int y, int x)
 {
 	if (player_glance < 2)
 	{
-		map->player.planeY = FOV;
+		map->player.plane_y = FOV;
 		if (player_glance % 2)
 		{
 			map->player.playerdir.dirx = 1;
-			map->player.planeY = -FOV;
+			map->player.plane_y = -FOV;
 		}
 		else
 			map->player.playerdir.dirx = -1;
 	}
 	else
 	{
-		map->player.planeX = FOV;
+		map->player.plane_x = FOV;
 		if (player_glance % 2)
 		{
-			map->player.planeX = -FOV;
+			map->player.plane_x = -FOV;
 			map->player.playerdir.diry = -1;
 		}
 		else
 			map->player.playerdir.diry = 1;
 	}
 	map->map[y][x] = '0';
-	map->player.xPos = x + 0.5;
-	map->player.yPos = y + 0.5;
+	map->player.x_pos = x + 0.5;
+	map->player.y_pos = y + 0.5;
 }
 
 void	take_player(t_cube *map)

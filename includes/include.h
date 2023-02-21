@@ -6,31 +6,14 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:42:10 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:42:11 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:11:51 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDE_H
 # define INCLUDE_H
 
-/*
- *
- *********************************		OS_MACRO
- *
- */
-
-# if defined (__APPLE__)
-	# include "../mlx/mlx.h"
-# elif defined(__linux__)
-	# include "../mlx_linux/mlx.h"
-#endif
-
-/*
- *
- *********************************		INCLUDE
- *
- */
-
+# include "../mlx_linux/mlx.h"
 # include <stddef.h>
 # include <stdlib.h>
 # include <limits.h>

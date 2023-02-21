@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:42:07 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:42:07 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:14:04 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,27 @@
  *
  */
 # define ERROR_MSG			"Error\n"
-
-//PARSING_ERROR
+# define SYNTAX_ERROR		"syntax in file not correct\n"
+# define RGB_ERROR			"rgb color can only be between 0 255 and contain numbers only\n"
+# define WALL_INVALID		"Wall invalid\n"
+# define UNKNOWN_CHAR		"unknown cahracter in map"
+# define MAP_ERROR			"map error in"
+# define MAP_ERROR_2		"map error\n"
+# define TWO_PLAYER			"you can't have more than one player in map"
+# define NO_PLAYER			"no player in map\n"
+# define MAP_TOO_SMALL		"map passed in files too small\n"
+# define MALLOC_ERROR		"malloc error\n"
+# define OPEN_ERROR			"open function system failed\n"
+# define READ_ERROR			"read function system failed\n"
+# define SPRITE_ERROR		"the sprite passed in file must be a square, and the lenght must be a pow 2 inferior to 2048\n"
+# define FILE_TOO_BIG		"file passed in argument can't be over 25000 character rethink your file\n"
+# define BAD_FILE_NAME		"the file passed in argument doesn't exist\n"
 # define INV_NUM_ARG		"invalid number of argument\n"
 # define DIR_ERROR_MSG		"file passed in argument need to be a file\n"
 # define CUB_FILE			"file passed in argument is not .cub extension\n"
 # define EMPTY_FILE			"files passed in argument is empty\n"
-# define BAD_FILE_NAME		"the file passed in argument doesn't exist\n"
-# define BAD_COLOR			"bad color in file\n"
-# define RGB_ERROR			"rgb color can only be between 0 255 and contain numbers only\n"
-# define FILE_TOO_BIG		"file passed in argument can't be over 25000 character rethink your file\n"
-# define SPRITE_ERROR		"the sprite passed in file must be a square, and the lenght must be a pow 2 inferior to 2048\n"
-
-//MAP_ERROR
-# define MAP_ERROR			"map error in"
-# define SYNTAX_ERROR		"syntax in file not correct\n"
 # define MAP_REQUEST		"please make sure you give all the needed informations before the map\n"
-# define WALL_ERROR			"Wall error\n"
-# define WALL_INVALID		"Wall invalid\n"
-# define MAP_TOO_SMALL		"map passed in files too small\n"
 # define EMPTY_LINE_IN_MAP	"empty line in map\n"
-# define SEVERAL_PLAYER		"several player in the map\n"
-# define TWO_PLAYER			"you can't have more than one player in map"
-# define UNKNOWN_CHAR		"unknown cahracter in map"
-# define NO_PLAYER			"no player in map\n"
-
-//SYS_ERROR
-# define MALLOC_ERROR		"malloc error\n"
-# define OPEN_ERROR			"open function system failed\n"
-# define READ_ERROR			"read function system failed\n"
-
-//MLX_ERROR
-# define XPM_WALL_INVALID	"xpm file for for wall is invalid\n"
 
 # define PLAYER_POS			"NSEW"
 # define MAP_CHAR			"01 "
@@ -102,7 +91,7 @@
  *
  */
 
-#define MOVESPEED 0.05
+#define MOVESPEED 0.03
 #define FOV	0.70 //Player's cone of vision (in plane)
 #define ROTATIONSPEED 0.05
 

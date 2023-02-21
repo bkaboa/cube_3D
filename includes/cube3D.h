@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:41:59 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:47:42 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:08:00 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 void	rotatePlayer(int keycode, t_player *player);
 void	movePlayer(int keycode, t_cube *cube);
 int		control_hooks_loop(int keycode, t_cube *cube);
-int		control_hooks_expose(int keycode, t_cube *cube);
+int		control_hooks_ex_pose(int keycode, t_cube *cube);
 int		control_hooks(int keycode, t_cube *cube);
 int		click_close(t_cube *cube);
 void	free_all_and_exit(t_cube *cube);
@@ -61,7 +61,7 @@ void	render_frame(t_cube *cube);
 void	raycasting_loop(t_cube *cube);
 void	trace_line_from_ray(t_cube *cube, int x);
 void	init_pixel_ray(t_cube *cube, int textnum);
-void	select_wall_to_put_pixel(t_cube *cube, int x);
+void	select_wall_to_put_pixel(t_cube *cube);
 
 /*
 *

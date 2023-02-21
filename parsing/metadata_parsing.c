@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:34:28 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:40:24 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:57:48 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	attribute_wall_sprite(t_cube *map, char **line)
 			&map->mlx.wall_sprite[i].line_length, \
 			&map->mlx.wall_sprite[i].endian);
 		if (map->mlx.wall_sprite[i].addr == NULL)
-			exit_error_and_destruct(*map, 0, WALL_ERROR);
+			exit_error_and_destruct(*map, 0, WALL_INVALID);
 		check_sprite(*map);
 	}
 }
@@ -116,7 +116,7 @@ void	take_sprite_and_color(t_cube *map)
 	ret_find = map->text_file.find_file_instructions(map->text_file, \
 		line, map_instruct);
 	if (ret_find < 0)
-		exit_error_and_destruct(*map, 0, MAP_ERROR);
+		exit_error_and_destruct(*map, 0, MAP_ERROR_2);
 	place_eol(line);
 	attribute_wall_sprite(map, line);
 	attribute_color(map, line);

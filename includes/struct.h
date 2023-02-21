@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:42:13 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:42:14 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:08:46 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,28 @@ typedef struct s_string
 	size_t	lenght;
 	size_t	size;
 	char	*str;
-	int32_t	(*append)(struct s_string*, const char*);
-	int32_t	(*alloc_string)(struct s_string*, size_t);
-	void	(*string_destructor)(struct s_string*);
-	void	(*reference_copy_operator)(const struct s_string, struct s_string*);
-	int32_t	(*profond_copy_operator)(const struct s_string, struct s_string*);
-	int64_t	(*find)(struct s_string*, const char*);
-	int64_t	(*find_file_instructions)(struct s_string, char**, const char**);
+	int32_t	(*append)(struct s_string *p1, const char *p2);
+	int32_t	(*alloc_string)(struct s_string *p1, size_t p2);
+	void	(*string_destructor)(struct s_string *p);
+	void	(*reference_copy_operator)(const struct s_string p1, struct s_string *p2);
+	int32_t	(*profond_copy_operator)(const struct s_string p1, struct s_string *p2);
+	int64_t	(*find)(struct s_string *p1, const char *p2);
+	int64_t	(*find_file_instructions)(struct s_string p1, char **p2, const char **p3);
 }	t_string;
 
 typedef struct s_vector
 {
-	float dirx;
-	float diry;
-} t_vector;
+	float	dirx;
+	float	diry;
+}	t_vector;
 
 typedef struct s_player
 {
-	float 		xPos;
-	float 		yPos;
-	float		planeX;
-	float		planeY;
-	t_vector 	playerdir;
+	float		x_pos;
+	float		y_pos;
+	float		plane_x;
+	float		plane_y;
+	t_vector	playerdir;
 }	t_player;
 
 typedef struct s_sprite
@@ -57,11 +57,11 @@ typedef struct s_sprite
 
 typedef struct s_position
 {
-	int x_pos;
-	int y_pos;
-} t_position;
+	int	x_pos;
+	int	y_pos;
+}	t_position;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -83,35 +83,35 @@ typedef struct s_mlx
 
 typedef struct s_ray
 {
-	float cameraX;
-	t_vector rayDir;
-	int mapX;
-	int mapY;
-	float deltaDistX;
-	float deltaDistY;
-	float perpWallDist;
-	int stepX;
-	int stepY;
-	int hit;  // was there a wall hit?
-	int side; // was a NS or a EW wall hit?
-	int line;
-	int lineHeight;
-	float sideDistX;
-	float sideDistY;
-	float tex_step;
-	float tex_pos;
-	float wallX;
-	float f_step;
-	int	texX;
-	int texY;
-	int textnum;
-	float ty_off;
-	float ty_step;
-	int	drawstart;
-	int drawend;
-} 	t_ray;
+	float		camera_x;
+	t_vector	ray_dir;
+	int			map_x;
+	int			map_y;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	float		perpwalldist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line;
+	int			lineheight;
+	float		side_distx;
+	float		side_disty;
+	float		tex_step;
+	float		tex_pos;
+	float		wall_x;
+	float		f_step;
+	int			tex_x;
+	int			tex_y;
+	int			textnum;
+	float		ty_off;
+	float		ty_step;
+	int			drawstart;
+	int			drawend;
+}	t_ray;
 
-typedef struct	s_cube
+typedef struct s_cube
 {
 	char		**map;
 	t_string	text_file;
@@ -123,6 +123,5 @@ typedef struct	s_cube
 	t_ray		ray;
 	int			keys[7];
 }	t_cube;
-
 
 #endif
