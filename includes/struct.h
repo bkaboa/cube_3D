@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:42:13 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:42:14 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -19,8 +31,8 @@ typedef struct s_string
 
 typedef struct s_vector
 {
-	float dirX;
-	float dirY;
+	float dirx;
+	float diry;
 } t_vector;
 
 typedef struct s_player
@@ -29,7 +41,7 @@ typedef struct s_player
 	float 		yPos;
 	float		planeX;
 	float		planeY;
-	t_vector 	playerDir;
+	t_vector 	playerdir;
 }	t_player;
 
 typedef struct s_sprite

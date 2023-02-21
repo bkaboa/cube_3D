@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:32:59 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:42:49 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube3D.h"
 
 void	exit_error(const char *str)
@@ -32,4 +44,28 @@ void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg)
 	ft_itoa_fd(x, 2);
 	write(2, "\n", 1);
 	exit(EXIT_FAILURE);
+}
+
+void	check_sprite(t_cube map)
+{
+	int8_t	i;
+	int32_t	j;
+	bool	valid_sprite;
+
+	valid_sprite = false;
+	i = -1;
+	j = 2;
+	while (++i < 4)
+	{
+		if (map.mlx.wall_sprite[i].height != map.mlx.wall_sprite[i].width)
+			exit_error_and_destruct(map, 0, SPRITE_ERROR);
+		while (j < 2048)
+		{
+			if ((j ^ map.mlx.wall_sprite[i].height) == 0)
+				valid_sprite = true;
+			j = j << 1;
+		}
+		if (valid_sprite == false)
+			exit_error_and_destruct(map, 0, SPRITE_ERROR);
+	}
 }

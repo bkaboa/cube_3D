@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:34:24 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:34:25 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube3D.h"
 
 void	check_valid_map(t_cube map)
@@ -34,11 +46,11 @@ void	set_player(t_cube *map, int player_glance, int y, int x)
 		map->player.planeY = FOV;
 		if (player_glance % 2)
 		{
-			map->player.playerDir.dirX = 1;
+			map->player.playerdir.dirx = 1;
 			map->player.planeY = -FOV;
 		}
 		else
-			map->player.playerDir.dirX = -1;
+			map->player.playerdir.dirx = -1;
 	}
 	else
 	{
@@ -46,10 +58,10 @@ void	set_player(t_cube *map, int player_glance, int y, int x)
 		if (player_glance % 2)
 		{
 			map->player.planeX = -FOV;
-			map->player.playerDir.dirY = -1;
+			map->player.playerdir.diry = -1;
 		}
 		else
-			map->player.playerDir.dirY = 1;
+			map->player.playerdir.diry = 1;
 	}
 	map->map[y][x] = '0';
 	map->player.xPos = x + 0.5;

@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:45:42 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 01:56:50 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:17:20 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	init_pixel_ray(t_cube *cube, int textnum)
 	cube->ray.ty_step = (HEIGHT / 10) / cube->ray.lineHeight;
 	if (cube->ray.side == 0)
 		cube->ray.wallX = cube->player.yPos + cube->ray.perpWallDist \
-		* cube->ray.rayDir.dirY;
+		* cube->ray.rayDir.diry;
 	else
 		cube->ray.wallX = cube->player.xPos + cube->ray.perpWallDist \
-		* cube->ray.rayDir.dirX;
+		* cube->ray.rayDir.dirx;
 	cube->ray.wallX -= floorf(cube->ray.wallX);
 	cube->ray.texX = (int)(cube->ray.wallX * \
 	(float)cube->mlx.wall_sprite[textnum].width);

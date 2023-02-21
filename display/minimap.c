@@ -1,26 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 17:47:23 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:32:34 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube3D.h"
 
-void drawDirection(t_cube *cube, int x, int y, int length)
+void	draw_direction(t_cube *cube, int x, int y, int length)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < length)
 	{
-		my_mlx_pixel_put(&cube->mlx.walls, (x + (cube->player.planeY* i)), (y + (cube->player.planeX * i)), C_RED);
-		my_mlx_pixel_put(&cube->mlx.walls, (x - (cube->player.planeY* i)), (y - (cube->player.planeX * i)), C_RED);
-		my_mlx_pixel_put(&cube->mlx.walls, (x + (cube->player.playerDir.dirY* i)), (y + (cube->player.playerDir.dirX * i)), C_GREEN);
+		my_mlx_pixel_put(&cube->mlx.walls, (x + (cube->player.planeY * i)), \
+		(y + (cube->player.planeX * i)), C_RED);
+		my_mlx_pixel_put(&cube->mlx.walls, (x - (cube->player.planeY * i)), \
+		(y - (cube->player.planeX * i)), C_RED);
+		my_mlx_pixel_put(&cube->mlx.walls, (x + \
+		(cube->player.playerdir.diry * i)), (y + \
+		(cube->player.playerdir.dirx * i)), C_GREEN);
 		i++;
 	}
 }
 
-void drawPlayer(t_mlx *mlx, int x, int y)
+void	draw_player(t_mlx *mlx, int x, int y)
 {
-	int j = -PLAYER_MINI_SIZE;
+	int	j;
+	int	i;
 
+	j = -PLAYER_MINI_SIZE;
 	while (j < PLAYER_MINI_SIZE)
 	{
-		int i = -PLAYER_MINI_SIZE;
+		i = -PLAYER_MINI_SIZE;
 		while (i < PLAYER_MINI_SIZE)
 		{
 			my_mlx_pixel_put(&mlx->walls, (x + i), (y + j), C_GREEN);
@@ -30,31 +48,40 @@ void drawPlayer(t_mlx *mlx, int x, int y)
 	}
 }
 
-void drawMinimap(t_cube *cube)
+void	draw_cells(t_cube *cube)
 {
-	int y = 0;
-	int x = 0;
+	int	y;
+	int	x;
 
+	y = -1;
+	x = -1;
 	if (cube->mlx.minimap_ratio > 3)
 	{
-		while (y < cube->map_ylen * cube->mlx.minimap_ratio - 1)
+		while (++y < cube->map_ylen * cube->mlx.minimap_ratio - 1)
 		{
-			x = 0;
-			while (x < cube->map_xlen * cube->mlx.minimap_ratio - 1)
+			while (++x < cube->map_xlen * cube->mlx.minimap_ratio - 1)
 			{
-				if (x / cube->mlx.minimap_ratio > ft_strlen(cube->map[y / cube->mlx.minimap_ratio]))
+				if (x / cube->mlx.minimap_ratio > \
+				ft_strlen(cube->map[y / cube->mlx.minimap_ratio]))
 					;
 				else if (y / cube->mlx.minimap_ratio > cube->map_ylen)
 					;
-				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
+				else if (cube->map[y / \
+				cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
 					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_WHITE);
-				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
+				else if (cube->map[y / \
+				cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
 					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_BLUE);
-				x++;
 			}
-			y++;
 		}
-		drawDirection(cube, offset(*cube, cube->player.yPos), offset(*cube, cube->player.xPos), 50);
-		drawPlayer(&cube->mlx, offset(*cube, cube->player.yPos), offset(*cube, cube->player.xPos));
 	}
+}
+
+void	draw_minimap(t_cube *cube)
+{
+	draw_cells(cube);
+	draw_direction(cube, offset(*cube, cube->player.yPos), \
+	offset(*cube, cube->player.xPos), 50);
+	draw_player(&cube->mlx, offset(*cube, cube->player.yPos), \
+	offset(*cube, cube->player.xPos));
 }

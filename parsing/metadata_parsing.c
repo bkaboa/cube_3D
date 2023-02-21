@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   metadata_parsing.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:34:28 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:40:24 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube3D.h"
 
 int	ato_rgb(char **str, u_int8_t *value)
@@ -62,30 +74,6 @@ void	attribute_color(t_cube *map, char **line)
 	}
 }
 
-void	check_sprite(t_cube map)
-{
-	int8_t	i;
-	int32_t	j;
-	bool	valid_sprite;
-
-	valid_sprite = false;
-	i = -1;
-	j = 2;
-	while (++i < 4)
-	{
-		if (map.mlx.wall_sprite[i].height != map.mlx.wall_sprite[i].width)
-			exit_error_and_destruct(map, 0, SPRITE_ERROR);
-		while (j < 2048)
-		{
-			if ((j ^ map.mlx.wall_sprite[i].height) == 0)
-				valid_sprite = true;
-			j = j << 1;
-		}
-		if (valid_sprite == false)
-			exit_error_and_destruct(map, 0, SPRITE_ERROR);
-	}
-}
-
 void	attribute_wall_sprite(t_cube *map, char **line)
 {
 	int8_t		i;
@@ -94,8 +82,7 @@ void	attribute_wall_sprite(t_cube *map, char **line)
 	i = -1;
 	while (++i < 4)
 	{
-		tmp_line = line[i];
-		tmp_line += 2;
+		tmp_line = line[i] + 2;
 		if (*tmp_line != ' ')
 			exit_error_and_destruct(*map, 0, SYNTAX_ERROR);
 		while (*tmp_line == ' ')

@@ -6,13 +6,13 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:42:37 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 01:44:52 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:18:54 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3D.h"
 
-int key_press(int keycode, t_cube *cube)
+int	key_press(int keycode, t_cube *cube)
 {
 	if (keycode == 65307)
 		free_all_and_exit(cube);
@@ -31,7 +31,7 @@ int key_press(int keycode, t_cube *cube)
 	return (0);
 }
 
-int key_release(int keycode, t_cube *cube)
+int	key_release(int keycode, t_cube *cube)
 {
 	if (keycode == 65307)
 		free_all_and_exit(cube);
@@ -50,28 +50,29 @@ int key_release(int keycode, t_cube *cube)
 	return (0);
 }
 
-int check_mov(t_cube *cube)
+int	check_mov(t_cube *cube)
 {
-	if (cube->keys[0] || cube->keys[1] || cube->keys[2] || cube->keys[3] || cube->keys[4] || cube->keys[5])
+	if (cube->keys[0] || cube->keys[1] || cube->keys[2] \
+	|| cube->keys[3] || cube->keys[4] || cube->keys[5])
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
 
-void keys_move_player(t_cube *cube)
+void	keys_move_player(t_cube *cube)
 {
 	if (check_mov(cube) == EXIT_SUCCESS)
 	{
 		if (cube->keys[0])
-			movePlayerFront(cube);
+			move_player_front(cube);
 		if (cube->keys[1])
-			movePlayerBack(cube);
+			move_player_back(cube);
 		if (cube->keys[2])
-			moveStrafeRight(cube);
+			move_strafe_right(cube);
 		if (cube->keys[3])
-			moveStrafeLeft(cube);
+			move_strafe_left(cube);
 		if (cube->keys[4])
-			rotateLeft(&cube->player);
+			rotateleft(&cube->player);
 		if (cube->keys[5])
-			rotateRight(&cube->player);
+			rotateright(&cube->player);
 	}
 }

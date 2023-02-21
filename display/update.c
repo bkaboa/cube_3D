@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:45:22 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 02:47:15 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:21:57 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render_frame(t_cube *cube)
 	&cube->mlx.walls.bits_per_pixel, \
 		&cube->mlx.walls.line_length, &cube->mlx.walls.endian);
 	raycasting_loop(cube);
-	drawMinimap(cube);
+	draw_minimap(cube);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, \
 	cube->mlx.walls.img, 0, 0);
 	mlx_destroy_image(cube->mlx.mlx, cube->mlx.walls.img);

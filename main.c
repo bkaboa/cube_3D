@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:36:32 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/02/21 18:37:06 by lmaurin-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cube3D.h"
 #include "includes/struct.h"
 
@@ -9,10 +21,11 @@ void	init_ratio(t_cube *cube)
 		cube->mlx.minimap_ratio = WIDTH / 3 / cube->map_xlen;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cube		cube;
-	ft_bzero((void*)&cube, sizeof(cube));
+	t_cube	cube;
+
+	ft_bzero((void *)&cube, sizeof(cube));
 	init_mlx(&cube);
 	file_map_parsing(ac, av, &cube);
 	init_ratio(&cube);
