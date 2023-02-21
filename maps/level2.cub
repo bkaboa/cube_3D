@@ -1,15 +1,27 @@
-WE ./maps/test.xpm
-EA ./maps/test.xpm
-NO ./maps/test.xpm
-SO ./maps/test.xpm
+WE ./maps/brickwall.xpm
+EA ./maps/brickwall.xpm
+NO ./maps/brickwall.xpm
+SO ./maps/brickwall.xpm
 
 F 225,193,110
 C 173,216,230
 
 111111
-101011
+1N1011
 100011
 100001
-1010W1
+101001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
+100001
 100001
 111111

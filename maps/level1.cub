@@ -1,7 +1,7 @@
-NO ./maps/wall_sprite.xpm
-SO ./maps/wall_sprite.xpm
-WE ./maps/wall_sprite.xpm
-EA ./maps/wall_sprite.xpm
+NO ./maps/brickwall.xpm
+SO ./maps/brickwall.xpm
+WE ./maps/brickwall.xpm
+EA ./maps/brickwall.xpm
 
 F 255,255,255
 C 50,20,35
