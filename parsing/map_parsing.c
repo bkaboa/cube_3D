@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:34:24 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 20:09:29 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 21:58:54 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void	set_player(t_cube *map, int player_glance, int y, int x)
 			map->player.playerdir.diry = 1;
 	}
 	map->map[y][x] = '0';
-	map->player.x_pos = x + 0.5;
-	map->player.y_pos = y + 0.5;
+	map->player.x_pos = y + 0.5;
+	map->player.y_pos = x + 0.5;
+	printf("posx %f posy %f\n xlen = %d ylen = %d\n", map->player.x_pos, map->player.y_pos, map->map_xlen, map->map_ylen);
 }
 
 void	take_player(t_cube *map)

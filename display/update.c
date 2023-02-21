@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:45:22 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:21:57 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:03:58 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	render_frame(t_cube *cube)
 {
 	cube->mlx.walls.img = mlx_new_image(cube->mlx.mlx, WIDTH, HEIGHT);
+	if (!cube->mlx.walls.img)
+		exit(1);
 	cube->mlx.walls.addr = mlx_get_data_addr(cube->mlx.walls.img, \
 	&cube->mlx.walls.bits_per_pixel, \
 		&cube->mlx.walls.line_length, &cube->mlx.walls.endian);

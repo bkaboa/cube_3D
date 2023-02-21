@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:47:23 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 20:51:05 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/21 21:47:06 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	draw_minimap(t_cube *cube)
 	draw_cells(cube);
 	draw_direction(cube, offset(*cube, cube->player.y_pos), \
 	offset(*cube, cube->player.x_pos), 50);
-	printf("posx %f posy %f\n", cube->player.x_pos, cube->player.y_pos);
 	draw_player(&cube->mlx, offset(*cube, cube->player.y_pos), \
 	offset(*cube, cube->player.x_pos));
 }
