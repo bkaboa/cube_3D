@@ -56,7 +56,7 @@ void drawMinimap(t_cube *cube)
 			}
 			y++;
 		}
-		drawDirection(cube, Offset(*cube, cube->player.yPos), Offset(*cube, cube->player.xPos), 50);
-		drawPlayer(&cube->mlx, Offset(*cube, cube->player.yPos), Offset(*cube, cube->player.xPos));
+		drawDirection(cube, offset(*cube, cube->player.yPos), offset(*cube, cube->player.xPos), 50);
+		drawPlayer(&cube->mlx, offset(*cube, cube->player.yPos), offset(*cube, cube->player.xPos));
 	}
 }

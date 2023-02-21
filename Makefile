@@ -17,7 +17,6 @@ SRC 		:=	parsing/error.c 				\
 				display/minimap.c			\
 				display/mlx_pixel_put.c			\
 				controls/closing.c 			\
-				controls/controls.c 			\
 				controls/keys.c				\
 				controls/move.c				\
 				controls/rotate.c				\

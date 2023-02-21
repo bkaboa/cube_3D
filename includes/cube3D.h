@@ -4,26 +4,25 @@
 # include "struct.h"
 
 /*
- *
- *********************************		HOOKS
- *
- */
+*
+*********************************		HOOKS
+*
+*/
 void rotatePlayer(int keycode, t_player *player);
 void movePlayer(int keycode, t_cube *cube);
 int control_hooks_loop(int keycode, t_cube *cube);
 int	control_hooks_expose(int keycode, t_cube *cube);
 int	control_hooks(int keycode, t_cube *cube);
 int	click_close(t_cube *cube);
-int	win_keyclose(int keycode, t_cube *cube);
-
+void free_all_and_exit(t_cube *cube);
 int key_press(int keycode, t_cube *cube);
 int key_release(int keycode, t_cube *cube);
 
 /*
- *
- *********************************		MOVE
- *
- */
+*
+*********************************		MOVE
+*
+*/
 void movePlayerFront(t_cube *cube);
 void movePlayerBack(t_cube *cube);
 void moveStrafeLeft(t_cube *cube);
@@ -33,31 +32,31 @@ void rotateRight(t_player *player);
 void keys_move_player(t_cube *cube);
 
 /*
-	*
-	*********************************		DISPLAY
-	*
-	*/
+*
+*********************************		DISPLAY
+*
+*/
 void my_mlx_pixel_put(t_img *img, float x, float y, int color);
 void	drawMinimap(t_cube *cube);
 void	drawBackground(t_mlx *mlx);
 int 	update_game(t_cube *cube);
 void 	render_frame(t_cube *cube);
-	/*
-	 *
-	 *********************************		RAYCASTING
-	 *
-	 */
-	void raycasting_loop(t_cube *cube);
+/*
+*
+*********************************		RAYCASTING
+*
+*/
+void raycasting_loop(t_cube *cube);
 void trace_line_from_ray(t_cube *cube, int x);
-int     init_pixel_ray(t_cube *cube, int textnum);
+void init_pixel_ray(t_cube *cube, int textnum);
 void select_wall_to_put_pixel(t_cube *cube, int x);
 
-    /*
-     *
-     *********************************		PARSING
-     *
-     */
-    void exit_error(const char *str);
+/*
+*
+*********************************		PARSING
+*
+*/
+void exit_error(const char *str);
 void	exit_error_and_destruct(t_cube map, const int fd, const char *msg);
 void	exit_map_error_and_destruct(t_cube map, int y, int x, const char *msg);
 
@@ -77,17 +76,17 @@ void	place_eol(char **line);
 
 void	file_map_parsing(const int argc, char **argv, t_cube *map);
 /*
- *
- *********************************		OFFSETS
- *
- */
-float			Offset(t_cube cube, float value);
+*
+*********************************		OFFSETS
+*
+*/
+float			offset(t_cube cube, float value);
 
 /*
- *
- *********************************		UTILS
- *
- */
+*
+*********************************		UTILS
+*
+*/
 bool		ft_strcomp(const char *first, const char *second);
 int			ft_read_file(t_string *line, int fd);
 void		init_map(t_cube *map);
