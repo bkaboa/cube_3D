@@ -18,9 +18,13 @@ SRC 		:=	parsing/error.c 				\
 				display/mlx_pixel_put.c			\
 				controls/closing.c 			\
 				controls/controls.c 			\
+				controls/keys.c				\
+				controls/move.c				\
+				controls/rotate.c				\
 				display/raycasting.c		\
 				display/offset.c			\
 				display/texture.c			\
+				display/update.c			\
 				main.c
 
 OPATH 		:= 	.obj_dir

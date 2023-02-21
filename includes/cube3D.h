@@ -16,23 +16,38 @@ int	control_hooks(int keycode, t_cube *cube);
 int	click_close(t_cube *cube);
 int	win_keyclose(int keycode, t_cube *cube);
 
+int key_press(int keycode, t_cube *cube);
+int key_release(int keycode, t_cube *cube);
 
 /*
  *
- *********************************		DISPLAY
+ *********************************		MOVE
  *
  */
-void    my_mlx_pixel_put(t_img *img, float x, float y, int color);
+void movePlayerFront(t_cube *cube);
+void movePlayerBack(t_cube *cube);
+void moveStrafeLeft(t_cube *cube);
+void moveStrafeRight(t_cube *cube);
+void rotateLeft(t_player *player);
+void rotateRight(t_player *player);
+void keys_move_player(t_cube *cube);
+
+/*
+	*
+	*********************************		DISPLAY
+	*
+	*/
+void my_mlx_pixel_put(t_img *img, float x, float y, int color);
 void	drawMinimap(t_cube *cube);
 void	drawBackground(t_mlx *mlx);
-void	updateMinimap(t_cube *cube);
-
-/*
- *
- *********************************		RAYCASTING
- *
- */
-void raycasting_loop(t_cube *cube);
+int 	update_game(t_cube *cube);
+void 	render_frame(t_cube *cube);
+	/*
+	 *
+	 *********************************		RAYCASTING
+	 *
+	 */
+	void raycasting_loop(t_cube *cube);
 void trace_line_from_ray(t_cube *cube, int x);
 int     init_pixel_ray(t_cube *cube, int textnum);
 void select_wall_to_put_pixel(t_cube *cube, int x);

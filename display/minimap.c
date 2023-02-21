@@ -60,10 +60,3 @@ void drawMinimap(t_cube *cube)
 		drawPlayer(&cube->mlx, Offset(*cube, cube->player.yPos), Offset(*cube, cube->player.xPos));
 	}
 }
-
-void updateMinimap(t_cube *cube)
-{
-	raycasting_loop(cube);
-	// drawMinimap(cube);
-	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
-}

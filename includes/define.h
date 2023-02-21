@@ -48,8 +48,8 @@
  *
  */
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1080
+# define HEIGHT 720
 # define MID_HEIGHT_SCREEN HEIGHT >> 1
 
 /*
@@ -73,7 +73,6 @@
 
 # define MINIMAP_RATIO		3
 # define PLAYER_MINI_SIZE	5
-# define WALL_SIZE			500
 /*
  *
  *********************************		DEFINE_COLOR

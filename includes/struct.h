@@ -30,7 +30,6 @@ typedef struct s_player
 	float		planeX;
 	float		planeY;
 	t_vector 	playerDir;
-	int32_t		lastKey;
 }	t_player;
 
 typedef struct s_sprite
@@ -111,6 +110,7 @@ typedef struct	s_cube
 	t_mlx		mlx;
 	t_player	player;
 	t_ray		ray;
+	int			keys[7];
 }	t_cube;
 
 

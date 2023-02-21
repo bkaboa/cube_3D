@@ -1,0 +1,19 @@
+#include "../includes/cube3D.h"
+
+void render_frame(t_cube *cube)
+{
+    cube->mlx.walls.img = mlx_new_image(cube->mlx.mlx, WIDTH, HEIGHT);
+    cube->mlx.walls.addr = mlx_get_data_addr(cube->mlx.walls.img, &cube->mlx.walls.bits_per_pixel,
+                                             &cube->mlx.walls.line_length, &cube->mlx.walls.endian);
+    raycasting_loop(cube);
+    drawMinimap(cube);
+    mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.mlx_win, cube->mlx.walls.img, 0, 0);
+    mlx_destroy_image(cube->mlx.mlx, cube->mlx.walls.img);
+}
+
+int update_game(t_cube *cube)
+{
+    keys_move_player(cube);
+    render_frame(cube);
+	return (0);
+}
