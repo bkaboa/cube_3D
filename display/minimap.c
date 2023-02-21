@@ -46,8 +46,6 @@ void drawMinimap(t_cube *cube)
 					;
 				else if (y / cube->mlx.minimap_ratio > cube->map_ylen)
 					;
-				else if (!(x % cube->mlx.minimap_ratio) || !(y % cube->mlx.minimap_ratio))
-					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_BLACK);
 				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
 					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_WHITE);
 				else if (cube->map[y / cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
