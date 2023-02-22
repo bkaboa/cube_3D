@@ -46,6 +46,9 @@ $(OPATH)/%.o 	: %.c $(HEADER) Makefile
 $(NAME) 		: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
 
+bonus			:
+	${MAKE} -C ./ all NAME=cub3D_bonus
+
 leaks 			: CFLAGS += $(MEMFLAGS)
 leaks			: all
 
@@ -53,7 +56,7 @@ debug			: CFLAGS += $(LLDB)
 debug 			: all
 
 norminette	:	
-	norminette $(SRC) $(HEADER) || true
+	norminette $(SRC) $(HEADER)
 
 make_mlx 		:
 	@make -C $(MLXPATH) || true
@@ -65,7 +68,7 @@ clean 			: clean_mlx
 	@rm -rf $(OPATH) || true
 
 fclean 			: clean
-	rm $(NAME) || true
+	rm $(NAME) cub3D_bonus || true
 
 re 					: fclean all
 

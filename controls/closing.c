@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:20:00 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 22:35:10 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/22 01:25:44 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	free_all_and_exit(t_cube *cube)
 
 int	click_close(t_cube *cube)
 {
-	mlx_clear_window(cube->mlx.mlx, cube->mlx.mlx_win);
-	mlx_destroy_window(cube->mlx.mlx, cube->mlx.mlx_win);
-	exit(0);
+	free_all_and_exit(cube);
 	return (0);
 }
