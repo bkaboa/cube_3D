@@ -1,7 +1,7 @@
 NO ./maps/czang.xpm
 SO ./maps/bird.xpm
-WE ./maps/lmaurin.xpm
-EA ./maps/brickwall.xpm
+EA ./maps/lmaurin.xpm
+WE ./maps/brickwall.xpm
 
 F 220,100,0
 C 225,30,0

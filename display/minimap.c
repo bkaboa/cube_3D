@@ -6,7 +6,7 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:47:23 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/02/21 21:47:06 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/02/22 01:49:19 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,34 @@ void	draw_cells(t_cube *cube)
 	int	x;
 
 	y = -1;
-	if (cube->mlx.minimap_ratio > 3)
+	while (++y < cube->map_ylen * cube->mlx.minimap_ratio - 1)
 	{
-		while (++y < cube->map_ylen * cube->mlx.minimap_ratio - 1)
+		x = -1;
+		while (++x < cube->map_xlen * cube->mlx.minimap_ratio - 1)
 		{
-			x = -1;
-			while (++x < cube->map_xlen * cube->mlx.minimap_ratio - 1)
-			{
-				if (x / cube->mlx.minimap_ratio > \
-				(int32_t)ft_strlen(cube->map[y / cube->mlx.minimap_ratio]))
-					;
-				else if (y / cube->mlx.minimap_ratio > cube->map_ylen)
-					;
-				else if (cube->map[y / \
-				cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
-					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_WHITE);
-				else if (cube->map[y / \
-				cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
-					my_mlx_pixel_put(&cube->mlx.walls, x, y, C_BLUE);
-			}
+			if (x / cube->mlx.minimap_ratio > \
+			(int32_t)ft_strlen(cube->map[y / cube->mlx.minimap_ratio]))
+				;
+			else if (y / cube->mlx.minimap_ratio > cube->map_ylen)
+				;
+			else if (cube->map[y / \
+			cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '1')
+				my_mlx_pixel_put(&cube->mlx.walls, x, y, C_WHITE);
+			else if (cube->map[y / \
+			cube->mlx.minimap_ratio][x / cube->mlx.minimap_ratio] == '0')
+				my_mlx_pixel_put(&cube->mlx.walls, x, y, C_BLUE);
 		}
 	}
 }
 
 void	draw_minimap(t_cube *cube)
 {
-	draw_cells(cube);
-	draw_direction(cube, offset(*cube, cube->player.y_pos), \
-	offset(*cube, cube->player.x_pos), 50);
-	draw_player(&cube->mlx, offset(*cube, cube->player.y_pos), \
-	offset(*cube, cube->player.x_pos));
+	if (cube->mlx.minimap_ratio > 3)
+	{
+		draw_cells(cube);
+		draw_direction(cube, offset(*cube, cube->player.y_pos), \
+		offset(*cube, cube->player.x_pos), 50);
+		draw_player(&cube->mlx, offset(*cube, cube->player.y_pos), \
+		offset(*cube, cube->player.x_pos));
+	}
 }
